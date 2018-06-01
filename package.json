@@ -1,0 +1,31 @@
+{
+  "name": "electron-quick-start",
+  "version": "1.0.0",
+  "description": "A minimal Electron application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "cross-env mocha tests/**/*Test.js"
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "chai": "4.1.2",
+    "cross-env": "5.1.5",
+    "electron": "^2.0.0",
+    "electron-devtools-installer": "^2.2.4",
+    "jsdom": "^11.10.0",
+    "mocha": "5.1.1",
+    "sinon": "5.0.7",
+    "vue": "^2.5.16",
+    "vue-server-renderer": "^2.5.16"
+  }
+}

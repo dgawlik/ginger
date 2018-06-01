@@ -1,0 +1,126 @@
+
+body::-webkit-scrollbar {
+    width: 1em;
+}
+
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url("Open_Sans/OpenSans-Regular.ttf") format("truetype");
+}
+
+
+#content {
+  background-color: #343A40;
+  color: #CED4D9;
+  width: 100vw;
+  height: 100vh;
+}
+
+.tabs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 5px;
+  height: 30px;
+}
+
+.tabs .tabOuterContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-right: 2px;
+  padding: 0 3px 0 10px;
+  background-color: #212529;
+}
+
+.tabs .tabOuterContainer .tabTextHolder {
+  font-size: 0.9rem;
+}
+
+.tabs .tabOuterContainer .tabCloseBtn {
+  margin-left: 3px;
+  font-size: 0.6rem;
+  height: 0.8rem;
+  align-self: center;
+  width: 12px;
+  height: 12px;
+}
+
+#textBuffer {
+  width: 100vw;
+  overflow-y: hidden;
+  height: calc(100vh - 35px);
+  width: calc(100vw - 8px);
+  float: left;
+}
+
+#textBuffer .textBufferLine {
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-left: 5px;
+  margin-bottom: 3px;
+  font-family: "Open Sans";
+}
+
+#textBuffer #linesWrapper {
+  position: relative;
+}
+
+#textBuffer .textBufferLine .lineNumber {
+  align-self: stretch;
+  background-color: #212529;
+  padding: 7px;
+  margin-right: 10px;
+}
+
+#overlay {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background-color: #000;
+  z-index: 1;
+  background-color: rgba(0,0,0,0.7);
+  display: none;
+}
+
+#overlay #progressContent {
+  width: 100vw;
+  height: 100vh;
+}
+
+.modal {
+  position: relative;
+  top: 25%;
+  width: 300px;
+  height: 200px;
+  margin: auto;
+  display: none;
+}
+
+.scrollbar {
+  float: right;
+  height: calc(100vh - 30px);
+  width: 6px;
+  margin-right: 2px;
+}
+
+.scrollbar .thumb {
+  position: relative;
+  height: 30px;
+  width: 6px;
+  border-radius: 10px;
+  background-color: #CED4D9;
+  cursor: pointer;
+}

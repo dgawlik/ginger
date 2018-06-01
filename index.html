@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Log Viewer</title>
+    <script src="./static/js/vue.js"></script>
+    <link rel="stylesheet" href="./static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="./static/css/style.css">
+  </head>
+  <body>
+    <div id="overlay">
+      <div id="progressContent">
+        <progress-dialog></progress-dialog>
+      </div>
+    </div>
+    <div id="content" @mouseup="delegateStopDrag" @mousemove="delegateMouseMove">
+      <tabs :tabs="tabs"></tabs>
+      <buffer></buffer>
+      <scrollbar></scrollbar>
+    </div>
+    <script src="./src/vue/index.js"></script>
+    <script>
+      require('./renderer.js');
+    </script>
+  </body>
+</html>

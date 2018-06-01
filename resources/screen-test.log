@@ -1,0 +1,211 @@
+﻿22:09:45.039 [main] DEBUG i.n.u.i.l.InternalLoggerFactory - Using SLF4J as the default logging framework
+22:09:45.047 [main] DEBUG io.netty.util.ResourceLeakDetector - -Dio.netty.leakDetection.level: simple
+22:09:45.048 [main] DEBUG io.netty.util.ResourceLeakDetector - -Dio.netty.leakDetection.targetRecords: 4
+22:09:45.083 [main] DEBUG i.n.util.internal.PlatformDependent - Platform: Windows
+22:09:45.084 [main] DEBUG i.n.util.internal.PlatformDependent0 - -Dio.netty.noUnsafe: false
+22:09:45.084 [main] DEBUG i.n.util.internal.PlatformDependent0 - Java version: 8
+22:09:45.084 [main] DEBUG i.n.util.internal.PlatformDependent0 - sun.misc.Unsafe.theUnsafe: available
+22:09:45.084 [main] DEBUG i.n.util.internal.PlatformDependent0 - sun.misc.Unsafe.copyMemory: available
+22:09:45.084 [main] DEBUG i.n.util.internal.PlatformDependent0 - java.nio.Buffer.address: available
+22:09:45.084 [main] DEBUG i.n.util.internal.PlatformDependent0 - direct buffer constructor: available
+22:09:45.084 [main] DEBUG i.n.util.internal.PlatformDependent0 - java.nio.Bits.unaligned: available, true
+22:09:45.084 [main] DEBUG i.n.util.internal.PlatformDependent0 - jdk.internal.misc.Unsafe.allocateUninitializedArray(int): unavailable prior to Java9
+22:09:45.084 [main] DEBUG i.n.util.internal.PlatformDependent0 - java.nio.DirectByteBuffer.<init>(long, int): available
+22:09:45.084 [main] DEBUG i.n.util.internal.PlatformDependent - sun.misc.Unsafe: available
+22:09:45.084 [main] DEBUG i.n.util.internal.PlatformDependent - -Dio.netty.tmpdir: C:\Users\dominik\AppData\Local\Temp (java.io.tmpdir)
+22:09:45.084 [main] DEBUG i.n.util.internal.PlatformDependent - -Dio.netty.bitMode: 64 (sun.arch.data.model)
+22:09:45.084 [main] DEBUG i.n.util.internal.PlatformDependent - -Dio.netty.noPreferDirect: false
+22:09:45.084 [main] DEBUG i.n.util.internal.PlatformDependent - -Dio.netty.maxDirectMemory: 3795845120 bytes
+22:09:45.084 [main] DEBUG i.n.util.internal.PlatformDependent - -Dio.netty.uninitializedArrayAllocationThreshold: -1
+22:09:45.100 [main] DEBUG io.netty.util.internal.CleanerJava6 - java.nio.ByteBuffer.cleaner(): available
+22:09:45.100 [main] DEBUG i.n.util.ResourceLeakDetectorFactory - Loaded default ResourceLeakDetector: io.netty.util.ResourceLeakDetector@4f7d0008
+22:09:45.131 [main] DEBUG i.n.util.internal.PlatformDependent - org.jctools-core.MpscChunkedArrayQueue: available
+22:09:46.647 [main] DEBUG io.netty.handler.ssl.JdkSslContext - Default protocols (JDK): [TLSv1.2, TLSv1.1, TLSv1]
+22:09:46.647 [main] DEBUG io.netty.handler.ssl.JdkSslContext - Default cipher suites (JDK): [TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_128_CBC_SHA]
+22:09:46.804 [main] DEBUG i.n.c.MultithreadEventLoopGroup - -Dio.netty.eventLoopThreads: 8
+22:09:46.882 [main] DEBUG io.netty.channel.nio.NioEventLoop - -Dio.netty.noKeySetOptimization: false
+22:09:46.882 [main] DEBUG io.netty.channel.nio.NioEventLoop - -Dio.netty.selectorAutoRebuildThreshold: 512
+22:09:46.979 [main] DEBUG i.n.u.i.InternalThreadLocalMap - -Dio.netty.threadLocalMap.stringBuilder.initialSize: 1024
+22:09:46.979 [main] DEBUG i.n.u.i.InternalThreadLocalMap - -Dio.netty.threadLocalMap.stringBuilder.maxSize: 4096
+22:09:47.019 [main] DEBUG i.n.buffer.PooledByteBufAllocator - -Dio.netty.allocator.numHeapArenas: 8
+22:09:47.019 [main] DEBUG i.n.buffer.PooledByteBufAllocator - -Dio.netty.allocator.numDirectArenas: 8
+22:09:47.019 [main] DEBUG i.n.buffer.PooledByteBufAllocator - -Dio.netty.allocator.pageSize: 8192
+22:09:47.020 [main] DEBUG i.n.buffer.PooledByteBufAllocator - -Dio.netty.allocator.maxOrder: 11
+22:09:47.020 [main] DEBUG i.n.buffer.PooledByteBufAllocator - -Dio.netty.allocator.chunkSize: 16777216
+22:09:47.020 [main] DEBUG i.n.buffer.PooledByteBufAllocator - -Dio.netty.allocator.tinyCacheSize: 512
+22:09:47.020 [main] DEBUG i.n.buffer.PooledByteBufAllocator - -Dio.netty.allocator.smallCacheSize: 256
+22:09:47.020 [main] DEBUG i.n.buffer.PooledByteBufAllocator - -Dio.netty.allocator.normalCacheSize: 64
+22:09:47.020 [main] DEBUG i.n.buffer.PooledByteBufAllocator - -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+22:09:47.020 [main] DEBUG i.n.buffer.PooledByteBufAllocator - -Dio.netty.allocator.cacheTrimInterval: 8192
+22:09:47.020 [main] DEBUG i.n.buffer.PooledByteBufAllocator - -Dio.netty.allocator.useCacheForAllThreads: true
+22:09:47.116 [main] DEBUG io.netty.buffer.ByteBufUtil - -Dio.netty.allocator.type: pooled
+22:09:47.116 [main] DEBUG io.netty.buffer.ByteBufUtil - -Dio.netty.threadLocalDirectBufferSize: 0
+22:09:47.117 [main] DEBUG io.netty.buffer.ByteBufUtil - -Dio.netty.maxThreadLocalCharBufferSize: 16384
+22:09:48.731 [routes-akka.actor.default-dispatcher-2] INFO  akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+22:09:48.763 [routes-akka.actor.default-dispatcher-2] DEBUG akka.event.EventStream - logger log1-Slf4jLogger started
+22:09:48.763 [routes-akka.actor.default-dispatcher-2] DEBUG akka.event.EventStream - Default Loggers started
+22:09:49.023 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.026 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.026 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.029 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.030 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.030 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.031 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.032 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.032 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.033 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.033 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.036 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.037 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.037 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.038 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.039 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.039 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.040 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.041 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.041 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.041 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.042 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.043 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.043 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.044 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.044 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.045 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.045 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.045 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.046 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.046 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.047 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.047 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.048 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.048 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.049 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.049 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.050 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.050 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.051 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.051 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.051 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.052 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.052 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.053 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.053 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.054 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.054 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.055 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.056 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.056 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.057 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.062 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.064 [routes-akka.actor.default-dispatcher-2] DEBUG org.cache2k.core.util.Log - New instance, using SLF4J logging
+22:09:49.064 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.065 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.065 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.066 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.066 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.066 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.067 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.067 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.068 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.068 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.069 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.069 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.070 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.070 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.071 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.071 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.072 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.072 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.075 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.077 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.078 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.081 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.082 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.082 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.083 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.089 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.102 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.104 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.104 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.105 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.105 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.106 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.106 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.106 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.108 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.108 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.108 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.109 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.109 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.109 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.110 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.110 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.112 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.112 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.113 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.113 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.114 [routes-akka.actor.default-dispatcher-13] DEBUG akka.actor.TimerScheduler - Start timer [tickKey] with generation [1]
+22:09:49.129 [routes-akka.actor.default-dispatcher-2] INFO  o.c.core.Cache2kCoreProviderImpl - cache2k starting. version=1.0.2.Final, build=undefined, defaultImplementation=HeapCache
+22:09:49.197 [routes-akka.actor.default-dispatcher-2] DEBUG org.cache2k.CacheManager:default - open name=default, id=2o2ad8, classloaderId=6us14y
+22:09:49.559 [routes-akka.actor.default-dispatcher-6] DEBUG c.t.sslconfig.akka.AkkaSSLConfig - Initializing AkkaSSLConfig extension...
+22:09:49.559 [routes-akka.actor.default-dispatcher-6] DEBUG c.t.sslconfig.akka.AkkaSSLConfig - buildHostnameVerifier: created hostname verifier: com.typesafe.sslconfig.ssl.DefaultHostnameVerifier@1d7f7be7
+22:09:50.607 [routes-akka.actor.default-dispatcher-6] DEBUG akka.io.TcpListener - Successfully bound to /127.0.0.1:8080
+22:09:58.379 [routes-akka.actor.default-dispatcher-8] DEBUG akka.io.TcpListener - New connection accepted
+22:09:58.602 [routes-akka.actor.default-dispatcher-6] DEBUG akka.io.TcpListener - New connection accepted
+22:09:58.612 [routes-akka.actor.default-dispatcher-6] DEBUG akka.io.TcpListener - New connection accepted
+22:09:58.618 [routes-akka.actor.default-dispatcher-9] DEBUG akka.io.TcpListener - New connection accepted
+22:09:58.692 [routes-akka.actor.default-dispatcher-9] DEBUG akka.io.TcpListener - New connection accepted
+22:09:59.009 [routes-akka.actor.default-dispatcher-10] DEBUG akka.crawler.actors.PetitionerRouter - Router got message
+22:09:59.014 [routes-akka.actor.default-dispatcher-10] DEBUG akka.crawler.actors.PetitionerRouter - Router got message
+22:09:59.014 [routes-akka.actor.default-dispatcher-10] DEBUG akka.crawler.actors.PetitionerRouter - Router got message
+22:09:59.015 [routes-akka.actor.default-dispatcher-10] DEBUG akka.crawler.actors.Petitioner - Got query
+22:09:59.015 [routes-akka.actor.default-dispatcher-10] DEBUG akka.crawler.actors.Petitioner - akka.crawler.actors.Petitioner$Question@66b3886a
+22:09:59.015 [routes-akka.actor.default-dispatcher-10] DEBUG akka.crawler.actors.Petitioner - Looking up cache
+22:09:59.016 [routes-akka.actor.default-dispatcher-10] DEBUG akka.crawler.actors.Petitioner - Got query
+22:09:59.016 [routes-akka.actor.default-dispatcher-10] DEBUG akka.crawler.actors.Petitioner - akka.crawler.actors.Petitioner$Question@6d061362
+22:09:59.016 [routes-akka.actor.default-dispatcher-10] DEBUG akka.crawler.actors.Petitioner - Looking up cache
+22:09:59.017 [routes-akka.actor.default-dispatcher-10] DEBUG akka.crawler.actors.PetitionerRouter - Router got message
+22:09:59.017 [routes-akka.actor.default-dispatcher-10] DEBUG akka.crawler.actors.Petitioner - Got query
+22:09:59.017 [routes-akka.actor.default-dispatcher-10] DEBUG akka.crawler.actors.Petitioner - akka.crawler.actors.Petitioner$Question@2824bae7
+22:09:59.017 [routes-akka.actor.default-dispatcher-10] DEBUG akka.crawler.actors.Petitioner - Looking up cache
+22:09:59.018 [routes-akka.actor.default-dispatcher-10] DEBUG akka.crawler.actors.PetitionerRouter - Router got message
+22:09:59.018 [routes-akka.actor.default-dispatcher-10] DEBUG akka.crawler.actors.Petitioner - Got query
+22:09:59.018 [routes-akka.actor.default-dispatcher-10] DEBUG akka.crawler.actors.Petitioner - akka.crawler.actors.Petitioner$Question@5f104fc7
+22:09:59.019 [routes-akka.actor.default-dispatcher-10] DEBUG akka.crawler.actors.Petitioner - Looking up cache
+22:09:59.039 [routes-akka.actor.default-dispatcher-11] DEBUG akka.crawler.actors.Petitioner - Got query
+22:09:59.044 [routes-akka.actor.default-dispatcher-11] DEBUG akka.crawler.actors.Petitioner - akka.crawler.actors.Petitioner$Question@77d1d058
+22:09:59.045 [routes-akka.actor.default-dispatcher-11] DEBUG akka.crawler.actors.Petitioner - Looking up cache
+22:09:59.178 [routes-akka.actor.default-dispatcher-2] DEBUG akka.crawler.actors.Cache - Received lookup request from: Actor[akka://routes/user/$c/$b#691929642]
+22:09:59.180 [routes-akka.actor.default-dispatcher-2] DEBUG akka.crawler.actors.Cache - Lookup{requestId=7cda39dd-928e-45a3-ba37-79f3976573c1, word=brussels}
+22:09:59.502 [routes-akka.actor.default-dispatcher-5] DEBUG akka.crawler.actors.Cache - Entry not found
+22:09:59.503 [routes-akka.actor.default-dispatcher-5] DEBUG akka.crawler.actors.Cache - Sending response to: Actor[akka://routes/user/$c/$b#691929642]
+22:09:59.503 [routes-akka.actor.default-dispatcher-5] DEBUG akka.crawler.actors.Petitioner - Value in cache not present, requesting fetch
+22:09:59.504 [routes-akka.actor.default-dispatcher-5] DEBUG akka.crawler.actors.Petitioner - Fetch{requestId=7cda39dd-928e-45a3-ba37-79f3976573c1, key=brussels}
+22:09:59.504 [routes-akka.actor.default-dispatcher-5] DEBUG akka.crawler.actors.WorkerRouter - Router got message
+22:09:59.505 [routes-akka.actor.default-dispatcher-5] DEBUG akka.crawler.actors.Worker - Got fetch request
+22:09:59.505 [routes-akka.actor.default-dispatcher-5] DEBUG akka.crawler.actors.Worker - Fetch{requestId=7cda39dd-928e-45a3-ba37-79f3976573c1, key=brussels}
+22:09:59.610 [routes-akka.actor.default-dispatcher-5] DEBUG akka.crawler.actors.Cache - Received lookup request from: Actor[akka://routes/user/$c/$c#-742119870]
+22:09:59.611 [routes-akka.actor.default-dispatcher-5] DEBUG akka.crawler.actors.Cache - Lookup{requestId=8d98fa04-3f07-412c-ac1d-61f229a7b390, word=phi}
+22:09:59.734 [routes-akka.actor.default-dispatcher-3] DEBUG akka.crawler.actors.Cache - Entry not found
+22:09:59.735 [routes-akka.actor.default-dispatcher-3] DEBUG akka.crawler.actors.Cache - Sending response to: Actor[akka://routes/user/$c/$c#-742119870]
+22:09:59.736 [routes-akka.actor.default-dispatcher-3] DEBUG akka.crawler.actors.Petitioner - Value in cache not present, requesting fetch
+22:09:59.738 [routes-akka.actor.default-dispatcher-3] DEBUG akka.crawler.actors.Petitioner - Fetch{requestId=8d98fa04-3f07-412c-ac1d-61f229a7b390, key=phi}
+22:09:59.739 [routes-akka.actor.default-dispatcher-3] DEBUG akka.crawler.actors.WorkerRouter - Router got message
+22:09:59.743 [routes-akka.actor.default-dispatcher-9] DEBUG akka.crawler.actors.Worker - Got fetch request
+22:09:59.744 [routes-akka.actor.default-dispatcher-9] DEBUG akka.crawler.actors.Worker - Fetch{requestId=8d98fa04-3f07-412c-ac1d-61f229a7b390, key=phi}
+22:09:59.843 [routes-akka.actor.default-dispatcher-12] DEBUG akka.crawler.actors.Cache - Received lookup request from: Actor[akka://routes/user/$c/$d#1700836022]
+22:09:59.843 [routes-akka.actor.default-dispatcher-12] DEBUG akka.crawler.actors.Cache - Lookup{requestId=f8bf00e8-9934-4e3c-abbe-0f3ae43cf312, word=acknowledge}
+22:09:59.864 [routes-akka.actor.default-dispatcher-12] DEBUG akka.crawler.actors.Cache - Entry not found
+22:09:59.865 [routes-akka.actor.default-dispatcher-12] DEBUG akka.crawler.actors.Cache - Sending response to: Actor[akka://routes/user/$c/$d#1700836022]
+22:09:59.865 [routes-akka.actor.default-dispatcher-12] DEBUG akka.crawler.actors.Petitioner - Value in cache not present, requesting fetch
+22:09:59.865 [routes-akka.actor.default-dispatcher-12] DEBUG akka.crawler.actors.Petitioner - Fetch{requestId=f8bf00e8-9934-4e3c-abbe-0f3ae43cf312, key=acknowledge}
+22:09:59.865 [routes-akka.actor.default-dispatcher-12] DEBUG akka.crawler.actors.WorkerRouter - Router got message
+22:09:59.865 [routes-akka.actor.default-dispatcher-12] DEBUG akka.crawler.actors.Worker - Got fetch request
+22:09:59.865 [routes-akka.actor.default-dispatcher-12] DEBUG akka.crawler.actors.Worker - Fetch{requestId=f8bf00e8-9934-4e3c-abbe-0f3ae43cf312, key=acknowledge}
+22:09:59.869 [routes-akka.actor.default-dispatcher-5] DEBUG akka.crawler.actors.Cache - Received lookup request from: Actor[akka://routes/user/$c/$e#-1130933110]
+22:09:59.869 [routes-akka.actor.default-dispatcher-5] DEBUG akka.crawler.actors.Cache - Lookup{requestId=999fb33c-8401-4529-a8ee-d5686b62ff49, word=calm}
+22:09:59.872 [routes-akka.actor.default-dispatcher-5] DEBUG akka.crawler.actors.Cache - Entry not found
+22:09:59.873 [routes-akka.actor.default-dispatcher-5] DEBUG akka.crawler.actors.Cache - Sending response to: Actor[akka://routes/user/$c/$e#-1130933110]
+22:09:59.873 [routes-akka.actor.default-dispatcher-5] DEBUG akka.crawler.actors.Petitioner - Value in cache not present, requesting fetch
+22:09:59.873 [routes-akka.actor.default-dispatcher-5] DEBUG akka.crawler.actors.Petitioner - Fetch{requestId=999fb33c-8401-4529-a8ee-d5686b62ff49, key=calm}
+22:09:59.873 [routes-akka.actor.default-dispatcher-5] DEBUG akka.crawler.actors.WorkerRouter - Router got message
