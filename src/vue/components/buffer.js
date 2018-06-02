@@ -18,6 +18,7 @@ let buffer =  {
     this.textBufferNode = document.querySelector('#textBuffer');
     this.linesWrapperNode = document.querySelector('#linesWrapper');
     this.lineNodes = [...document.querySelectorAll('#linesWrapper p')];
+    this.queue = [];
   },
   updated: function(){
     this.textBufferNode = document.querySelector('#textBuffer');
@@ -49,6 +50,7 @@ let buffer =  {
       let offset = node.offsetTop || 0;
       this.setWrapperVerticalPosition(-offset);
     },
+
     onMouseWheel(e){
       if(this.lines.length){
         let lastLineNode = this.lineNodes[this.lineNodes.length-1];
@@ -66,13 +68,26 @@ let buffer =  {
 
         if(e.deltaY < 0){
           if(this.topLine > 0){
-            this.topLine--;
-            this.alignToLine(this.topLine);
+            let dy = settingsManager.scrollResolution;
+            if(this.topLine - dy < this.boundaryLow){
+              app.loadPrevPage();
+            }
+            else {
+              this.topLine -= dy;
+              this.alignToLine(this.topLine);
+            }
+
           }
         }
         else {
-          this.topLine++;
-          this.alignToLine(this.topLine);
+          let dy = settingsManager.scrollResolution;
+          if(this.topLine + dy >= this.boundaryHigh){
+            app.loadNextPage();
+          }
+          else {
+            this.topLine += dy;
+            this.alignToLine(this.topLine);
+          }
         }
       }
     },

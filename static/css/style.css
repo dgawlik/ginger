@@ -80,7 +80,7 @@ body::-webkit-scrollbar-thumb {
 
 #textBuffer .textBufferLine .lineNumber {
   align-self: stretch;
-  background-color: #212529;
+  background-color: #3e454c;
   padding: 7px;
   margin-right: 10px;
 }
@@ -123,4 +123,19 @@ body::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: #CED4D9;
   cursor: pointer;
+}
+
+#settingsContainer {
+  width: 90vw;
+  height: 90vh;
+  padding: 10px;
+}
+
+#settingsScroll{
+  width: 300px;
+}
+
+.dark-input input, .dark-input input:active, .dark-input input:focus {
+  background-color: #343A40;
+  color: #CED4D9;
 }

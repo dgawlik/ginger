@@ -16,7 +16,9 @@
     </div>
     <div id="content" @mouseup="delegateStopDrag" @mousemove="delegateMouseMove">
       <tabs :tabs="tabs"></tabs>
-      <buffer></buffer>
+      <keep-alive>
+        <component v-bind:is="display"></component>
+      </keep-alive>
       <scrollbar></scrollbar>
     </div>
     <script src="./src/vue/index.js"></script>

@@ -16,6 +16,10 @@ const template = [
            click () { onMenuOpenClick()}
         },
         {
+          label: 'Settings',
+           click () { onMenuSettingsClick()}
+        },
+        {
           label: 'Exit',
           click () { remote.getCurrentWindow().close()}
         }
@@ -63,4 +67,12 @@ function onMenuOpenClick(){
         app.addTab(tab);
       });
   }
+}
+
+function onMenuSettingsClick(){
+  tabManager.addTab("<Settings>", true)
+    .then(name => {
+      let tab = tabManager.tabs[name];
+      app.addTab(tab);
+    });
 }

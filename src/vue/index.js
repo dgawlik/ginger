@@ -3,6 +3,7 @@ const {tabs} = require('./src/vue/components/tabs.js');
 const {buffer} = require('./src/vue/components/buffer.js');
 const {progressDialog} = require('./src/vue/components/progressDialog.js');
 const {scrollbar} = require('./src/vue/components/scrollbar.js');
+const {settings} = require('./src/vue/components/settings.js');
 
 window.progressBar = new Vue({
   el: '#progressContent',
@@ -35,17 +36,22 @@ window.app = new Vue({
   el: '#content',
   data: {
     message: 'Hello Vue!',
-    tabs: []
+    tabs: [],
+    display: 'buffer'
   },
   components: {
     'tabs': tabs,
     'buffer': buffer,
-    'scrollbar': scrollbar
+    'scrollbar': scrollbar,
+    'settings': settings
   },
   mounted(){
     this.buffer = this.$children[1];
     this.scrollbar = this.$children[2];
     this.tabOffsets = {};
+    this.virtualNameToComponent = {
+      '<Settings>': 'settings'
+    }
   },
   methods: {
     delegateStopDrag(){
@@ -82,14 +88,27 @@ window.app = new Vue({
         else {
           cpy.isActive = false;
         }
-        if(this.activeTab){
-          this.tabOffsets[this.activeTab] = this.buffer.topLine;
-        }
         this.$set(this.tabs, i, cpy);
-        this.activeTab = tab.name;
-        let screen = tabManager.tabs[tab.name].screen;
-        this.buffer.update(screen.lines, screen.boundaryLow, screen.boundaryHigh, this.tabOffsets[tab.name], true);
+        if(tab.name.startsWith("<")){
+          this.setVirtualTab(tab);
+        }
+        else {
+          this.setBufferTab(tab);
+        }
       }
+    },
+    setBufferTab(tab){
+      this.display = 'buffer';
+      if(this.activeTab){
+        this.tabOffsets[this.activeTab] = this.buffer.topLine;
+      }
+
+      this.activeTab = tab.name;
+      let screen = tabManager.tabs[tab.name].screen;
+      this.buffer.update(screen.lines, screen.boundaryLow, screen.boundaryHigh, this.tabOffsets[tab.name], true);
+    },
+    setVirtualTab(tab){
+      this.display = this.virtualNameToComponent[tab.name];
     },
     activateTab(name){
       let tab = this.tabs.filter(t => t.name == name)[0];
@@ -128,4 +147,8 @@ window.app = new Vue({
 
     }
   }
-})
+});
+
+window.settingsManager = {
+  scrollResolution: 1
+};

@@ -35,7 +35,11 @@ class TabHolder {
           .catch(err => reject(err));
       }
       else {
-        //
+        this.tabs[name] = {
+          'name': name,
+          'isVirtual': true
+        };
+        resolve(name);
       }
     }).bind(this));
   }
