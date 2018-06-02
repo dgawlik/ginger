@@ -29,16 +29,17 @@ let buffer =  {
     else {
       this.alignToLine(this.topLine);
     }
-    console.log(this.lines.length, this.boundaryLow, this.boundaryHigh);
   },
   methods: {
-    update(lines, boundaryLow, boundaryHigh, topLine){
-      if(boundaryLow != this.boundaryLow || boundaryHigh != this.boundaryHigh){
+    update(lines, boundaryLow, boundaryHigh, topLine, forceUpdate){
+      if(forceUpdate || boundaryLow != this.boundaryLow || boundaryHigh != this.boundaryHigh){
         this.lines = lines;
         this.boundaryLow = boundaryLow;
         this.boundaryHigh = boundaryHigh;
         this.topLine = topLine;
-        this.$forceUpdate();
+        if(topLine){
+          this.alignToLine(topLine);
+        }
       }
     },
     alignToLine(lineNo){

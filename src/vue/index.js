@@ -45,6 +45,7 @@ window.app = new Vue({
   mounted(){
     this.buffer = this.$children[1];
     this.scrollbar = this.$children[2];
+    this.tabOffsets = {};
   },
   methods: {
     delegateStopDrag(){
@@ -58,7 +59,8 @@ window.app = new Vue({
       }
     },
     updateScreenOnScroll(currentCursor){
-      let screen = tabManager.tabs[this.activeTab].screen;
+      let activeTab = this.activeTab;
+      let screen = tabManager.tabs[activeTab].screen;
       let totalLines = screen.file.lineBeginnings.length;
       let newOffset = parseInt(totalLines*currentCursor);
       screen.readRandomAt(newOffset)
@@ -68,6 +70,7 @@ window.app = new Vue({
     },
     addTab(tab){
       this.tabs.push(tab);
+      this.tabOffsets[tab.name] = 0;
       this.setTab(tab);
     },
     setTab(tab){
@@ -79,10 +82,13 @@ window.app = new Vue({
         else {
           cpy.isActive = false;
         }
+        if(this.activeTab){
+          this.tabOffsets[this.activeTab] = this.buffer.topLine;
+        }
         this.$set(this.tabs, i, cpy);
         this.activeTab = tab.name;
         let screen = tabManager.tabs[tab.name].screen;
-        this.buffer.update(screen.lines, screen.boundaryLow, screen.boundaryHigh);
+        this.buffer.update(screen.lines, screen.boundaryLow, screen.boundaryHigh, this.tabOffsets[tab.name], true);
       }
     },
     activateTab(name){
@@ -93,6 +99,7 @@ window.app = new Vue({
     },
     closeTab(name){
       let ind = this.tabs.findIndex(t=>t.name==name);
+      this.tabOffsets[this.tabs[ind].name] = 0;
       this.tabs = this.tabs.slice(0, ind).concat(this.tabs.slice(ind+1));
       tabManager.removeTab(name);
       let firstTab = this.tabs[0];
@@ -104,14 +111,16 @@ window.app = new Vue({
       }
     },
     loadNextPage(){
-      let screen = tabManager.tabs[this.activeTab].screen;
+      let activeTab = this.activeTab;
+      let screen = tabManager.tabs[activeTab].screen;
       screen.readNextPage()
         .then((function(){
           this.buffer.update(screen.lines, screen.boundaryLow, screen.boundaryHigh, this.buffer.topLine);
         }).bind(this));
     },
     loadPrevPage(){
-      let screen = tabManager.tabs[this.activeTab].screen;
+      let activeTab = this.activeTab;
+      let screen = tabManager.tabs[activeTab].screen;
       screen.readPrevPage()
         .then((function(){
           this.buffer.update(screen.lines, screen.boundaryLow, screen.boundaryHigh, this.buffer.topLine);
