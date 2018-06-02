@@ -41,6 +41,14 @@ let buffer =  {
         if(topLine){
           this.alignToLine(topLine);
         }
+        else {
+          try {
+            this.alignToLine(0);
+          }
+          catch(ex){
+
+          }
+        }
       }
     },
     alignToLine(lineNo){
@@ -68,9 +76,12 @@ let buffer =  {
 
         if(e.deltaY < 0){
           if(this.topLine > 0){
-            let dy = settingsManager.scrollResolution;
+            let dy = Math.min(settingsManager.scrollResolution, this.topLine-this.boundaryLow);
             if(this.topLine - dy < this.boundaryLow){
-              app.loadPrevPage();
+              app.loadPrevPage().then(()=>{
+                this.topLine -= dy;
+                this.alignToLine(this.topLine);
+              });
             }
             else {
               this.topLine -= dy;
@@ -80,9 +91,12 @@ let buffer =  {
           }
         }
         else {
-          let dy = settingsManager.scrollResolution;
+          let dy = Math.min(settingsManager.scrollResolution, this.boundaryHigh-this.topLine);
           if(this.topLine + dy >= this.boundaryHigh){
-            app.loadNextPage();
+            app.loadNextPage().then(() => {
+              this.topLine += dy;
+              this.alignToLine(this.topLine);
+            });
           }
           else {
             this.topLine += dy;

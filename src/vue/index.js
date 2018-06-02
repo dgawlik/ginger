@@ -132,19 +132,20 @@ window.app = new Vue({
     loadNextPage(){
       let activeTab = this.activeTab;
       let screen = tabManager.tabs[activeTab].screen;
-      screen.readNextPage()
-        .then((function(){
+      let promise = screen.readNextPage();
+      promise.then((function(){
           this.buffer.update(screen.lines, screen.boundaryLow, screen.boundaryHigh, this.buffer.topLine);
         }).bind(this));
+      return promise;
     },
     loadPrevPage(){
       let activeTab = this.activeTab;
       let screen = tabManager.tabs[activeTab].screen;
-      screen.readPrevPage()
-        .then((function(){
+      let promise = screen.readPrevPage();
+      promise.then((function(){
           this.buffer.update(screen.lines, screen.boundaryLow, screen.boundaryHigh, this.buffer.topLine);
         }).bind(this));
-
+      return promise;
     }
   }
 });
