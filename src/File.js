@@ -85,15 +85,15 @@ class File {
 
         let index;
         if(!this.ending){
-          if((index = text.indexOf("\r\n", 0)) != -1){
+          if((index = buffer.indexOf("\r\n", 0)) != -1){
             this.ending = this.WINDOWS_ENDING;
           }
-          else if((index = text.indexOf("\n", 0)) != -1){
+          else if((index = buffer.indexOf("\n", 0)) != -1){
             this.ending = this.LINUX_ENDING;
           }
         }
         else {
-          index = text.indexOf(this.ending, 0);
+          index = buffer.indexOf(this.ending, 0);
         }
 
         while(index != -1){
@@ -103,7 +103,7 @@ class File {
           else{
             marks.push(index);
           }
-          index = text.indexOf(this.ending, index+1);
+          index = buffer.indexOf(this.ending, index+1);
         }
 
         this.block.fill(0);

@@ -19,9 +19,9 @@ let scrollbar =  {
       let bottomY = this.scrollbarNode.getBoundingClientRect().bottom;
       let cursorY = this.thumbNode.getBoundingClientRect().top;
 
-      if(this.doDrag && e.pageY + 30 >= topY && e.pageY + 30 < bottomY){
+      if(this.doDrag && e.pageY >= topY && e.pageY + 30 < bottomY){
         this.thumbNode.style.top = (e.pageY - topY) + 'px';
-        this.cursor = parseFloat(e.pageY) / (bottomY - topY);
+        this.cursor = parseFloat(e.pageY - 30) / (bottomY - topY - 30);
         app.updateScreenOnScroll(this.cursor);
       }
     }
