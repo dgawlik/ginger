@@ -139,3 +139,17 @@ body::-webkit-scrollbar-thumb {
   background-color: #343A40;
   color: #CED4D9;
 }
+
+.highlight {
+  background-color: #FFCA28;
+  color: black;
+}
+
+.highlight-active {
+  background-color: #FF6F00;
+  color: black;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}

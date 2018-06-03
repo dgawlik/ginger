@@ -6,6 +6,7 @@ let buffer =  {
       lines: [],
       boundaryLow: 0,
       boundaryHigh: 0,
+      softLineWraps: true
     }
   },
   beforeMount () {
@@ -120,11 +121,16 @@ let buffer =  {
         });
       }
       return arr;
+    },
+    noWrap: function(){
+      return !this.softLineWraps;
     }
   },
   template: `<div id="textBuffer">
 <div id="linesWrapper">
-  <p :key="entry.lineNo" class="textBufferLine" v-for="entry in linesWithNumbers">
+  <p :key="entry.lineNo"
+      v-for="entry in linesWithNumbers"
+      v-bind:class="{'no-wrap': noWrap, 'textBufferLine': true}">
     <span class="lineNumber">{{entry.lineNo}}</span>
     {{entry.line}}
   </p>

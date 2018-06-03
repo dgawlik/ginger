@@ -2,7 +2,8 @@
 let settings =  {
   data: function () {
     return {
-      scrollResolution: 1
+      scrollResolution: 1,
+      softLineWraps: true
     }
   },
   methods: {
@@ -10,6 +11,9 @@ let settings =  {
   watch : {
     scrollResolution: function(val){
       settingsManager.scrollResolution = parseInt(val);
+    },
+    softLineWraps: function(val){
+      settingsManager.setSoftLineWraps(val);
     }
   },
   template: `
@@ -20,6 +24,14 @@ let settings =  {
     </div>
     <input type="text" v-model="scrollResolution" class="form-control"
       aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+  </div>
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <div class="input-group-text">
+        <input v-model="softLineWraps" type="checkbox" aria-label="Checkbox for following text input">
+        Line wraps
+      </div>
+    </div>
   </div>
 </div>
 `

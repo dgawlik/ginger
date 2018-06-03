@@ -107,9 +107,8 @@ window.app = new Vue({
 
       this.activeTab = tab.name;
       let screen = tabManager.tabs[tab.name].screen;
-      Vue.nextTick((function () {
-        this.buffer.update(screen.lines, screen.boundaryLow, screen.boundaryHigh, this.tabOffsets[tab.name], true);
-      }).bind(this));
+      this.buffer.update(screen.lines, screen.boundaryLow, screen.boundaryHigh, this.tabOffsets[tab.name], true);
+
     },
     setVirtualTab(tab){
       this.display = this.virtualNameToComponent[tab.name];
@@ -156,5 +155,9 @@ window.app = new Vue({
 });
 
 window.settingsManager = {
-  scrollResolution: 1
+  scrollResolution: 1,
+  setSoftLineWraps(val){
+    app.buffer.softLineWraps = val;
+    app.buffer.update([], 0, 0, 0);
+  }
 };
