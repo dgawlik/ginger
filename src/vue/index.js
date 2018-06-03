@@ -89,6 +89,11 @@ window.app = new Vue({
           cpy.isActive = false;
         }
         this.$set(this.tabs, i, cpy);
+
+        if(this.activeTab){
+          this.tabOffsets[this.activeTab] = this.buffer.topLine;
+        }
+
         if(tab.name.startsWith("<")){
           this.setVirtualTab(tab);
         }
@@ -99,16 +104,16 @@ window.app = new Vue({
     },
     setBufferTab(tab){
       this.display = 'buffer';
-      if(this.activeTab){
-        this.tabOffsets[this.activeTab] = this.buffer.topLine;
-      }
 
       this.activeTab = tab.name;
       let screen = tabManager.tabs[tab.name].screen;
-      this.buffer.update(screen.lines, screen.boundaryLow, screen.boundaryHigh, this.tabOffsets[tab.name], true);
+      Vue.nextTick((function () {
+        this.buffer.update(screen.lines, screen.boundaryLow, screen.boundaryHigh, this.tabOffsets[tab.name], true);
+      }).bind(this));
     },
     setVirtualTab(tab){
       this.display = this.virtualNameToComponent[tab.name];
+      this.activeTab = tab.name;
     },
     activateTab(name){
       let tab = this.tabs.filter(t => t.name == name)[0];

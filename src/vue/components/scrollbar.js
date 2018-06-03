@@ -8,6 +8,7 @@ let scrollbar =  {
   mounted() {
     this.thumbNode = document.querySelector('.scrollbar .thumb');
     this.scrollbarNode = document.querySelector('.scrollbar');
+    this.THUMB_HEIGHT = 30;
   },
   methods: {
     onMouseDown(e){
@@ -19,9 +20,9 @@ let scrollbar =  {
       let bottomY = this.scrollbarNode.getBoundingClientRect().bottom;
       let cursorY = this.thumbNode.getBoundingClientRect().top;
 
-      if(this.doDrag && e.pageY >= topY && e.pageY + 30 < bottomY){
+      if(this.doDrag && e.pageY >= topY && e.pageY + this.THUMB_HEIGHT < bottomY){
         this.thumbNode.style.top = (e.pageY - topY) + 'px';
-        this.cursor = parseFloat(e.pageY - 30) / (bottomY - topY - 30);
+        this.cursor = parseFloat(e.pageY - this.THUMB_HEIGHT) / (bottomY - topY - this.THUMB_HEIGHT);
         app.updateScreenOnScroll(this.cursor);
       }
     }
