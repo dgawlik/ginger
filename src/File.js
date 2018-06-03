@@ -64,46 +64,31 @@ class File {
     }).bind(this));
   }
 
-  scanFile(progressSubscriber){
+  find(onFinish, match, progressSubscriber, fullSearch){
     function promise(resolve, reject){
-      this.lineBeginnings = [];
-      this.lineEndings = [];
-      let marks = [-2];
-      let BOM;
+      let marks = [];
       let pages = 0;
       function onRead(err, bytesRead, buffer){
         let totalPages = Math.ceil(this.fileSize / this.RAW_BLOCK_SIZE);
         if(bytesRead == 0){
-          for(let i=0;i<marks.length-1;i++){
-            this.lineBeginnings.push(marks[i]+this.ending.length + BOM);
-            this.lineEndings.push(marks[i+1] + BOM);
-          }
+          onFinish(marks);
           resolve();
           return;
         }
-        let text = buffer.toString('utf8');
-
-        let index;
-        if(!this.ending){
-          if((index = buffer.indexOf("\r\n", 0)) != -1){
-            this.ending = this.WINDOWS_ENDING;
-          }
-          else if((index = buffer.indexOf("\n", 0)) != -1){
-            this.ending = this.LINUX_ENDING;
-          }
-        }
-        else {
-          index = buffer.indexOf(this.ending, 0);
+        let index = match(buffer, 0);
+        if(index != -1 && !fullSearch){
+          resolve();
+          return;
         }
 
         while(index != -1){
           if(pages >= 1){
-            marks.push(index + this.RAW_BLOCK_SIZE - BOM + (pages-1)*this.RAW_BLOCK_SIZE);
+            marks.push(index + this.RAW_BLOCK_SIZE - this.BOM + (pages-1)*this.RAW_BLOCK_SIZE);
           }
           else{
             marks.push(index);
           }
-          index = buffer.indexOf(this.ending, index+1);
+          index = match(buffer, index+1);
         }
 
         this.block.fill(0);
@@ -117,9 +102,47 @@ class File {
           this.fileSize = size;
           return this.detectBom();
       }).then(isBom => {
-          BOM = isBom ? 3 : 0;
-          fs.read(this.file, this.block, 0, this.RAW_BLOCK_SIZE, BOM, onRead.bind(this));
+          this.BOM = isBom ? 3 : 0;
+          fs.read(this.file, this.block, 0, this.RAW_BLOCK_SIZE, this.BOM, onRead.bind(this));
         });
+    }
+    return new Promise(promise.bind(this));
+  }
+
+  scanFile(progressSubscriber){
+    let matches = [-2];
+    this.lineBeginnings = [];
+    this.lineEndings = [];
+    function onFinish(marks){
+      matches = matches.concat(marks);
+      for(let i=0;i<matches.length-1;i++){
+        this.lineBeginnings.push(matches[i]+this.ending.length + this.BOM);
+        this.lineEndings.push(matches[i+1] + this.BOM);
+      }
+    }
+
+    function detectNewlines(buffer, start){
+      let index = -1;
+      if((index = buffer.indexOf("\r\n", 0)) != -1){
+        this.ending = this.WINDOWS_ENDING;
+      }
+      else if((index = buffer.indexOf("\n", 0)) != -1){
+        this.ending = this.LINUX_ENDING;
+      }
+      return index;
+    }
+
+    function matchNewlines(buffer, start){
+      return buffer.indexOf(this.ending, start);
+    }
+
+    let that = this;
+    function promise(resolve, reject){
+      this.find(() => {}, detectNewlines.bind(that), null, false)
+        .then(() => {
+          return this.find(onFinish.bind(that), matchNewlines.bind(that), progressSubscriber, true)
+        })
+        .then(() => { resolve(); });
     }
     return new Promise(promise.bind(this));
   }
