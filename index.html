@@ -15,7 +15,7 @@
       </div>
     </div>
     <div id="content" @mouseup="delegateStopDrag" @mousemove="delegateMouseMove">
-      <tabs :tabs="tabs"></tabs>
+      <tabs></tabs>
       <keep-alive>
         <component v-bind:is="display"></component>
       </keep-alive>

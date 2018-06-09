@@ -67,11 +67,11 @@ let buffer =  {
               .height.replace('px', '');
         viewportHeight = parseInt(viewportHeight);
         if(lastLineNode.offsetTop + this.linesWrapperOffset < viewportHeight && e.deltaY > 0){
-          app.loadNextPage();
+          this.loadNextPage();
           return;
         }
         if(this.topLine == this.boundaryLow && e.deltaY < 0 && this.boundaryLow != 0){
-          app.loadPrevPage();
+          this.loadPrevPage();
           return;
         }
 
@@ -79,7 +79,7 @@ let buffer =  {
           if(this.topLine > 0){
             let dy = Math.min(settingsManager.scrollResolution, this.topLine-this.boundaryLow);
             if(this.topLine - dy < this.boundaryLow){
-              app.loadPrevPage().then(()=>{
+              this.loadPrevPage().then(()=>{
                 this.topLine -= dy;
                 this.alignToLine(this.topLine);
               });
@@ -94,7 +94,7 @@ let buffer =  {
         else {
           let dy = Math.min(settingsManager.scrollResolution, this.boundaryHigh-this.topLine);
           if(this.topLine + dy >= this.boundaryHigh){
-            app.loadNextPage().then(() => {
+            this.loadNextPage().then(() => {
               this.topLine += dy;
               this.alignToLine(this.topLine);
             });
@@ -109,6 +109,22 @@ let buffer =  {
     setWrapperVerticalPosition(val){
       this.linesWrapperNode.style.top = val + 'px';
       this.linesWrapperOffset = val;
+    },
+    loadNextPage(){
+      let screen = tabManager.tabs[app.tabs.activeTabName].screen;
+      let promise = screen.readNextPage();
+      promise.then((function(){
+          this.update(screen.lines, screen.boundaryLow, screen.boundaryHigh, this.topLine);
+        }).bind(this));
+      return promise;
+    },
+    loadPrevPage(){
+      let screen = tabManager.tabs[app.tabs.activeTabName].screen;
+      let promise = screen.readPrevPage();
+      promise.then((function(){
+          this.update(screen.lines, screen.boundaryLow, screen.boundaryHigh, this.topLine);
+        }).bind(this));
+      return promise;
     }
   },
   computed: {

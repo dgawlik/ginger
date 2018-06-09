@@ -23,8 +23,17 @@ let scrollbar =  {
       if(this.doDrag && e.pageY >= topY && e.pageY + this.THUMB_HEIGHT < bottomY){
         this.thumbNode.style.top = (e.pageY - topY) + 'px';
         this.cursor = parseFloat(e.pageY - this.THUMB_HEIGHT) / (bottomY - topY - this.THUMB_HEIGHT);
-        app.updateScreenOnScroll(this.cursor);
+        this.updateScreenOnScroll(this.cursor);
       }
+    },
+    updateScreenOnScroll(currentCursor){
+      let screen = tabManager.tabs[app.tabs.activeTabName].screen;
+      let totalLines = screen.file.lineBeginnings.length;
+      let newOffset = parseInt(totalLines*currentCursor);
+      screen.readRandomAt(newOffset)
+        .then(() => {
+          app.buffer.update(screen.lines, screen.boundaryLow, screen.boundaryHigh, screen.boundaryLow);
+        });
     }
   },
   template: `

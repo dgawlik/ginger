@@ -14,10 +14,10 @@ let tab =  {
       this.mouseOver = false;
     },
     onActivateClick: function(){
-      app.activateTab(this.name);
+      app.tabs.activateTab(this.name);
     },
     onCloseClick: function(){
-      app.closeTab(this.name);
+      app.tabs.closeTab(this.name);
     }
   },
   template: `

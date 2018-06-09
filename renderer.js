@@ -5,8 +5,6 @@ const {remote} = require('electron')
 const {Menu, MenuItem} = remote
 const {dialog} = require('electron').remote
 
-let {TabHolder} = require('./src/TabHolder.js')
-
 const template = [
     {
       label: 'File',
@@ -47,9 +45,6 @@ const template = [
 const menu = Menu.buildFromTemplate(template)
 Menu.setApplicationMenu(menu)
 
-
-window.tabManager = new TabHolder();
-
 class $1{
   progress(val){
     progressBar.updateProgress(val);
@@ -64,7 +59,7 @@ function onMenuOpenClick(){
       .then(name => {
         let tab = tabManager.tabs[name];
         progressBar.hide();
-        app.addTab(tab);
+        app.tabs.addTab(tab);
       });
   }
 }
@@ -73,6 +68,6 @@ function onMenuSettingsClick(){
   tabManager.addTab("<Settings>", true)
     .then(name => {
       let tab = tabManager.tabs[name];
-      app.addTab(tab);
+      app.tabs.addTab(tab);
     });
 }
