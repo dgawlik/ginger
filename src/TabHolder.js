@@ -28,6 +28,7 @@ class TabHolder {
               'name': basename,
               'path': name,
               'screen': screen,
+              'offset': 0,
               'isVirtual': false
             }
             resolve(basename);

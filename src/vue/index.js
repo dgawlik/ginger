@@ -36,7 +36,7 @@ window.app = new Vue({
   el: '#content',
   data: {
     message: 'Hello Vue!',
-    tabs: [],
+    tabs: {},
     display: 'buffer'
   },
   components: {
@@ -65,8 +65,7 @@ window.app = new Vue({
       }
     },
     updateScreenOnScroll(currentCursor){
-      let activeTab = this.activeTab;
-      let screen = tabManager.tabs[activeTab].screen;
+      let screen = tabManager.tabs[this.activeTabName].screen;
       let totalLines = screen.file.lineBeginnings.length;
       let newOffset = parseInt(totalLines*currentCursor);
       screen.readRandomAt(newOffset)
@@ -75,67 +74,47 @@ window.app = new Vue({
         });
     },
     addTab(tab){
-      this.tabs.push(tab);
-      this.tabOffsets[tab.name] = 0;
+      Vue.set(this.tabs, tab.name, tab);
       this.setTab(tab);
     },
     setTab(tab){
-      for(let i=0;i<this.tabs.length;i++){
-        let cpy = Object.assign({}, this.tabs[i]);
-        if(this.tabs[i].name == tab.name){
-          cpy.isActive = true;
-        }
-        else {
-          cpy.isActive = false;
-        }
-        this.$set(this.tabs, i, cpy);
+      let previousTab;
+      if(this.activeTabName && this.tabs[this.activeTabName]){
+        previousTab = this.tabs[this.activeTabName];
+        previousTab.offset = this.buffer.topLine;
+        previousTab.isActive = false;
+      }
 
-        if(this.activeTab){
-          this.tabOffsets[this.activeTab] = this.buffer.topLine;
-        }
-
-        if(tab.name.startsWith("<")){
-          this.setVirtualTab(tab);
-        }
-        else {
-          this.setBufferTab(tab);
-        }
+      this.activeTabName = tab.name;
+      Vue.set(tab, 'isActive', true);
+      if(tab.isVirtual){
+        this.display = this.virtualNameToComponent[tab.name];
+      }
+      else {
+        this.display = 'buffer';
+        let screen = tabManager.tabs[tab.name].screen;
+        this.buffer.update(screen.lines, screen.boundaryLow, screen.boundaryHigh, tab.offset, true);
       }
     },
-    setBufferTab(tab){
-      this.display = 'buffer';
-
-      this.activeTab = tab.name;
-      let screen = tabManager.tabs[tab.name].screen;
-      this.buffer.update(screen.lines, screen.boundaryLow, screen.boundaryHigh, this.tabOffsets[tab.name], true);
-
-    },
-    setVirtualTab(tab){
-      this.display = this.virtualNameToComponent[tab.name];
-      this.activeTab = tab.name;
-    },
     activateTab(name){
-      let tab = this.tabs.filter(t => t.name == name)[0];
+      let tab = this.tabs[name];
       if(tab){
         this.setTab(tab);
       }
     },
     closeTab(name){
-      let ind = this.tabs.findIndex(t=>t.name==name);
-      this.tabOffsets[this.tabs[ind].name] = 0;
-      this.tabs = this.tabs.slice(0, ind).concat(this.tabs.slice(ind+1));
+      delete this.tabs[name];
       tabManager.removeTab(name);
-      let firstTab = this.tabs[0];
+      let firstTab = Object.keys(this.tabs)[0];
       if(firstTab){
-        this.setTab(firstTab);
+        this.setTab(this.tabs[firstTab]);
       }
       else {
         this.buffer.update([], 0, 0);
       }
     },
     loadNextPage(){
-      let activeTab = this.activeTab;
-      let screen = tabManager.tabs[activeTab].screen;
+      let screen = tabManager.tabs[this.activeTabName].screen;
       let promise = screen.readNextPage();
       promise.then((function(){
           this.buffer.update(screen.lines, screen.boundaryLow, screen.boundaryHigh, this.buffer.topLine);
@@ -143,8 +122,7 @@ window.app = new Vue({
       return promise;
     },
     loadPrevPage(){
-      let activeTab = this.activeTab;
-      let screen = tabManager.tabs[activeTab].screen;
+      let screen = tabManager.tabs[this.activeTabName].screen;
       let promise = screen.readPrevPage();
       promise.then((function(){
           this.buffer.update(screen.lines, screen.boundaryLow, screen.boundaryHigh, this.buffer.topLine);
