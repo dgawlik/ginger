@@ -23,7 +23,7 @@ describe('File', function() {
     let file;
     openFilePromise(filePath, 'r')
       .then(fd => {
-        file = new File(fd, filePath, 10, RAW_BLOCK_SIZE);
+        file = new File(fd, filePath, RAW_BLOCK_SIZE);
         return file.scanFile();
       })
       .then(function(){
@@ -181,6 +181,31 @@ describe('File', function() {
         }
         catch(ex){
           done(ex);
+        }
+      });
+  });
+
+  it('find() returns matches', function(done){
+    let filePath = path.resolve('resources/find-test.log');
+    let RAW_BLOCK_SIZE = 1000;
+    let file;
+    openFilePromise(filePath, 'r')
+      .then(fd => {
+        file = new File(fd, filePath, RAW_BLOCK_SIZE);
+        return file.scanFile();
+      })
+      .then(() => file.find("match", null))
+      .then(function(matches){
+        try {
+          assert.equal(matches.lines.length, 2);
+          assert.equal(matches.lines[0], 0);
+          assert.equal(matches.lines[1], 2);
+          assert.equal(matches.positions[0], 9);
+          assert.equal(matches.positions[1], 4);
+          done();
+        }
+        catch (err){
+          done(err);
         }
       });
   });

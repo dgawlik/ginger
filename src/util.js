@@ -27,8 +27,22 @@ function elementOuterHeight(el) {
   return marginTop + height + marginBottom;
 }
 
+function findLargestSmallerIndex(arr, start, end, val){
+  if(end-start==1){
+    return arr[end] < val ? end : start;
+  }
+  let middle = Math.floor((end+start)/2);
+  if(val < arr[middle]){
+    return findLargestSmallerIndex(arr, start, middle, val);
+  }
+  else{
+    return findLargestSmallerIndex(arr, middle, end, val);
+  }
+}
+
 module.exports = {
   'range': range,
   'openFilePromise': openFilePromise,
-  'elementOuterHeight': elementOuterHeight
+  'elementOuterHeight': elementOuterHeight,
+  'findLargestSmallerIndex': findLargestSmallerIndex
 };

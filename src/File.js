@@ -1,5 +1,6 @@
 const fs = require('fs');
 const os = require('os');
+const {findLargestSmallerIndex} = require('./util.js');
 
 class File {
 
@@ -64,39 +65,67 @@ class File {
     }).bind(this));
   }
 
-  find(onFinish, match, progressSubscriber, fullSearch){
+  find(text, progressSubscriber){
+
+    function match(buffer, offset){
+      return buffer.indexOf(text, offset);
+    }
+    let that = this;
+    function promise(resolve, reject){
+      this.findMarks(match.bind(that), true, progressSubscriber)
+        .then(marks => {
+          let matches = {
+            lines: [],
+            positions: []
+          };
+          // marks = marks.map(val => val+this.BOM);
+          for(let mark of marks){
+            let lineIndex = findLargestSmallerIndex(this.lineBeginnings,
+                0, this.lineBeginnings.length-1, mark);
+            let position = mark - this.lineBeginnings[lineIndex];
+            matches.lines.push(lineIndex);
+            matches.positions.push(position);
+          }
+          this.matches = matches;
+          resolve(matches);
+        });
+    }
+    return new Promise(promise.bind(this));
+  }
+
+  findMarks(match, fullSearch, progressSubscriber){
     function promise(resolve, reject){
       let marks = [];
       let pages = 0;
       function onRead(err, bytesRead, buffer){
         let totalPages = Math.ceil(this.fileSize / this.RAW_BLOCK_SIZE);
         if(bytesRead == 0){
-          onFinish(marks);
-          resolve();
+          resolve(marks);
           return;
         }
         let index = match(buffer, 0);
         if(index != -1 && !fullSearch){
-          resolve();
+          resolve(marks);
           return;
         }
 
         while(index != -1){
           if(pages >= 1){
-            marks.push(index + this.RAW_BLOCK_SIZE - this.BOM + (pages-1)*this.RAW_BLOCK_SIZE);
+            marks.push(index + pages*this.RAW_BLOCK_SIZE);
           }
           else{
-            marks.push(index);
+            marks.push(index + this.BOM);
           }
           index = match(buffer, index+1);
         }
 
-        this.block.fill(0);
         if(progressSubscriber){
           progressSubscriber.progress(100.0*(pages+1)/totalPages);
         }
+        this.block.fill(0);
         fs.read(this.file, this.block, 0, this.RAW_BLOCK_SIZE, this.RAW_BLOCK_SIZE*(++pages), onRead.bind(this));
       }
+      
       this.checkFileSize()
         .then(size => {
           this.fileSize = size;
@@ -110,17 +139,6 @@ class File {
   }
 
   scanFile(progressSubscriber){
-    let matches = [-2];
-    this.lineBeginnings = [];
-    this.lineEndings = [];
-    function onFinish(marks){
-      matches = matches.concat(marks);
-      for(let i=0;i<matches.length-1;i++){
-        this.lineBeginnings.push(matches[i]+this.ending.length + this.BOM);
-        this.lineEndings.push(matches[i+1] + this.BOM);
-      }
-    }
-
     function detectNewlines(buffer, start){
       let index = -1;
       if((index = buffer.indexOf("\r\n", 0)) != -1){
@@ -138,11 +156,20 @@ class File {
 
     let that = this;
     function promise(resolve, reject){
-      this.find(() => {}, detectNewlines.bind(that), null, false)
-        .then(() => {
-          return this.find(onFinish.bind(that), matchNewlines.bind(that), progressSubscriber, true)
+      this.findMarks(detectNewlines.bind(that), false)
+        .then(marks => {
+          return this.findMarks(matchNewlines.bind(that), true, progressSubscriber)
         })
-        .then(() => { resolve(); });
+        .then(marks => {
+          let matches = [-2+this.BOM].concat(marks);
+          this.lineBeginnings = [];
+          this.lineEndings = [];
+          for(let i=0;i<matches.length-1;i++){
+            this.lineBeginnings.push(matches[i]+this.ending.length);
+            this.lineEndings.push(matches[i+1]);
+          }
+          resolve();
+        });
     }
     return new Promise(promise.bind(this));
   }
