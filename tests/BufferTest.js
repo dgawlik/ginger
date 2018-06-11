@@ -26,7 +26,7 @@ describe('Buffer', function() {
     Line 2
   </p></div></div>`;
 
-    let vm = new Vue(Object.assign(buffer, {
+    let vm = new Vue(Object.assign({}, buffer, {
       el: '#content',
       data: {
         lines: ['Line 1', 'Line 2'],

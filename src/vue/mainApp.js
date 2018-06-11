@@ -21,10 +21,6 @@ let mainApp = {
     this.tabs = this.$children[0];
     this.buffer = this.$children[1];
     this.scrollbar = this.$children[2];
-    this.tabOffsets = {};
-    this.virtualNameToComponent = {
-      '<Settings>': 'settings'
-    }
   },
   methods: {
     delegateStopDrag(){

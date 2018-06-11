@@ -10,6 +10,11 @@ let tabs =  {
   components: {
     'tab': tab,
   },
+  mounted() {
+    this.virtualNameToComponent = {
+      '<Settings>': 'settings'
+    };
+  },
   methods: {
     addTab(tab){
       Vue.set(this.tabs, tab.name, tab);

@@ -40,9 +40,23 @@ function findLargestSmallerIndex(arr, start, end, val){
   }
 }
 
+function delayed(timeout){
+  return new Promise(function (resolve, reject){
+    setTimeout(() => resolve(), timeout);
+  });
+}
+
+function dispatchEvent(el, evt){
+  let evObj = document.createEvent('Events');
+  evObj.initEvent(evt, true, false);
+  el.dispatchEvent(evObj);
+};
+
 module.exports = {
   'range': range,
   'openFilePromise': openFilePromise,
   'elementOuterHeight': elementOuterHeight,
-  'findLargestSmallerIndex': findLargestSmallerIndex
+  'findLargestSmallerIndex': findLargestSmallerIndex,
+  'delayed': delayed,
+  'dispatchEvent': dispatchEvent
 };
