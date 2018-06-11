@@ -6,7 +6,7 @@ let tabs =  {
       tabs: {}
     }
   },
-  template: '<div data-tabs="true" class="tabs"><tab v-for="tabAttr in Object.values(tabs)" :key="tabAttr.name" :name="tabAttr.name" :isActive="tabAttr.isActive"></tab></div>',
+  template: '<div class="tabs"><tab v-for="tabAttr in Object.values(tabs)" :key="tabAttr.name" :name="tabAttr.name" :isActive="tabAttr.isActive"></tab></div>',
   components: {
     'tab': tab,
   },

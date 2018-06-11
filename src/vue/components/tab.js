@@ -21,7 +21,7 @@ let tab =  {
     }
   },
   template: `
-<div @click="onActivateClick" data-tab="true" class="tabOuterContainer" @mouseenter="onMouseEnter()" @mouseleave="onMouseLeave()">
+<div @click="onActivateClick" class="tabOuterContainer" @mouseenter="onMouseEnter()" @mouseleave="onMouseLeave()">
   <div class="tabTextHolder">{{name}}</div>
   <div class="tabCloseBtn"><i v-if="isActive || mouseOver" @click="onCloseClick" class="fas fa-times-circle"></i></div>
 </div>
