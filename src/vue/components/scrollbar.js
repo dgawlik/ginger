@@ -14,16 +14,31 @@ let scrollbar =  {
     onMouseDown(e){
       e.preventDefault();
       this.doDrag = true;
+      this.startingY = e.pageY;
+      this.topY = this.scrollbarNode.getBoundingClientRect().top;
+      this.bottomY = this.scrollbarNode.getBoundingClientRect().bottom;
+      this.cursorY = this.thumbNode.getBoundingClientRect().top;
     },
     onMouseMove(e){
-      let topY = this.scrollbarNode.getBoundingClientRect().top;
-      let bottomY = this.scrollbarNode.getBoundingClientRect().bottom;
-      let cursorY = this.thumbNode.getBoundingClientRect().top;
+      let dy = e.pageY - this.startingY;
+      newCursorY = this.cursorY + dy;
 
-      if(this.doDrag && e.pageY >= topY && e.pageY + this.THUMB_HEIGHT < bottomY){
-        this.thumbNode.style.top = (e.pageY - topY) + 'px';
-        this.cursor = parseFloat(e.pageY) / (bottomY - topY);
-        this.updateScreenOnScroll(this.cursor);
+      if(this.doDrag){
+        if(newCursorY < this.topY){
+          this.thumbNode.style.top = 0 + 'px';
+          this.cursor = 0;
+          this.updateScreenOnScroll(this.cursor);
+        }
+        else if(newCursorY + this.THUMB_HEIGHT > this.bottomY){
+          this.thumbNode.style.top = (this.bottomY - this.topY - this.THUMB_HEIGHT) + 'px';
+          this.cursor = 1;
+          this.updateScreenOnScroll(this.cursor);
+        }
+        else {
+          this.thumbNode.style.top = (newCursorY - this.topY) + 'px';
+          this.cursor = (newCursorY-this.topY) / (this.bottomY - this.topY - this.THUMB_HEIGHT + 1);
+          this.updateScreenOnScroll(this.cursor);
+        }
       }
     },
     updateScreenOnScroll(currentCursor){

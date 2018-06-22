@@ -114,6 +114,7 @@ body::-webkit-scrollbar-thumb {
   height: calc(100vh - 30px);
   width: 6px;
   margin-right: 2px;
+  overflow-y: hidden;
 }
 
 .scrollbar .thumb {
