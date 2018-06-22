@@ -99,7 +99,7 @@ describe('File', function() {
         file = new File(fd, filePath, RAW_BLOCK_SIZE);
         return file.scanFile();
       })
-      .then(() => file.readLines([0, undefined, undefined]))
+      .then(() => file.readLines([0, -1, 3]))
       .then(lines => {
         try {
           let verifyLines = [
@@ -206,6 +206,27 @@ describe('File', function() {
         }
         catch (err){
           done(err);
+        }
+      });
+  });
+
+  it('readLine() should resolve to undefined for index out of bounds', function(done){
+    let filePath = path.resolve('resources/file-test.log');
+    let RAW_BLOCK_SIZE = 1000;
+    let file;
+    openFilePromise(filePath, 'r')
+      .then(fd => {
+        file = new File(fd, filePath, RAW_BLOCK_SIZE);
+        return file.scanFile();
+      })
+      .then(() => file.readLine(3))
+      .then(result => {
+        try{
+          assert.isOk(result === undefined);
+          done();
+        }
+        catch(e){
+          done(e);
         }
       });
   });

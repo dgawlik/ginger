@@ -15,12 +15,20 @@ class File {
   }
 
   readLines(lines){
-    let promises = lines.filter(i => this.lineBeginnings[i] !== undefined).map(i => this.readLine(i));
-    return Promise.all(promises);
+    let promises = lines.map(i => this.readLine(i));
+    return Promise
+            .all(promises)
+            .then(lst => lst.filter(l => l !== undefined));
   }
 
   readLine(index){
     function promise(resolve, reject){
+      if(
+        index < 0 ||
+        index >= this.lineBeginnings.length
+      ) {
+        resolve(undefined);
+      }
       let lineDescriptor = {
         'start': this.lineBeginnings[index],
         'end': this.lineEndings[index]
@@ -125,7 +133,7 @@ class File {
         this.block.fill(0);
         fs.read(this.file, this.block, 0, this.RAW_BLOCK_SIZE, this.RAW_BLOCK_SIZE*(++pages), onRead.bind(this));
       }
-      
+
       this.checkFileSize()
         .then(size => {
           this.fileSize = size;

@@ -19,6 +19,13 @@ describe('Tabs', function() {
   function applicationWithOpenTwoTabs(){
     return new Promise(function(resolve, reject){
       global.tabManager = tabManager = new TabHolder();
+      global.settingsManager = {
+        scrollResolution: 1,
+        setSoftLineWraps(val){
+          app.buffer.softLineWraps = val;
+          app.buffer.update([], 0, 0, 0);
+        }
+      };
       tabManager.addTab(path.resolve('./resources/apple.txt'), false)
         .then(() => {
           return tabManager.addTab(path.resolve('./resources/microsoft.txt'), false);
@@ -116,10 +123,43 @@ describe('Tabs', function() {
       })
       .then(() => {
         assert.isOk(app.$el.outerHTML.includes('input-group'));
+        app.tabs.closeTab('<Settings>');
         done();
       })
       .catch(function(err){
         done(err);
+      });
+  });
+
+  it('closing tab activates first tab left', function(done){
+    applicationWithOpenTwoTabs()
+      .then(() => {
+        app.tabs.closeTab('microsoft.txt');
+        return delayed(10);
+      })
+      .then(() => {
+        assert.isOk(app.$el.outerHTML.includes('Cupertino'));
+        done();
+      });
+  });
+
+  it('switching tabs remembers page offset', function(done){
+    applicationWithOpenTwoTabs()
+      .then(() => {
+        app.buffer.onMouseWheel({deltaY: 10});
+        return delayed(10);
+      })
+      .then(() => {
+        app.tabs.activateTab('apple.txt');
+        app.tabs.activateTab('microsoft.txt');
+        return delayed(10);
+      })
+      .then(() => {
+        assert.equal(app.buffer.topLine, 1);
+        done();
+      })
+      .catch(function(ex){
+        done(ex);
       });
   });
 });
