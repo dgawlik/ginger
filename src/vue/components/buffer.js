@@ -3,10 +3,8 @@ const {elementOuterHeight} = require('../../util.js');
 let buffer =  {
   data: function () {
     return {
-      lines: [],
-      boundaryLow: 0,
-      boundaryHigh: 0,
-      softLineWraps: true
+      screen: undefined,
+      lineWraps: true
     }
   },
   beforeMount () {
@@ -19,127 +17,64 @@ let buffer =  {
     this.textBufferNode = document.querySelector('#textBuffer');
     this.linesWrapperNode = document.querySelector('#linesWrapper');
     this.lineNodes = [...document.querySelectorAll('#linesWrapper p')];
-    this.queue = [];
   },
   updated: function(){
     this.textBufferNode = document.querySelector('#textBuffer');
     this.linesWrapperNode = document.querySelector('#linesWrapper');
     this.lineNodes = [...document.querySelectorAll('#linesWrapper p')];
-    if(!this.topLine){
-      this.topLine = 0;
-    }
-    else {
-      this.alignToLine(this.topLine);
-    }
   },
   methods: {
-    update(lines, boundaryLow, boundaryHigh, topLine, forceUpdate){
-      if(forceUpdate || boundaryLow != this.boundaryLow || boundaryHigh != this.boundaryHigh){
-        this.lines = lines;
-        this.boundaryLow = boundaryLow;
-        this.boundaryHigh = boundaryHigh;
-        this.topLine = topLine;
-        if(topLine){
-          this.alignToLine(topLine);
-        }
-        else {
-          try {
-            this.alignToLine(0);
-          }
-          catch(ex){
-
-          }
-        }
-      }
-    },
-    alignToLine(lineNo){
-      let index;
-      index = lineNo - this.boundaryLow;
-      let node = this.lineNodes[index];
-      let offset = node.offsetTop || 0;
-      this.setWrapperVerticalPosition(-offset);
-    },
-
     onMouseWheel(e){
-      if(this.lines.length){
-        let lastLineNode = this.lineNodes[this.lineNodes.length-1];
-        let viewportHeight = window.getComputedStyle(this.textBufferNode)
-              .height.replace('px', '');
-        viewportHeight = parseInt(viewportHeight);
-        if(lastLineNode.offsetTop + this.linesWrapperOffset < viewportHeight && e.deltaY > 0){
-          this.loadNextPage();
-          return;
-        }
-        if(this.topLine == this.boundaryLow && e.deltaY < 0 && this.boundaryLow != 0){
-          this.loadPrevPage();
-          return;
-        }
-
-        if(e.deltaY < 0){
-          if(this.topLine > 0){
-            let dy = Math.min(settingsManager.scrollResolution, this.topLine-this.boundaryLow);
-            if(this.topLine - dy < this.boundaryLow){
-              this.loadPrevPage().then(()=>{
-                this.topLine -= dy;
-                this.alignToLine(this.topLine);
-              });
+      if(this.screen){
+        let distance = settingsManager.scrollResolution;
+        distance *= e.deltaY < 0 ? -1 : 1;
+        let currentPos = this.screen.cursor;
+        this.screen.update(currentPos + distance)
+          .then(isUpdate => {
+            if(isUpdate){
+              this.forceUpdate();
             }
-            else {
-              this.topLine -= dy;
-              this.alignToLine(this.topLine);
-            }
-
-          }
-        }
-        else {
-          let dy = Math.min(settingsManager.scrollResolution, this.boundaryHigh-this.topLine);
-          if(this.topLine + dy >= this.boundaryHigh){
-            this.loadNextPage().then(() => {
-              this.topLine += dy;
-              this.alignToLine(this.topLine);
-            });
-          }
-          else {
-            this.topLine += dy;
-            this.alignToLine(this.topLine);
-          }
-        }
+          });
       }
     },
-    setWrapperVerticalPosition(val){
-      this.linesWrapperNode.style.top = val + 'px';
-      this.linesWrapperOffset = val;
+
+    updateScreen(){
+      let lineNodeHeights = this.lineNodes.map(e => {
+        return e.offsetHeight +
+        parseInt(window.getComputedStyle(e).getPropertyValue('margin-top')) +
+        parseInt(window.getComputedStyle(e).getPropertyValue('margin-bottom'));
+
+      });
+      let offsets = new Array(lineNodeHeights.length);
+      offsets[0] = 0;
+      for(let i=1;i<offsets.length;i++){
+        offsets[i] = offsets[i-1]+lineNodeHeights[i-1];
+      }
+      let offset = this.screen.cursor - this.screen.boundaryLow;
+      this.linesWrapperNode.style.top = -offsets[offset] + 'px';
     },
-    loadNextPage(){
-      let screen = tabManager.tabs[app.tabs.activeTabName].screen;
-      let promise = screen.readNextPage();
-      promise.then((function(){
-          this.update(screen.lines, screen.boundaryLow, screen.boundaryHigh, this.topLine);
-        }).bind(this));
-      return promise;
-    },
-    loadPrevPage(){
-      let screen = tabManager.tabs[app.tabs.activeTabName].screen;
-      let promise = screen.readPrevPage();
-      promise.then((function(){
-          this.update(screen.lines, screen.boundaryLow, screen.boundaryHigh, this.topLine);
-        }).bind(this));
-      return promise;
+
+    forceUpdate(){
+      this.$forceUpdate();
+      Vue.nextTick(() => this.updateScreen());
     }
   },
   computed: {
     linesWithNumbers: function(){
+      if(!this.screen){
+        return [];
+      }
       let arr = [];
-      for(let i=0;i<this.boundaryHigh-this.boundaryLow;i++){
+      for(let i=0;i<this.screen.boundaryHigh-this.screen.boundaryLow;i++){
         arr.push({
-          'lineNo': i+this.boundaryLow,
-          'line': this.lines[i]
+          'lineNo': i+this.screen.boundaryLow,
+          'line': this.screen.lines[i]
         });
       }
       return arr;
     },
     noWrap: function(){
-      return !this.softLineWraps;
+      return !this.lineWraps;
     }
   },
   template: `<div id="textBuffer">

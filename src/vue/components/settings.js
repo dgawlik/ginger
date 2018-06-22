@@ -3,7 +3,7 @@ let settings =  {
   data: function () {
     return {
       scrollResolution: 1,
-      softLineWraps: true
+      lineWraps: true
     }
   },
   methods: {
@@ -12,8 +12,8 @@ let settings =  {
     scrollResolution: function(val){
       settingsManager.scrollResolution = parseInt(val);
     },
-    softLineWraps: function(val){
-      settingsManager.setSoftLineWraps(val);
+    lineWraps: function(val){
+      settingsManager.setLineWraps(val);
     }
   },
   template: `
@@ -28,7 +28,7 @@ let settings =  {
   <div class="input-group mb-3">
     <div class="input-group-prepend">
       <div class="input-group-text">
-        <input v-model="softLineWraps" type="checkbox" aria-label="Checkbox for following text input">
+        <input v-model="lineWraps" type="checkbox" aria-label="Checkbox for following text input">
         Line wraps
       </div>
     </div>

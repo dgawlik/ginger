@@ -10,8 +10,7 @@ window.tabManager = new TabHolder();
 
 window.settingsManager = {
   scrollResolution: 1,
-  setSoftLineWraps(val){
-    app.buffer.softLineWraps = val;
-    app.buffer.update([], 0, 0, 0);
+  setLineWraps(val){
+    app.buffer.lineWraps = val;
   }
 };

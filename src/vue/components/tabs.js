@@ -36,7 +36,8 @@ let tabs =  {
       else {
         app.display = 'buffer';
         let screen = tabManager.tabs[tab.name].screen;
-        app.buffer.update(screen.lines, screen.boundaryLow, screen.boundaryHigh, tab.offset, true);
+        app.buffer.screen = screen;
+        app.buffer.forceUpdate();
       }
     },
     activateTab(name){
@@ -53,7 +54,8 @@ let tabs =  {
         this.setTab(this.tabs[firstTab]);
       }
       else {
-        app.buffer.update([], 0, 0);
+        app.buffer.screen = undefined;
+        app.buffer.forceUpdate();
       }
     },
   }

@@ -12,6 +12,7 @@ class Screen {
   }
 
   update(newCursorPos){
+    console.log(newCursorPos);
     return new Promise((function(resolve, reject){
       if(newCursorPos < this.boundaryLow){
         //boundaryLow should be 0 at minimum
@@ -19,8 +20,11 @@ class Screen {
           this.readPrevPage()
             .then(() => {
               this.cursor = newCursorPos;
-              resolve();
+              resolve(true);
             })
+        }
+        else {
+          resolve(false);
         }
       }
       else if(newCursorPos + this.pageSize > this.boundaryHigh){
@@ -28,13 +32,16 @@ class Screen {
           this.readNextPage()
             .then(() => {
               this.cursor = newCursorPos;
-              resolve();
+              resolve(true);
             })
+        }
+        else {
+          resolve(false);
         }
       }
       else {
         this.cursor = newCursorPos;
-        resolve();
+        resolve(true);
       }
     }).bind(this));
   }
@@ -75,7 +82,8 @@ class Screen {
           }
 
           this.lines = this.lines.concat(lines);
-          resolve();
+          let isNew = lines.length == 0;
+          resolve(isNew);
         })
     }).bind(this));
   }
@@ -95,7 +103,8 @@ class Screen {
             this.boundaryLow -= this.pageSize;
           }
           this.lines = lines.concat(this.lines);
-          resolve();
+          let isNew = lines.length == 0;
+          resolve(isNew);
         });
     }).bind(this));
   }

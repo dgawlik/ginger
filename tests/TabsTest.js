@@ -21,9 +21,8 @@ describe('Tabs', function() {
       global.tabManager = tabManager = new TabHolder();
       global.settingsManager = {
         scrollResolution: 1,
-        setSoftLineWraps(val){
-          app.buffer.softLineWraps = val;
-          app.buffer.update([], 0, 0, 0);
+        setLineWraps(val){
+          app.buffer.lineWraps = val;
         }
       };
       tabManager.addTab(path.resolve('./resources/apple.txt'), false)

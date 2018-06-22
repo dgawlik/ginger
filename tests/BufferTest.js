@@ -32,7 +32,7 @@ describe('Buffer', function() {
         lines: ['Line 1', 'Line 2'],
         boundaryLow: 0,
         boundaryHigh: 2,
-        softLineWraps: true
+        lineWraps: true
       }
     }));
     assert.equal(vm.$el.outerHTML, toBeRendered);
