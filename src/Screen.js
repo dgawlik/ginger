@@ -12,7 +12,6 @@ class Screen {
   }
 
   update(newCursorPos){
-    console.log(newCursorPos);
     return new Promise((function(resolve, reject){
       if(newCursorPos < this.boundaryLow){
         //boundaryLow should be 0 at minimum
@@ -34,6 +33,10 @@ class Screen {
               this.cursor = newCursorPos;
               resolve(true);
             })
+        }
+        else if(newCursorPos < this.boundaryHigh){
+          this.cursor = newCursorPos;
+          resolve(true);
         }
         else {
           resolve(false);

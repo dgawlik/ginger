@@ -38,6 +38,13 @@ let buffer =  {
       }
     },
 
+    updateToRandomPosition(newPosition){
+      this.screen.readRandomAt(newPosition)
+        .then(() => {
+          this.forceUpdate();
+        });
+    },
+
     updateScreen(){
       let lineNodeHeights = this.lineNodes.map(e => {
         return e.offsetHeight +
