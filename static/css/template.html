@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Template</title>
+    <link rel="stylesheet" href="./bootstrap.min.css">
+    <link rel="stylesheet" href="./fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <style>
+      body {
+        background-color: #fff;
+        padding: 20px;
+      }
+      #findToolbar {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        color: #CED4D9;
+        background-color: #212529;
+        border-radius: 5px;
+        height: 40px;
+        width: 300px;
+        padding: 0px 5px;
+      }
+
+      #findToolbar input {
+        background-color: #343A40;
+        border-radius: 3px;
+        border: none;
+        width: 150px;
+        color: #CED4D9;
+      }
+
+      #findToolbar input:focus{
+        border-color: #B2FF59;
+        outline-color: #B2FF59;
+        box-shadow:none;
+      }
+
+      #findToolbar i {
+        margin: 0px 5px;
+        cursor: pointer;
+      }
+
+      #findToolbar button {
+        width: 100px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: #343A40;
+        color: #CED4D9;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="findToolbar">
+      <input type="text" id="findToolbarInput">
+      <i class="fas fa-angle-left"></i>
+      <i class="fas fa-angle-right"></i>
+      <button id="findToolbarSearch">
+        <i class="fas fa-search"></i>
+        Search
+      </button>
+      <i class="fas fa-times"></i>
+    </div>
+  </body>
+</html>

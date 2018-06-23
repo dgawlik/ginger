@@ -25,7 +25,7 @@ let tab =  {
       app.tabs.closeTab(this.name);
     }
   },
-  
+
   template: `
 <div @click="onActivateClick" class="tabOuterContainer" @mouseenter="onMouseEnter()" @mouseleave="onMouseLeave()">
   <div class="tabTextHolder">{{name}}</div>

@@ -154,3 +154,48 @@ body::-webkit-scrollbar-thumb {
 .no-wrap {
   white-space: nowrap;
 }
+
+#findToolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: #CED4D9;
+  background-color: #212529;
+  border-radius: 5px;
+  height: 40px;
+  width: 300px;
+  padding: 0px 5px;
+}
+
+#findToolbar input {
+  background-color: #343A40;
+  border-radius: 3px;
+  border: none;
+  width: 150px;
+  color: #CED4D9;
+}
+
+#findToolbar input:focus{
+  border-color: #B2FF59;
+  outline-color: #B2FF59;
+  box-shadow:none;
+}
+
+#findToolbar i {
+  margin: 0px 5px;
+  cursor: pointer;
+}
+
+#findToolbar button {
+  width: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #343A40;
+  color: #CED4D9;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
