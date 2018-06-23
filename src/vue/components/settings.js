@@ -6,16 +6,17 @@ let settings =  {
       lineWraps: true
     }
   },
-  methods: {
-  },
+
   watch : {
     scrollResolution: function(val){
       settingsManager.scrollResolution = parseInt(val);
     },
+    
     lineWraps: function(val){
       settingsManager.setLineWraps(val);
     }
   },
+
   template: `
 <div id="settingsContainer">
   <div id="settingsScroll" class="dark-input input-group input-group-sm mb-3">

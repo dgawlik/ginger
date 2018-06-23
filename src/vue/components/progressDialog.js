@@ -5,11 +5,13 @@ let progressDialog =  {
       progress: 0
     }
   },
+
   methods: {
     update(val){
       this.progress = val;
     }
   },
+
   computed: {
     styleWidth: function(){
       return {
@@ -17,6 +19,7 @@ let progressDialog =  {
       };
     }
   },
+  
   template: `
 <div id="dialog" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">

@@ -10,6 +10,7 @@ window.tabManager = new TabHolder();
 
 window.settingsManager = {
   scrollResolution: 1,
+  
   setLineWraps(val){
     app.buffer.lineWraps = val;
   }
