@@ -19,14 +19,6 @@ function openFilePromise(filePath, mode){
   });
 }
 
-function elementOuterHeight(el) {
-  let css = window.getComputedStyle(el);
-  let marginTop = parseInt(css.marginTop.replace('px', '')) || 0;
-  let marginBottom = parseInt(css.marginBottom.replace('px', '')) || 0;
-  let height = parseInt(css.height.replace('px', '')) || 0;
-  return marginTop + height + marginBottom;
-}
-
 function findLargestSmallerIndex(arr, start, end, val){
   if(end-start==1){
     return arr[end] < val ? end : start;
@@ -55,7 +47,6 @@ function dispatchEvent(el, evt){
 module.exports = {
   'range': range,
   'openFilePromise': openFilePromise,
-  'elementOuterHeight': elementOuterHeight,
   'findLargestSmallerIndex': findLargestSmallerIndex,
   'delayed': delayed,
   'dispatchEvent': dispatchEvent

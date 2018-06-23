@@ -1,4 +1,3 @@
-const {elementOuterHeight} = require('../../util.js');
 
 let buffer =  {
   data: function () {
@@ -48,10 +47,10 @@ let buffer =  {
     updateScreen(){
       if(this.screen){
         let lineNodeHeights = this.lineNodes.map(e => {
-          return e.offsetHeight +
-          parseInt(window.getComputedStyle(e).getPropertyValue('margin-top')) +
-          parseInt(window.getComputedStyle(e).getPropertyValue('margin-bottom'));
-
+          const propValue = prop =>
+            parseInt(window.getComputedStyle(e).getPropertyValue(prop));
+          return e.offsetHeight + propValue('margin-top')
+            + propValue('marginBottom');
         });
         let offsets = new Array(lineNodeHeights.length);
         offsets[0] = 0;
