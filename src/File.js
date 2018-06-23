@@ -61,9 +61,11 @@ class File {
         if(err || bytesRead < 3){
           resolve(false);
         }
-        if(buffer.readUInt8(0) == parseInt("ef", 16)
-          && buffer.readUInt8(1) == parseInt("bb", 16)
-          && buffer.readUInt8(2) == parseInt("bf", 16)){
+        if(
+          buffer.readUInt8(0) == parseInt("ef", 16) &&
+          buffer.readUInt8(1) == parseInt("bb", 16) &&
+          buffer.readUInt8(2) == parseInt("bf", 16)
+        ){
             resolve(true);
         }
         else {
@@ -86,7 +88,7 @@ class File {
             lines: [],
             positions: []
           };
-          // marks = marks.map(val => val+this.BOM);
+
           for(let mark of marks){
             let lineIndex = findLargestSmallerIndex(this.lineBeginnings,
                 0, this.lineBeginnings.length-1, mark);
@@ -169,7 +171,7 @@ class File {
           return this.findMarks(matchNewlines.bind(that), true, progressSubscriber)
         })
         .then(marks => {
-          let matches = [-2+this.BOM].concat(marks);
+          let matches = [-this.ending.length+this.BOM].concat(marks);
           this.lineBeginnings = [];
           this.lineEndings = [];
           for(let i=0;i<matches.length-1;i++){
