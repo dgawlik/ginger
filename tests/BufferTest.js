@@ -4,6 +4,7 @@ require('browser-env')();
 const Vue = require('vue/dist/vue.js');
 const {assert} = require('chai');
 const {buffer} = require('../src/vue/components/buffer.js');
+const {Screen} = require('../src/Screen.js');
 
 
 describe('Buffer', function() {
@@ -26,12 +27,15 @@ describe('Buffer', function() {
     Line 2
   </p></div></div>`;
 
+    let screen = new Screen();
+    screen.boundaryLow = 0;
+    screen.boundaryHigh = 2;
+    screen.lines = ['Line 1', 'Line 2'];
+
     let vm = new Vue(Object.assign({}, buffer, {
       el: '#content',
       data: {
-        lines: ['Line 1', 'Line 2'],
-        boundaryLow: 0,
-        boundaryHigh: 2,
+        screen,
         lineWraps: true
       }
     }));

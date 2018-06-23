@@ -46,19 +46,21 @@ let buffer =  {
     },
 
     updateScreen(){
-      let lineNodeHeights = this.lineNodes.map(e => {
-        return e.offsetHeight +
-        parseInt(window.getComputedStyle(e).getPropertyValue('margin-top')) +
-        parseInt(window.getComputedStyle(e).getPropertyValue('margin-bottom'));
+      if(this.screen){
+        let lineNodeHeights = this.lineNodes.map(e => {
+          return e.offsetHeight +
+          parseInt(window.getComputedStyle(e).getPropertyValue('margin-top')) +
+          parseInt(window.getComputedStyle(e).getPropertyValue('margin-bottom'));
 
-      });
-      let offsets = new Array(lineNodeHeights.length);
-      offsets[0] = 0;
-      for(let i=1;i<offsets.length;i++){
-        offsets[i] = offsets[i-1]+lineNodeHeights[i-1];
+        });
+        let offsets = new Array(lineNodeHeights.length);
+        offsets[0] = 0;
+        for(let i=1;i<offsets.length;i++){
+          offsets[i] = offsets[i-1]+lineNodeHeights[i-1];
+        }
+        let offset = this.screen.cursor - this.screen.boundaryLow;
+        this.linesWrapperNode.style.top = -offsets[offset] + 'px';
       }
-      let offset = this.screen.cursor - this.screen.boundaryLow;
-      this.linesWrapperNode.style.top = -offsets[offset] + 'px';
     },
 
     forceUpdate(){

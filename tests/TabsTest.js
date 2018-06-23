@@ -154,7 +154,7 @@ describe('Tabs', function() {
         return delayed(10);
       })
       .then(() => {
-        assert.equal(app.buffer.topLine, 1);
+        assert.equal(app.buffer.screen.cursor, 1);
         done();
       })
       .catch(function(ex){
