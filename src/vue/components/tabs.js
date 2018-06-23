@@ -44,6 +44,11 @@ let tabs =  {
         let screen = tabManager.tabs[tab.name].screen;
         app.buffer.screen = screen;
         app.scrollbar.isVisible = true;
+
+        if(this.wrappingCbk){
+          this.wrappingCbk();
+          this.wrappingCbk = undefined;
+        }
         app.buffer.forceUpdate();
       }
     },
@@ -68,6 +73,12 @@ let tabs =  {
         app.buffer.forceUpdate();
       }
     },
+
+    changeWrapping(val){
+      this.wrappingCbk = () => {
+        app.buffer.lineWraps = val;
+      };
+    }
   }
 };
 

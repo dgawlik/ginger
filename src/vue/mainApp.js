@@ -32,11 +32,15 @@ let mainApp = {
         this.scrollbar.doDrag = false;
       }
     },
-    
+
     delegateMouseMove(e){
       if(this.scrollbar.doDrag){
         this.scrollbar.onMouseMove(e);
       }
+    },
+
+    changeWrapping(val){
+      this.tabs.changeWrapping(val);
     }
   }
 };
