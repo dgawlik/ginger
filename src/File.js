@@ -9,7 +9,6 @@ class File {
     this.path = path;
     this.RAW_BLOCK_SIZE = RAW_BLOCK_SIZE;
     this.block = Buffer.alloc(RAW_BLOCK_SIZE);
-
     this.LINUX_ENDING = "\n";
     this.WINDOWS_ENDING = "\r\n";
   }
@@ -29,13 +28,12 @@ class File {
       ) {
         resolve(undefined);
       }
-      let lineDescriptor = {
-        'start': this.lineBeginnings[index],
-        'end': this.lineEndings[index]
-      };
-      let length = lineDescriptor.end-lineDescriptor.start;
-      let buffer = Buffer.alloc(length);
-      fs.read(this.file, buffer, 0, length, lineDescriptor.start, (err, bytesRead, buffer) => {
+
+      let lineStart = this.lineBeginnings[index],
+          lineEnd = this.lineEndings[index],
+          length = lineEnd - lineStart,
+          buffer = Buffer.alloc(length);
+      fs.read(this.file, buffer, 0, length, lineStart, (err, bytesRead, buffer) => {
         resolve(buffer.toString('utf8'));
       });
     }

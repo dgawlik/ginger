@@ -50,7 +50,7 @@ let buffer =  {
           const propValue = prop =>
             parseInt(window.getComputedStyle(e).getPropertyValue(prop));
           return e.offsetHeight + propValue('margin-top')
-            + propValue('marginBottom');
+            + propValue('margin-bottom');
         });
         let offsets = new Array(lineNodeHeights.length);
         offsets[0] = 0;
