@@ -19,11 +19,11 @@ class Screen {
           this.readPrevPage()
             .then(() => {
               this.cursor = newCursorPos;
-              resolve(true);
+              resolve('loaded');
             })
         }
         else {
-          resolve(false);
+          resolve('no');
         }
       }
       else if(newCursorPos + this.pageSize > this.boundaryHigh){
@@ -31,20 +31,20 @@ class Screen {
           this.readNextPage()
             .then(() => {
               this.cursor = newCursorPos;
-              resolve(true);
+              resolve('loaded');
             })
         }
         else if(newCursorPos < this.boundaryHigh){
           this.cursor = newCursorPos;
-          resolve(true);
+          resolve('cursor-moved');
         }
         else {
-          resolve(false);
+          resolve('no');
         }
       }
       else {
         this.cursor = newCursorPos;
-        resolve(true);
+        resolve('cursor-moved');
       }
     }).bind(this));
   }

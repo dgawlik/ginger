@@ -30,8 +30,11 @@ let buffer =  {
 
         this.screen.update(currentPos + distance)
           .then(isUpdate => {
-            if(isUpdate){
-              this.forceUpdate();
+            if(
+              isUpdate == 'loaded' ||
+              isUpdate == 'cursor-moved'
+            ){
+              this.forceUpdate(isUpdate == 'loaded');
             }
           });
       }
@@ -64,9 +67,13 @@ let buffer =  {
       }
     },
 
-    forceUpdate(){
-      this.$forceUpdate();
-      Vue.nextTick(() => this.updateScreen());
+    forceUpdate(isPageLoaded){
+      if(isPageLoaded){
+        this.$forceUpdate();
+      }
+      Vue.nextTick(() => {
+        this.updateScreen();
+      });
     }
   },
 
@@ -83,7 +90,7 @@ let buffer =  {
           'line': this.screen.lines[i]
         });
       }
-      
+
       return arr;
     },
     noWrap: function(){
