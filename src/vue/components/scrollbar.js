@@ -2,11 +2,12 @@
 let scrollbar =  {
   data: function () {
     return {
-      cursor: 0
+      cursor: 0,
+      isVisible: false
     }
   },
 
-  mounted() {
+  updated() {
     this.thumbNode = document.querySelector('.scrollbar .thumb');
     this.scrollbarNode = document.querySelector('.scrollbar');
     this.THUMB_HEIGHT = 30;
@@ -50,9 +51,9 @@ let scrollbar =  {
       app.buffer.updateToRandomPosition(newOffset);
     }
   },
-  
+
   template: `
-<div class="scrollbar"
+<div v-if="isVisible" class="scrollbar"
     @mousedown="onMouseDown">
     <div class="thumb"
       ></div>

@@ -8,65 +8,31 @@
     <link rel="stylesheet" href="./style.css">
     <style>
       body {
-        background-color: #fff;
+        background-color: #222;
         padding: 20px;
-      }
-      #findToolbar {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        color: #CED4D9;
-        background-color: #212529;
-        border-radius: 5px;
-        height: 40px;
-        width: 300px;
-        padding: 0px 5px;
-      }
-
-      #findToolbar input {
-        background-color: #343A40;
-        border-radius: 3px;
-        border: none;
-        width: 150px;
-        color: #CED4D9;
-      }
-
-      #findToolbar input:focus{
-        border-color: #B2FF59;
-        outline-color: #B2FF59;
-        box-shadow:none;
-      }
-
-      #findToolbar i {
-        margin: 0px 5px;
-        cursor: pointer;
-      }
-
-      #findToolbar button {
-        width: 100px;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        background-color: #343A40;
-        color: #CED4D9;
-        border: none;
-        border-radius: 3px;
-        cursor: pointer;
       }
     </style>
   </head>
   <body>
-    <div id="findToolbar">
-      <input type="text" id="findToolbarInput">
-      <i class="fas fa-angle-left"></i>
-      <i class="fas fa-angle-right"></i>
-      <button id="findToolbarSearch">
-        <i class="fas fa-search"></i>
-        Search
-      </button>
-      <i class="fas fa-times"></i>
+    <div id="settingsContainer">
+      <h2>General</h2>
+      <form>
+        <div class="form-group row">
+          <label for="settingsScroll" class="col-sm-2 col-form-label">Scroll resolution</label>
+          <div class="col-sm-10">
+            <input type="text" v-model="scrollResolution" class="form-control-plaintext" id="settingsScroll">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="lineWraps" class="col-sm-2 col-form-label">Wrap lines</label>
+          <div class="col-sm-10">
+            <label class="custom-checkbox">
+                <input v-model="lineWraps" type="checkbox" id="lineWraps">
+                <span class="fas"</span>
+            </label>
+          </div>
+        </div>
+      </form>
     </div>
   </body>
 </html>

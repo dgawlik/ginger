@@ -11,7 +11,7 @@ let settings =  {
     scrollResolution: function(val){
       settingsManager.scrollResolution = parseInt(val);
     },
-    
+
     lineWraps: function(val){
       settingsManager.setLineWraps(val);
     }
@@ -19,21 +19,24 @@ let settings =  {
 
   template: `
 <div id="settingsContainer">
-  <div id="settingsScroll" class="dark-input input-group input-group-sm mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-sm">Scroll by</span>
-    </div>
-    <input type="text" v-model="scrollResolution" class="form-control"
-      aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-  </div>
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <div class="input-group-text">
-        <input v-model="lineWraps" type="checkbox" aria-label="Checkbox for following text input">
-        Line wraps
+  <h2>General</h2>
+  <form>
+    <div class="form-group row">
+      <label for="settingsScroll" class="col-sm-2 col-form-label">Scroll resolution</label>
+      <div class="col-sm-10">
+        <input type="text" v-model="scrollResolution" class="form-control-plaintext" id="settingsScroll">
       </div>
     </div>
-  </div>
+    <div class="form-group row">
+      <label for="lineWraps" class="col-sm-2 col-form-label">Wrap lines</label>
+      <div class="col-sm-10">
+        <label class="custom-checkbox">
+            <input v-model="lineWraps" type="checkbox" id="lineWraps">
+            <span class="fas"></span>
+        </label>
+      </div>
+    </div>
+  </form>
 </div>
 `
 };

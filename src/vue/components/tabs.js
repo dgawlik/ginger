@@ -37,11 +37,13 @@ let tabs =  {
       Vue.set(tab, 'isActive', true);
       if(tab.isVirtual){
         app.display = this.virtualNameToComponent[tab.name];
+        app.scrollbar.isVisible = false;
       }
       else {
         app.display = 'buffer';
         let screen = tabManager.tabs[tab.name].screen;
         app.buffer.screen = screen;
+        app.scrollbar.isVisible = true;
         app.buffer.forceUpdate();
       }
     },
@@ -56,7 +58,7 @@ let tabs =  {
     closeTab(name){
       delete this.tabs[name];
       tabManager.removeTab(name);
-      
+
       let firstTab = Object.keys(this.tabs)[0];
       if(firstTab){
         this.setTab(this.tabs[firstTab]);

@@ -127,17 +127,27 @@ body::-webkit-scrollbar-thumb {
 }
 
 #settingsContainer {
-  width: 90vw;
-  height: 90vh;
-  padding: 10px;
+  color: #CED4D9;
+  padding: 20px;
 }
 
-#settingsScroll{
-  width: 300px;
+#settingsContainer input {
+  height: 100%;
+  margin: 0;
 }
 
-.dark-input input, .dark-input input:active, .dark-input input:focus {
-  background-color: #343A40;
+#settingsContainer input#settingsScroll {
+  background-color: #3e454c;
+  width: 100px;
+  color: #CED4D9;
+}
+
+#settingsContainer input#settingsScroll:focus {
+  outline-color: #B2FF59;
+}
+
+#settingsContainer input#lineWraps {
+  background-color: #B2FF59;
   color: #CED4D9;
 }
 
@@ -198,4 +208,29 @@ body::-webkit-scrollbar-thumb {
   border: none;
   border-radius: 3px;
   cursor: pointer;
+}
+
+.custom-checkbox input {
+    position: relative;
+    z-index: -9999;
+}
+
+.custom-checkbox span {
+  width: 20px;
+  display: block;
+  position: relative;
+  top: -12px;
+  color: #B2FF59;
+}
+
+.custom-checkbox span:after{
+  content: "\f00d";
+}
+
+.custom-checkbox input:checked + span:after {
+    content: "\f00c";
+}
+
+.form-group {
+  width: 98%;
 }
