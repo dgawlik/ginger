@@ -24,6 +24,15 @@ let mainApp = {
     this.tabs = this.$children[0];
     this.buffer = this.$children[1];
     this.scrollbar = this.$children[2];
+
+    window.addEventListener('keypress', event => {
+      if (event.code === 'KeyF') {
+        this.findKeyDown()
+      }
+      if(event.code === 'Escape'){
+        this.closeFindKeyDown();
+      }
+    });
   },
 
   methods: {
@@ -41,6 +50,15 @@ let mainApp = {
 
     changeWrapping(val){
       this.tabs.changeWrapping(val);
+    },
+
+    findKeyDown(){
+      findToolbar.isShow = true;
+    },
+
+    closeFindKeyDown(){
+      findToolbar.isShow = false;
+      console.log('close');
     }
   }
 };

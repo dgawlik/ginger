@@ -15,9 +15,11 @@
       </div>
     </div>
     <div id="findContent">
-      <find-toolbar :is-enabled="isEnabled" :is-visible="isVisible"></find-toolbar>
+      <find-toolbar :is-valid="isValid" :is-show="isShow"></find-toolbar>
     </div>
-    <div id="content" @mouseup="delegateStopDrag" @mousemove="delegateMouseMove">
+    <div id="content"
+        @mouseup="delegateStopDrag"
+        @mousemove="delegateMouseMove">
       <tabs></tabs>
       <keep-alive>
         <component v-bind:is="display"></component>

@@ -4,8 +4,8 @@ let findApp = {
   el: '#findContent',
 
   data: {
-    isEnabled: false,
-    isVisible: true
+    isValid: false,
+    isShow: false
   },
 
   methods: {

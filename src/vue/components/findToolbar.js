@@ -1,13 +1,15 @@
 
 let findToolbar =  {
-  props: ['isEnabled', 'isVisible'],
+  props: ['isValid', 'isShow'],
 
   methods: {
-
+    onClose(){
+      window.findToolbar.isShow = false;
+    }
   },
 
   template: `
-<div v-if="isEnabled && isVisible" id="findToolbar">
+<div v-if="isValid && isShow" id="findToolbar">
   <input type="text" id="findToolbarInput">
   <i class="fas fa-angle-left"></i>
   <i class="fas fa-angle-right"></i>
@@ -15,7 +17,7 @@ let findToolbar =  {
     <i class="fas fa-search"></i>
     Search
   </button>
-  <i class="fas fa-times"></i>
+  <i @click="onClose" class="fas fa-times"></i>
 </div>
 `
 };
