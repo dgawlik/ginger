@@ -38,12 +38,14 @@ let tabs =  {
       if(tab.isVirtual){
         app.display = this.virtualNameToComponent[tab.name];
         app.scrollbar.isVisible = false;
+        findToolbar.isEnabled = false;
       }
       else {
         app.display = 'buffer';
         let screen = tabManager.tabs[tab.name].screen;
         app.buffer.screen = screen;
         app.scrollbar.isVisible = true;
+        findToolbar.isEnabled = true;
 
         if(this.wrappingCbk){
           this.wrappingCbk();
@@ -69,7 +71,10 @@ let tabs =  {
         this.setTab(this.tabs[firstTab]);
       }
       else {
+        app.scrollbar.isVisible = false;
+        findToolbar.isEnabled = false;
         app.buffer.screen = undefined;
+        app.tabs.$forceUpdate();
         app.buffer.forceUpdate();
       }
     },

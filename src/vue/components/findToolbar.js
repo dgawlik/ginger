@@ -1,16 +1,13 @@
 
 let findToolbar =  {
-  data: function () {
-    return {
-    }
-  },
+  props: ['isEnabled', 'isVisible'],
 
   methods: {
 
   },
 
   template: `
-<div id="findToolbar">
+<div v-if="isEnabled && isVisible" id="findToolbar">
   <input type="text" id="findToolbarInput">
   <i class="fas fa-angle-left"></i>
   <i class="fas fa-angle-right"></i>

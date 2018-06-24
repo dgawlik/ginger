@@ -41,6 +41,7 @@ body::-webkit-scrollbar-thumb {
   margin-right: 2px;
   padding: 0 3px 0 10px;
   background-color: #212529;
+  cursor: pointer;
 }
 
 .tabs .tabOuterContainer .tabTextHolder {
@@ -163,6 +164,13 @@ body::-webkit-scrollbar-thumb {
 
 .no-wrap {
   white-space: nowrap;
+}
+
+#findContent {
+  position: absolute;
+  top : 30px;
+  left: 15px;
+  z-index: 10;
 }
 
 #findToolbar {
