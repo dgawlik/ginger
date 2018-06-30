@@ -3,7 +3,7 @@ const {tabs} = require('./components/tabs.js');
 const {buffer} = require('./components/buffer.js');
 const {scrollbar} = require('./components/scrollbar.js');
 const {settings} = require('./components/settings.js');
-
+const {globalShortcut} = require('electron');
 
 let mainApp = {
   el: '#content',
@@ -24,15 +24,6 @@ let mainApp = {
     this.tabs = this.$children[0];
     this.buffer = this.$children[1];
     this.scrollbar = this.$children[2];
-
-    window.addEventListener('keypress', event => {
-      if (event.code === 'KeyF') {
-        this.findKeyDown()
-      }
-      if(event.code === 'Escape'){
-        this.closeFindKeyDown();
-      }
-    });
   },
 
   methods: {
@@ -46,6 +37,10 @@ let mainApp = {
       if(this.scrollbar.doDrag){
         this.scrollbar.onMouseMove(e);
       }
+    },
+
+    delegateChangePage(isUp){
+      this.buffer.changePage(isUp);
     },
 
     changeWrapping(val){

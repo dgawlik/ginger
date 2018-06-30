@@ -25,6 +25,10 @@ let tabs =  {
       this.setTab(tab);
     },
 
+    getActiveTab(){
+      return this.tabs[this.activeTabName];
+    },
+
     setTab(tab){
       let previousTab;
       if(this.activeTabName && this.tabs[this.activeTabName]){

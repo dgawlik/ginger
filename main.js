@@ -1,6 +1,7 @@
 const electron = require('electron')
 // Module to control application life.
 const app = electron.app
+const globalShortcut = electron.globalShortcut;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
 
@@ -32,6 +33,15 @@ function createWindow () {
     // when you should delete the corresponding element.
     mainWindow = null
   })
+
+  globalShortcut.register('F',
+    () => mainWindow.webContents.executeJavaScript('app.findKeyDown()'));
+  globalShortcut.register('Esc',
+    () => mainWindow.webContents.executeJavaScript('app.closeFindKeyDown()'));
+  globalShortcut.register('PageUp',
+    () => mainWindow.webContents.executeJavaScript('app.delegateChangePage(true)'));
+  globalShortcut.register('PageDown',
+    () => mainWindow.webContents.executeJavaScript('app.delegateChangePage(false)'));
 }
 
 // This method will be called when Electron has finished

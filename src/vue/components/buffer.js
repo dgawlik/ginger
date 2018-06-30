@@ -28,7 +28,7 @@ let buffer =  {
         distance *= e.deltaY < 0 ? -1 : 1;
         let currentPos = this.screen.cursor;
 
-        this.screen.update(currentPos + distance)
+        return this.screen.update(currentPos + distance)
           .then(isUpdate => {
             if(
               isUpdate == 'loaded' ||
@@ -48,20 +48,8 @@ let buffer =  {
 
     updateScreen(){
       if(this.screen){
-        let lineNodeHeights = this.lineNodes.map(e => {
-          const propValue = prop =>
-            parseInt(window.getComputedStyle(e).getPropertyValue(prop));
 
-          return e.offsetHeight + propValue('margin-top')
-            + propValue('margin-bottom');
-        });
-
-        let offsets = new Array(lineNodeHeights.length);
-        offsets[0] = 0;
-        for(let i=1;i<offsets.length;i++){
-          offsets[i] = offsets[i-1]+lineNodeHeights[i-1];
-        }
-
+        let offsets = this.calculateLineOffsets();
         let offset = this.screen.cursor - this.screen.boundaryLow;
         this.linesWrapperNode.style.top = -offsets[offset] + 'px';
       }
@@ -74,6 +62,61 @@ let buffer =  {
       Vue.nextTick(() => {
         this.updateScreen();
       });
+    },
+
+    changePage(isUp){
+      let offsets = this.calculateLineOffsets();
+
+      if (isUp) {
+        
+      }
+      else {
+        for(
+          let i = this.screen.cursor;
+          i < this.screen.boundaryHigh;
+          i++){
+            if(!this.checkIsLineCurrentlyOnScreen(offsets, i)){
+              this.updateToRandomPosition(i);
+              return;
+            }
+        }
+      }
+    },
+
+    checkIsLineCurrentlyOnScreen(offsets, lineNo){
+          //we want ensure whole line is visible
+      let offset = lineNo - this.screen.boundaryLow + 1,
+          screenHeight = this.textBufferNode.getBoundingClientRect().height,
+          currentToplineOffset = -parseInt(this.linesWrapperNode.style.top.replace('px', ''));
+
+      if (
+        offset == offsets.length ||
+        ( offsets[offset] - currentToplineOffset < screenHeight &&
+          offsets[offset-1] - currentToplineOffset >= 0
+        )
+      ){
+        return true;
+      }
+      else {
+        return false;
+      }
+    },
+
+    calculateLineOffsets(){
+      let lineNodeHeights = this.lineNodes.map(e => {
+        const propValue = prop =>
+          parseInt(window.getComputedStyle(e).getPropertyValue(prop));
+
+        return e.offsetHeight + propValue('margin-top')
+          + propValue('margin-bottom');
+      });
+
+      let offsets = new Array(lineNodeHeights.length);
+      offsets[0] = 0;
+      for(let i=1;i<offsets.length;i++){
+        offsets[i] = offsets[i-1]+lineNodeHeights[i-1];
+      }
+      return offsets;
     }
   },
 
