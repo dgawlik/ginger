@@ -65,17 +65,34 @@ let buffer =  {
     },
 
     changePage(isUp){
-      let offsets = this.calculateLineOffsets();
+      let offsets = this.calculateLineOffsets(),
+          currentToplineOffset = -parseInt(this.linesWrapperNode.style.top.replace('px', ''));
 
       if (isUp) {
-        
+        let topLineIt = currentToplineOffset;
+        let prevTopLine = this.screen.cursor;
+
+        for(
+          let i = this.screen.cursor;
+          i > 0;
+          i--
+        ){
+          topLineIt = offsets[i-this.screen.boundaryLow-1];
+          if(!this.checkIsLineCurrentlyOnScreen(offsets, prevTopLine, topLineIt)){
+            this.updateToRandomPosition(i);
+            return;
+          }
+          else if (topLineIt === 0) {
+            this.updateToRandomPosition(0);
+          }
+        }
       }
       else {
         for(
           let i = this.screen.cursor;
           i < this.screen.boundaryHigh;
           i++){
-            if(!this.checkIsLineCurrentlyOnScreen(offsets, i)){
+            if(!this.checkIsLineCurrentlyOnScreen(offsets, i, currentToplineOffset)){
               this.updateToRandomPosition(i);
               return;
             }
@@ -83,16 +100,16 @@ let buffer =  {
       }
     },
 
-    checkIsLineCurrentlyOnScreen(offsets, lineNo){
+    checkIsLineCurrentlyOnScreen(offsets, lineNo, topLineOffset){
           //we want ensure whole line is visible
       let offset = lineNo - this.screen.boundaryLow + 1,
-          screenHeight = this.textBufferNode.getBoundingClientRect().height,
-          currentToplineOffset = -parseInt(this.linesWrapperNode.style.top.replace('px', ''));
+          screenHeight = this.textBufferNode.getBoundingClientRect().height;
 
       if (
         offset == offsets.length ||
-        ( offsets[offset] - currentToplineOffset < screenHeight &&
-          offsets[offset-1] - currentToplineOffset >= 0
+        (
+          offsets[offset] - topLineOffset < screenHeight &&
+          offsets[offset-1] - topLineOffset >= 0
         )
       ){
         return true;

@@ -51,15 +51,17 @@ class Screen {
 
   readRandomAt(beginning){
     return new Promise((function(resolve, reject){
-      this.boundaryLow = beginning;
       this.cursor = beginning;
 
-      if(beginning + this.pageSize > this.file.lineBeginnings.length){
-        this.boundaryHigh = this.file.lineBeginnings.length;
-      }
-      else {
-        this.boundaryHigh = beginning + this.pageSize;
-      }
+      this.boundaryHigh = Math.min(
+        this.file.lineBeginnings.length,
+        beginning + this.pageSize
+      );
+
+      this.boundaryLow = Math.max(
+        0,
+        beginning - this.pageSize
+      );
 
       this.file.readLines(range(this.boundaryLow, this.boundaryHigh))
         .then(lines => {

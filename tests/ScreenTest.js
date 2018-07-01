@@ -145,11 +145,11 @@ describe('Screen', function() {
         })
         .then(function(){
           try{
-            assert.equal(10, screen.lines.length);
-            assert.equal(1, screen.boundaryLow);
+            assert.equal(11, screen.lines.length);
+            assert.equal(0, screen.boundaryLow);
             assert.equal(11, screen.boundaryHigh);
             assert.equal("22:09:45.047 [main] DEBUG io.netty.util.ResourceLeakDetector - -Dio.netty.leakDetection.level: simple",
-                        screen.lines[0]);
+                        screen.lines[screen.cursor-screen.boundaryLow]);
             done();
           }
           catch(err){
@@ -158,34 +158,7 @@ describe('Screen', function() {
         })
     });
 
-    it('readRandomAt() should should read page from offset', function(done){
-      let filePath = path.resolve('resources/screen-test.log');
-      let RAW_BLOCK_SIZE = 10000;
-      let LINES_PAGE = 10;
-      let file, screen;
-      openFilePromise(filePath, 'r')
-        .then(fd => {
-          file = new File(fd, filePath, RAW_BLOCK_SIZE);
-          return file.scanFile();
-        })
-        .then(function(){
-          screen = new Screen(LINES_PAGE, file);
-          return screen.readRandomAt(1);
-        })
-        .then(function(){
-          try{
-            assert.equal(10, screen.lines.length);
-            assert.equal(1, screen.boundaryLow);
-            assert.equal(11, screen.boundaryHigh);
-            assert.equal("22:09:45.047 [main] DEBUG io.netty.util.ResourceLeakDetector - -Dio.netty.leakDetection.level: simple",
-                        screen.lines[0]);
-            done();
-          }
-          catch(err){
-            done(err);
-          }
-        })
-    });
+
 
 
     it('readRandomAt() should trim buffer at line ending', function(done){
@@ -204,8 +177,8 @@ describe('Screen', function() {
         })
         .then(function(){
           try{
-            assert.equal(5, screen.lines.length);
-            assert.equal(206, screen.boundaryLow);
+            assert.equal(15, screen.lines.length);
+            assert.equal(196, screen.boundaryLow);
             assert.equal(211, screen.boundaryHigh);
             done();
           }
@@ -260,8 +233,8 @@ describe('Screen', function() {
         .then(() => screen.readNextPage())
         .then(function(){
           try{
-            assert.equal(6, screen.lines.length);
-            assert.equal(205, screen.boundaryLow);
+            assert.equal(16, screen.lines.length);
+            assert.equal(195, screen.boundaryLow);
             assert.equal(211, screen.boundaryHigh);
             done();
           }
@@ -287,8 +260,7 @@ describe('Screen', function() {
           return screen.readRandomAt(0);
         })
         .then(() => {
-          screen.cursor = 0;
-          return screen.update(1);
+          return screen.update(11);
         })
         .then(function(){
           try{
@@ -317,8 +289,7 @@ describe('Screen', function() {
           return screen.readRandomAt(30);
         })
         .then(() => {
-          screen.cursor = 30;
-          return screen.update(29);
+          return screen.update(19);
         })
         .then(function(){
           try{

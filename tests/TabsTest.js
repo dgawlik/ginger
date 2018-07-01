@@ -8,6 +8,7 @@ const {tabs} = require('../src/vue/components/tabs.js');
 const {TabHolder} = require('../src/TabHolder.js');
 const {delayed, dispatchEvent} = require('../src/util.js');
 const {mainApp} = require('../src/vue/mainApp.js');
+const {findApp} = require('../src/vue/findApp.js');
 const path = require('path');
 
 
@@ -55,6 +56,11 @@ describe('Tabs', function() {
     content.setAttribute("id", "content");
     document.body.appendChild(content);
     global.Vue = Vue;
+
+    let findContent = document.createElement('div');
+    findContent.setAttribute("id", "findContent");
+    document.body.appendChild(findContent);
+    global.findToolbar = new Vue(findApp);
   });
 
   afterEach(function() {
@@ -105,7 +111,7 @@ describe('Tabs', function() {
         return delayed(10);
       })
       .then(() => {
-        let toBeRendered = '<div id="content"><div class="tabs"></div> <div id="textBuffer"><div id="linesWrapper" style="top: 0px;"></div></div> <div class="scrollbar"><div class="thumb"></div></div></div>';
+        let toBeRendered = '<div id="content"><div class="tabs"></div> <div id="textBuffer"><div id="linesWrapper" style="top: 0px;"></div></div> <!----></div>';
         assert.equal(toBeRendered, app.$el.outerHTML);
         done();
       });
@@ -121,7 +127,7 @@ describe('Tabs', function() {
           });
       })
       .then(() => {
-        assert.isOk(app.$el.outerHTML.includes('input-group'));
+        assert.isOk(app.$el.outerHTML.includes('input'));
         app.tabs.closeTab('<Settings>');
         done();
       })
