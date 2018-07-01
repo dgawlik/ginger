@@ -1,5 +1,4 @@
 const fs = require('fs');
-const os = require('os');
 const {findLargestSmallerIndex} = require('./util.js');
 
 class File {
@@ -9,19 +8,19 @@ class File {
     this.path = path;
     this.RAW_BLOCK_SIZE = RAW_BLOCK_SIZE;
     this.block = Buffer.alloc(RAW_BLOCK_SIZE);
-    this.LINUX_ENDING = "\n";
-    this.WINDOWS_ENDING = "\r\n";
+    this.LINUX_ENDING = '\n';
+    this.WINDOWS_ENDING = '\r\n';
   }
 
   readLines(lines){
     let promises = lines.map(i => this.readLine(i));
     return Promise
-            .all(promises)
-            .then(lst => lst.filter(l => l !== undefined));
+      .all(promises)
+      .then(lst => lst.filter(l => l !== undefined));
   }
 
   readLine(index){
-    function promise(resolve, reject){
+    function promise(resolve){
       if(
         index < 0 ||
         index >= this.lineBeginnings.length
@@ -30,9 +29,10 @@ class File {
       }
 
       let lineStart = this.lineBeginnings[index],
-          lineEnd = this.lineEndings[index],
-          length = lineEnd - lineStart,
-          buffer = Buffer.alloc(length);
+        lineEnd = this.lineEndings[index],
+        length = lineEnd - lineStart,
+        buffer = Buffer.alloc(length);
+
       fs.read(this.file, buffer, 0, length, lineStart, (err, bytesRead, buffer) => {
         resolve(buffer.toString('utf8'));
       });
@@ -53,18 +53,18 @@ class File {
   }
 
   detectBom(){
-    return new Promise((function(resolve, reject){
+    return new Promise((function(resolve){
       let buffer = Buffer.alloc(3);
       fs.read(this.file, buffer, 0, 3, 0, (err, bytesRead, buffer) => {
         if(err || bytesRead < 3){
           resolve(false);
         }
         if(
-          buffer.readUInt8(0) == parseInt("ef", 16) &&
-          buffer.readUInt8(1) == parseInt("bb", 16) &&
-          buffer.readUInt8(2) == parseInt("bf", 16)
+          buffer.readUInt8(0) == parseInt('ef', 16) &&
+          buffer.readUInt8(1) == parseInt('bb', 16) &&
+          buffer.readUInt8(2) == parseInt('bf', 16)
         ){
-            resolve(true);
+          resolve(true);
         }
         else {
           resolve(false);
@@ -79,7 +79,7 @@ class File {
       return buffer.indexOf(text, offset);
     }
     let that = this;
-    function promise(resolve, reject){
+    function promise(resolve){
       this.findMarks(match.bind(that), true, progressSubscriber)
         .then(marks => {
           let matches = {
@@ -89,7 +89,7 @@ class File {
 
           for(let mark of marks){
             let lineIndex = findLargestSmallerIndex(this.lineBeginnings,
-                0, this.lineBeginnings.length-1, mark);
+              0, this.lineBeginnings.length-1, mark);
             let position = mark - this.lineBeginnings[lineIndex];
             matches.lines.push(lineIndex);
             matches.positions.push(position);
@@ -102,7 +102,7 @@ class File {
   }
 
   findMarks(match, fullSearch, progressSubscriber){
-    function promise(resolve, reject){
+    function promise(resolve){
       let marks = [];
       let pages = 0;
       function onRead(err, bytesRead, buffer){
@@ -138,7 +138,7 @@ class File {
         .then(size => {
           this.fileSize = size;
           return this.detectBom();
-      }).then(isBom => {
+        }).then(isBom => {
           this.BOM = isBom ? 3 : 0;
           fs.read(this.file, this.block, 0, this.RAW_BLOCK_SIZE, this.BOM, onRead.bind(this));
         });
@@ -147,12 +147,12 @@ class File {
   }
 
   scanFile(progressSubscriber){
-    function detectNewlines(buffer, start){
+    function detectNewlines(buffer){
       let index = -1;
-      if((index = buffer.indexOf("\r\n", 0)) != -1){
+      if((index = buffer.indexOf('\r\n', 0)) != -1){
         this.ending = this.WINDOWS_ENDING;
       }
-      else if((index = buffer.indexOf("\n", 0)) != -1){
+      else if((index = buffer.indexOf('\n', 0)) != -1){
         this.ending = this.LINUX_ENDING;
       }
       return index;
@@ -163,10 +163,10 @@ class File {
     }
 
     let that = this;
-    function promise(resolve, reject){
+    function promise(resolve){
       this.findMarks(detectNewlines.bind(that), false)
-        .then(marks => {
-          return this.findMarks(matchNewlines.bind(that), true, progressSubscriber)
+        .then(() => {
+          return this.findMarks(matchNewlines.bind(that), true, progressSubscriber);
         })
         .then(marks => {
           let matches = [-this.ending.length+this.BOM].concat(marks);
