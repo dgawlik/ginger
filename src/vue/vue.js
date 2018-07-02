@@ -1,4 +1,4 @@
 
 module.exports = {
-  'Vue': Vue
+  'Vue': Vue /* eslint-disable-line no-undef */
 };

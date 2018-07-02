@@ -5,7 +5,7 @@ let settings =  {
     return {
       scrollResolution: 1,
       lineWraps: true
-    }
+    };
   },
 
   watch : {
@@ -44,4 +44,4 @@ let settings =  {
 
 module.exports = {
   'settings': settings
-}
+};

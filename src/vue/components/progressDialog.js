@@ -3,7 +3,7 @@ let progressDialog =  {
   data: function () {
     return {
       progress: 0
-    }
+    };
   },
 
   methods: {
@@ -19,7 +19,7 @@ let progressDialog =  {
       };
     }
   },
-  
+
   template: `
 <div id="dialog" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
@@ -42,4 +42,4 @@ let progressDialog =  {
 
 module.exports = {
   'progressDialog': progressDialog
-}
+};

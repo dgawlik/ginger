@@ -1,5 +1,6 @@
 const {findToolbar} = require('./components/findToolbar.js');
 const {eventBus} = require('./eventBus.js');
+const {Vue} = require('./vue.js');
 
 let findApp = {
   el: '#findContent',
@@ -24,6 +25,8 @@ let findApp = {
   },
 };
 
+let findToolbar_ = new Vue(findApp);
+
 module.exports = {
-  'findApp': findApp
-}
+  'findToolbar': findToolbar_
+};

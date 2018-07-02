@@ -12,7 +12,7 @@ class Screen {
   }
 
   update(newCursorPos){
-    return new Promise((function(resolve, reject){
+    return new Promise((function(resolve){
       if(newCursorPos < this.boundaryLow){
         //boundaryLow should be 0 at minimum
         if(this.boundaryLow > 0){
@@ -20,7 +20,7 @@ class Screen {
             .then(() => {
               this.cursor = newCursorPos;
               resolve('loaded');
-            })
+            });
         }
         else {
           resolve('no');
@@ -32,7 +32,7 @@ class Screen {
             .then(() => {
               this.cursor = newCursorPos;
               resolve('loaded');
-            })
+            });
         }
         else if(newCursorPos < this.boundaryHigh){
           this.cursor = newCursorPos;
@@ -50,7 +50,7 @@ class Screen {
   }
 
   readRandomAt(beginning){
-    return new Promise((function(resolve, reject){
+    return new Promise((function(resolve){
       this.cursor = beginning;
 
       this.boundaryHigh = Math.min(
@@ -67,12 +67,12 @@ class Screen {
         .then(lines => {
           this.lines = lines;
           resolve();
-        })
+        });
     }).bind(this));
   }
 
   readNextPage(){
-    return new Promise((function(resolve, reject){
+    return new Promise((function(resolve){
       if(this.boundaryHigh - this.boundaryLow+1 >= 2*this.pageSize){
         this.lines = this.lines.slice(this.pageSize);
         this.boundaryLow += this.pageSize;
@@ -89,12 +89,12 @@ class Screen {
           this.lines = this.lines.concat(lines);
           let isNew = lines.length == 0;
           resolve(isNew);
-        })
+        });
     }).bind(this));
   }
 
   readPrevPage(){
-    return new Promise((function(resolve, reject){
+    return new Promise((function(resolve){
       if(this.boundaryHigh - this.boundaryLow >= 2*this.pageSize){
         this.lines = this.lines.slice(0,this.pageSize);
         this.boundaryHigh -= this.pageSize;
@@ -117,4 +117,4 @@ class Screen {
 
 module.exports = {
   'Screen' : Screen
-}
+};

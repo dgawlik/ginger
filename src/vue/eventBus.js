@@ -17,6 +17,7 @@ const {Vue} = require('./vue.js');
   tabs/changeWrap
   tabs/activateTab
   tabs/closeTab
+  tabs/changeActiveTab
 
   settingsManager/changeScrollResolution
   settingsManager/changeLineWrap

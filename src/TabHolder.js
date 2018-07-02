@@ -1,4 +1,3 @@
-const fs = require('fs');
 const path = require('path');
 const {File} = require('./File.js');
 const {Screen} = require('./Screen.js');
@@ -30,7 +29,7 @@ class TabHolder {
               'screen': screen,
               'offset': 0,
               'isVirtual': false
-            }
+            };
             resolve(basename);
           })
           .catch(err => reject(err));
@@ -52,4 +51,4 @@ class TabHolder {
 
 module.exports = {
   'TabHolder': TabHolder
-}
+};

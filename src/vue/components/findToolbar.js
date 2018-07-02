@@ -15,18 +15,21 @@ let findToolbar =  {
     };
   },
 
+  mounted(){
+    eventBus.$on('tabs/changeActiveTab', val => this.triggeringTab = val);
+  },
+
   methods: {
     onClose(){
       window.findToolbar.isShow = false;
     },
 
     onSearch(){
-      let triggeringTab = app.tabs.getActiveTab();
       eventBus.$emit('progressBar/show');
-      triggeringTab.screen.file
+      this.triggeringTab && this.triggeringTab.screen.file
         .find(this.findText, new $1())
         .then(matches => {
-          console.log(matches);
+          //console.log(matches);
           eventBus.$emit('progressBar/hide');
         });
     }
@@ -48,4 +51,4 @@ let findToolbar =  {
 
 module.exports = {
   'findToolbar': findToolbar
-}
+};

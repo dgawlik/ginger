@@ -1,5 +1,6 @@
 const {progressDialog} = require('./components/progressDialog.js');
 const {eventBus} = require('./eventBus.js');
+const {Vue} = require('./vue.js');
 
 let progressApp = {
   el: '#progressContent',
@@ -22,8 +23,8 @@ let progressApp = {
 
   mounted() {
     eventBus.$on('progressBar/updateProgress', val => this.updateProgress(val));
-    eventBus.$on('progressBar/show', val => this.show());
-    eventBus.$on('progressBar/hide', val => this.hide());
+    eventBus.$on('progressBar/show', () => this.show());
+    eventBus.$on('progressBar/hide', () => this.hide());
 
     this.overlayNode = document.querySelector('#overlay');
     this.modalNode = document.querySelector('#dialog');
@@ -35,6 +36,8 @@ let progressApp = {
   },
 };
 
+let progressBar = new Vue(progressApp);
+
 module.exports = {
-  'progressApp': progressApp
-}
+  'progressBar': progressBar
+};

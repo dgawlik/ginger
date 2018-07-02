@@ -1,10 +1,9 @@
-const {tab} = require('./components/tab.js');
 const {tabs} = require('./components/tabs.js');
 const {buffer} = require('./components/buffer.js');
 const {scrollbar} = require('./components/scrollbar.js');
 const {settings} = require('./components/settings.js');
 const {eventBus} = require('./eventBus.js');
-const {globalShortcut} = require('electron');
+const {Vue} = require('./vue.js');
 
 let mainApp = {
   el: '#content',
@@ -56,6 +55,8 @@ let mainApp = {
   }
 };
 
+let app = new Vue(mainApp);
+
 module.exports = {
-  'mainApp': mainApp
+  'app': app
 };

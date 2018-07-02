@@ -1,11 +1,12 @@
 const {eventBus} = require('../eventBus.js');
+const {Vue} = require('../vue.js');
 
 let buffer =  {
   data: function () {
     return {
       screen: undefined,
       lineWraps: true
-    }
+    };
   },
 
   beforeMount () {
@@ -19,6 +20,8 @@ let buffer =  {
   mounted () {
     eventBus.$on('buffer/changePage', isUp => this.changePage(isUp));
     eventBus.$on('buffer/changeWrap', val => this.lineWraps = val);
+    eventBus.$on('settingsManager/changeScrollResolution', val => this.scrollResolution = val);
+    eventBus.$on('buffer/updateToRandomPosition', val => this.updateToRandomPosition(val));
   },
 
   updated: function(){
@@ -30,7 +33,7 @@ let buffer =  {
   methods: {
     onMouseWheel(e){
       if(this.screen){
-        let distance = settingsManager.scrollResolution;
+        let distance = this.scrollResolution || 1;
         distance *= e.deltaY < 0 ? -1 : 1;
         let currentPos = this.screen.cursor;
 
@@ -72,11 +75,11 @@ let buffer =  {
 
     changePage(isUp){
       let offsets = this.calculateLineOffsets(),
-          currentToplineOffset = -parseInt(this.linesWrapperNode.style.top.replace('px', ''));
+        currentToplineOffset = -parseInt(this.linesWrapperNode.style.top.replace('px', ''));
 
       if (isUp) {
-        let topLineIt = currentToplineOffset;
-        let prevTopLine = this.screen.cursor;
+        let topLineIt = currentToplineOffset,
+          prevTopLine = this.screen.cursor;
 
         for(
           let i = this.screen.cursor;
@@ -97,19 +100,20 @@ let buffer =  {
         for(
           let i = this.screen.cursor;
           i < this.screen.boundaryHigh;
-          i++){
-            if(!this.checkIsLineCurrentlyOnScreen(offsets, i, currentToplineOffset)){
-              this.updateToRandomPosition(i);
-              return;
-            }
+          i++
+        ){
+          if(!this.checkIsLineCurrentlyOnScreen(offsets, i, currentToplineOffset)){
+            this.updateToRandomPosition(i);
+            return;
+          }
         }
       }
     },
 
     checkIsLineCurrentlyOnScreen(offsets, lineNo, topLineOffset){
-          //we want ensure whole line is visible
+      //we want ensure whole line is visible
       let offset = lineNo - this.screen.boundaryLow + 1,
-          screenHeight = this.textBufferNode.getBoundingClientRect().height;
+        screenHeight = this.textBufferNode.getBoundingClientRect().height;
 
       if (
         offset == offsets.length ||
@@ -178,4 +182,4 @@ let buffer =  {
 
 module.exports = {
   'buffer': buffer
-}
+};

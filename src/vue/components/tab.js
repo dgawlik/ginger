@@ -6,7 +6,7 @@ let tab =  {
   data: function () {
     return {
       mouseOver: false
-    }
+    };
   },
 
   methods: {
@@ -37,4 +37,4 @@ let tab =  {
 
 module.exports = {
   'tab': tab
-}
+};

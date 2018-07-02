@@ -1,14 +1,14 @@
-const {mainApp} = require('./src/vue/mainApp.js');
-const {progressApp} = require('./src/vue/progressApp.js');
-const {findApp} = require('./src/vue/findApp.js');
+const {app} = require('./src/vue/mainApp.js');
+const {progressBar} = require('./src/vue/progressApp.js');
+const {findToolbar} = require('./src/vue/findApp.js');
 const {TabHolder} = require('./src/TabHolder.js');
 const {eventBus} = require('./src/vue/eventBus.js');
 
-window.progressBar = new Vue(progressApp);
+window.progressBar = progressBar;
 
-window.app = new Vue(mainApp);
+window.app = app;
 
-window.findToolbar = new Vue(findApp);
+window.findToolbar = findToolbar;
 
 window.tabManager = new TabHolder();
 
@@ -23,4 +23,10 @@ window.settingsManager = {
   setLineWraps(val){
     eventBus.$emit('app/changeWrap', val);
   }
+};
+
+module.exports = {
+  'progressBar': window.progressBar,
+  'app': window.app,
+  'findToolbar': window.findToolbar
 };

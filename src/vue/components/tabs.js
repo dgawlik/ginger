@@ -1,11 +1,12 @@
 const {tab} = require('./tab.js');
 const {eventBus} = require('../eventBus.js');
+const {Vue} = require('../vue.js');
 
 let tabs =  {
   data: function () {
     return {
       tabs: {}
-    }
+    };
   },
 
   template: '<div class="tabs"><tab v-for="tabAttr in Object.values(tabs)" :key="tabAttr.name" :name="tabAttr.name" :isActive="tabAttr.isActive"></tab></div>',
@@ -19,6 +20,9 @@ let tabs =  {
     eventBus.$on('tabs/activateTab', name => this.activateTab(name));
     eventBus.$on('tabs/closeTab', name => this.closeTab(name));
     eventBus.$on('tabs/addTab', tab => this.addTab(tab));
+    eventBus.$on('tabs/queryActiveTab', () => {
+      eventBus.$emit('findToolbar/pushActiveTab', this.getActiveTab());
+    });
 
     this.virtualNameToComponent = {
       '<Settings>': 'settings'
@@ -39,30 +43,31 @@ let tabs =  {
       let previousTab;
       if(this.activeTabName && this.tabs[this.activeTabName]){
         previousTab = this.tabs[this.activeTabName];
-        previousTab.offset = app.buffer.topLine;
+        previousTab.offset = window.app.buffer.topLine;
         previousTab.isActive = false;
       }
 
       this.activeTabName = tab.name;
       Vue.set(tab, 'isActive', true);
       if(tab.isVirtual){
-        app.display = this.virtualNameToComponent[tab.name];
-        app.scrollbar.isVisible = false;
-        findToolbar.isValid = false;
+        window.app.display = this.virtualNameToComponent[tab.name];
+        window.app.scrollbar.isVisible = false;
+        window.findToolbar.isValid = false;
       }
       else {
-        app.display = 'buffer';
-        let screen = tabManager.tabs[tab.name].screen;
-        app.buffer.screen = screen;
-        app.scrollbar.isVisible = true;
-        findToolbar.isValid = true;
+        window.app.display = 'buffer';
+        let screen = window.tabManager.tabs[tab.name].screen;
+        window.app.buffer.screen = screen;
+        window.app.scrollbar.isVisible = true;
+        window.findToolbar.isValid = true;
 
         if(this.wrappingCbk){
           this.wrappingCbk();
           this.wrappingCbk = undefined;
         }
-        app.buffer.forceUpdate();
+        window.app.buffer.forceUpdate();
       }
+      eventBus.$emit('tabs/changeActiveTab', this.tabs[this.activeTabName]);
     },
 
     activateTab(name){
@@ -74,18 +79,18 @@ let tabs =  {
 
     closeTab(name){
       delete this.tabs[name];
-      tabManager.removeTab(name);
+      window.tabManager.removeTab(name);
 
       let firstTab = Object.keys(this.tabs)[0];
       if(firstTab){
         this.setTab(this.tabs[firstTab]);
       }
       else {
-        app.scrollbar.isVisible = false;
-        findToolbar.isValid = false;
-        app.buffer.screen = undefined;
-        app.tabs.$forceUpdate();
-        app.buffer.forceUpdate();
+        window.app.scrollbar.isVisible = false;
+        window.findToolbar.isValid = false;
+        window.app.buffer.screen = undefined;
+        window.app.tabs.$forceUpdate();
+        window.app.buffer.forceUpdate();
       }
     },
 
@@ -99,4 +104,4 @@ let tabs =  {
 
 module.exports = {
   'tabs' : tabs
-}
+};

@@ -5,7 +5,7 @@ let scrollbar =  {
     return {
       cursor: 0,
       isVisible: false
-    }
+    };
   },
 
   mounted() {
@@ -15,6 +15,7 @@ let scrollbar =  {
         this.onMouseMove(e);
       }
     });
+    eventBus.$on('tabs/changeActiveTab', val => this.activeTabName = val.name);
   },
 
   updated() {
@@ -34,8 +35,8 @@ let scrollbar =  {
     },
 
     onMouseMove(e){
-      let dy = e.pageY - this.startingY;
-      newCursorY = this.cursorY + dy;
+      let dy = e.pageY - this.startingY,
+        newCursorY = this.cursorY + dy;
 
       if(this.doDrag){
         if(newCursorY < this.topY){
@@ -55,10 +56,11 @@ let scrollbar =  {
     },
 
     updateScreenOnScroll(currentCursor){
-      let screen = tabManager.tabs[app.tabs.activeTabName].screen;
+      // eslint-disable-next-line no-undef
+      let screen = tabManager.tabs[this.activeTabName].screen;
       let totalLines = screen.file.lineBeginnings.length;
       let newOffset = parseInt(totalLines*currentCursor);
-      app.buffer.updateToRandomPosition(newOffset);
+      eventBus.$emit('buffer/updateToRandomPosition', newOffset);
     }
   },
 
@@ -73,4 +75,4 @@ let scrollbar =  {
 
 module.exports = {
   'scrollbar': scrollbar
-}
+};
