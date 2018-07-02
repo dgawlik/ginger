@@ -1,7 +1,8 @@
+const {eventBus} = require('../eventBus.js');
 
 class $1{
   progress(val){
-    progressBar.updateProgress(val);
+    eventBus.$emit('progressBar/updateProgress', val);
   }
 }
 
@@ -21,12 +22,12 @@ let findToolbar =  {
 
     onSearch(){
       let triggeringTab = app.tabs.getActiveTab();
-      progressBar.show();
+      eventBus.$emit('progressBar/show');
       triggeringTab.screen.file
         .find(this.findText, new $1())
         .then(matches => {
           console.log(matches);
-          progressBar.hide();
+          eventBus.$emit('progressBar/hide');
         });
     }
   },

@@ -1,3 +1,4 @@
+const {eventBus} = require('../eventBus.js');
 
 let tab =  {
   props: ['name', 'isActive'],
@@ -18,14 +19,14 @@ let tab =  {
     },
 
     onActivateClick: function(){
-      app.tabs.activateTab(this.name);
+      eventBus.$emit('tabs/activateTab', this.name);
     },
 
     onCloseClick: function(){
-      app.tabs.closeTab(this.name);
+      eventBus.$emit('tabs/closeTab', this.name);
     }
   },
-  
+
   template: `
 <div @click="onActivateClick" class="tabOuterContainer" @mouseenter="onMouseEnter()" @mouseleave="onMouseLeave()">
   <div class="tabTextHolder">{{name}}</div>

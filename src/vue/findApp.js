@@ -1,4 +1,5 @@
 const {findToolbar} = require('./components/findToolbar.js');
+const {eventBus} = require('./eventBus.js');
 
 let findApp = {
   el: '#findContent',
@@ -13,6 +14,9 @@ let findApp = {
 
   mounted() {
     this.findToolbar = this.$children[0];
+
+    eventBus.$on('findApp/keyDown', () => this.isShow = true);
+    eventBus.$on('findApp/closeKeyDown', () => this.isShow = false);
   },
 
   components: {

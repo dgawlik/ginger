@@ -1,4 +1,5 @@
 const {tab} = require('./tab.js');
+const {eventBus} = require('../eventBus.js');
 
 let tabs =  {
   data: function () {
@@ -14,6 +15,11 @@ let tabs =  {
   },
 
   mounted() {
+    eventBus.$on('tabs/changeWrap', val => this.changeWrapping(val));
+    eventBus.$on('tabs/activateTab', name => this.activateTab(name));
+    eventBus.$on('tabs/closeTab', name => this.closeTab(name));
+    eventBus.$on('tabs/addTab', tab => this.addTab(tab));
+
     this.virtualNameToComponent = {
       '<Settings>': 'settings'
     };
@@ -85,7 +91,7 @@ let tabs =  {
 
     changeWrapping(val){
       this.wrappingCbk = () => {
-        app.buffer.lineWraps = val;
+        eventBus.$emit('buffer/changeWrap', val);
       };
     }
   }

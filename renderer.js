@@ -4,6 +4,7 @@
 const {remote} = require('electron')
 const {Menu, MenuItem} = remote
 const {dialog} = require('electron').remote
+const {eventBus} = require('./src/vue/eventBus.js');
 
 const template = [
     {
@@ -47,19 +48,19 @@ Menu.setApplicationMenu(menu)
 
 class $1{
   progress(val){
-    progressBar.updateProgress(val);
+    eventBus.$emit('progressBar/updateProgress', val);
   }
 }
 
 function onMenuOpenClick(){
   let path = dialog.showOpenDialog({properties: ['openFile']});
   if(path && path[0]){
-    progressBar.show();
+    eventBus.$emit('progressBar/show');
     tabManager.addTab(path[0], false, new $1())
       .then(name => {
         let tab = tabManager.tabs[name];
-        progressBar.hide();
-        app.tabs.addTab(tab);
+        eventBus.$emit('progressBar/hide');
+        eventBus.$emit('tabs/addTab', tab);
       });
   }
 }
@@ -68,6 +69,6 @@ function onMenuSettingsClick(){
   tabManager.addTab("<Settings>", true)
     .then(name => {
       let tab = tabManager.tabs[name];
-      app.tabs.addTab(tab);
+      eventBus.$emit('tabs/addTab', tab);
     });
 }

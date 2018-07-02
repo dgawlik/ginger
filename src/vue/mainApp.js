@@ -3,6 +3,7 @@ const {tabs} = require('./components/tabs.js');
 const {buffer} = require('./components/buffer.js');
 const {scrollbar} = require('./components/scrollbar.js');
 const {settings} = require('./components/settings.js');
+const {eventBus} = require('./eventBus.js');
 const {globalShortcut} = require('electron');
 
 let mainApp = {
@@ -21,6 +22,8 @@ let mainApp = {
   },
 
   mounted(){
+    eventBus.$on('app/changeWrap', val => this.changeWrapping(val));
+
     this.tabs = this.$children[0];
     this.buffer = this.$children[1];
     this.scrollbar = this.$children[2];
@@ -28,32 +31,27 @@ let mainApp = {
 
   methods: {
     delegateStopDrag(){
-      if(this.scrollbar.doDrag){
-        this.scrollbar.doDrag = false;
-      }
+      eventBus.$emit('scrollbar/stopDrag');
     },
 
     delegateMouseMove(e){
-      if(this.scrollbar.doDrag){
-        this.scrollbar.onMouseMove(e);
-      }
+      eventBus.$emit('scrollbar/mouseMove', e);
     },
 
     delegateChangePage(isUp){
-      this.buffer.changePage(isUp);
+      eventBus.$emit('buffer/changePage', isUp);
     },
 
     changeWrapping(val){
-      this.tabs.changeWrapping(val);
+      eventBus.$emit('tabs/changeWrap', val);
     },
 
     findKeyDown(){
-      findToolbar.isShow = true;
+      eventBus.$emit('findApp/keyDown');
     },
 
     closeFindKeyDown(){
-      findToolbar.isShow = false;
-      console.log('close');
+      eventBus.$emit('findApp/closeKeyDown');
     }
   }
 };

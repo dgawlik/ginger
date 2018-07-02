@@ -1,3 +1,4 @@
+const {eventBus} = require('../eventBus.js');
 
 let settings =  {
   data: function () {
@@ -9,11 +10,11 @@ let settings =  {
 
   watch : {
     scrollResolution: function(val){
-      settingsManager.scrollResolution = parseInt(val);
+      eventBus.$emit('settingsManager/changeScrollResolution', parseInt(val));
     },
 
     lineWraps: function(val){
-      settingsManager.setLineWraps(val);
+      eventBus.$emit('settingsManager/changeLineWrap', val);
     }
   },
 

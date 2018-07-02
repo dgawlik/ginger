@@ -1,3 +1,4 @@
+const {eventBus} = require('../eventBus.js');
 
 let scrollbar =  {
   data: function () {
@@ -5,6 +6,15 @@ let scrollbar =  {
       cursor: 0,
       isVisible: false
     }
+  },
+
+  mounted() {
+    eventBus.$on('scrollbar/stopDrag', () => this.doDrag = false);
+    eventBus.$on('scrollbar/mouseMove', e => {
+      if(this.doDrag){
+        this.onMouseMove(e);
+      }
+    });
   },
 
   updated() {

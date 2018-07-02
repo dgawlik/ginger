@@ -1,4 +1,5 @@
 const {progressDialog} = require('./components/progressDialog.js');
+const {eventBus} = require('./eventBus.js');
 
 let progressApp = {
   el: '#progressContent',
@@ -20,11 +21,15 @@ let progressApp = {
   },
 
   mounted() {
+    eventBus.$on('progressBar/updateProgress', val => this.updateProgress(val));
+    eventBus.$on('progressBar/show', val => this.show());
+    eventBus.$on('progressBar/hide', val => this.hide());
+
     this.overlayNode = document.querySelector('#overlay');
     this.modalNode = document.querySelector('#dialog');
     this.dialog = this.$children[0];
   },
-  
+
   components: {
     'progress-dialog': progressDialog,
   },

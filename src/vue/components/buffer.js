@@ -1,3 +1,4 @@
+const {eventBus} = require('../eventBus.js');
 
 let buffer =  {
   data: function () {
@@ -13,6 +14,11 @@ let buffer =  {
 
   beforeDestroy () {
     window.removeEventListener('wheel', this.onMouseWheel);
+  },
+
+  mounted () {
+    eventBus.$on('buffer/changePage', isUp => this.changePage(isUp));
+    eventBus.$on('buffer/changeWrap', val => this.lineWraps = val);
   },
 
   updated: function(){
