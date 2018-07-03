@@ -11,7 +11,7 @@ let scrollbar =  {
   mounted() {
     eventBus.$on('scrollbar/stopDrag', () => this.doDrag = false);
     eventBus.$on('scrollbar/mouseMove', e => {
-      if(this.doDrag){
+      if (this.doDrag) {
         this.onMouseMove(e);
       }
     });
@@ -38,12 +38,12 @@ let scrollbar =  {
       let dy = e.pageY - this.startingY,
         newCursorY = this.cursorY + dy;
 
-      if(this.doDrag){
-        if(newCursorY < this.topY){
+      if (this.doDrag) {
+        if (newCursorY < this.topY) {
           this.thumbNode.style.top = 0 + 'px';
           this.cursor = 0;
         }
-        else if(newCursorY + this.THUMB_HEIGHT > this.bottomY){
+        else if (newCursorY + this.THUMB_HEIGHT > this.bottomY) {
           this.thumbNode.style.top = (this.bottomY - this.topY - this.THUMB_HEIGHT) + 'px';
           this.cursor = 1;
         }

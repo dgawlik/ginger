@@ -41,7 +41,7 @@ let tabs =  {
 
     setTab(tab){
       let previousTab;
-      if(this.activeTabName && this.tabs[this.activeTabName]){
+      if (this.activeTabName && this.tabs[this.activeTabName]){
         previousTab = this.tabs[this.activeTabName];
         previousTab.offset = window.app.buffer.topLine;
         previousTab.isActive = false;
@@ -49,7 +49,7 @@ let tabs =  {
 
       this.activeTabName = tab.name;
       Vue.set(tab, 'isActive', true);
-      if(tab.isVirtual){
+      if (tab.isVirtual) {
         window.app.display = this.virtualNameToComponent[tab.name];
         window.app.scrollbar.isVisible = false;
         window.findToolbar.isValid = false;
@@ -61,7 +61,7 @@ let tabs =  {
         window.app.scrollbar.isVisible = true;
         window.findToolbar.isValid = true;
 
-        if(this.wrappingCbk){
+        if (this.wrappingCbk) {
           this.wrappingCbk();
           this.wrappingCbk = undefined;
         }
@@ -72,7 +72,7 @@ let tabs =  {
 
     activateTab(name){
       let tab = this.tabs[name];
-      if(tab){
+      if (tab) {
         this.setTab(tab);
       }
     },
@@ -82,7 +82,7 @@ let tabs =  {
       window.tabManager.removeTab(name);
 
       let firstTab = Object.keys(this.tabs)[0];
-      if(firstTab){
+      if (firstTab) {
         this.setTab(this.tabs[firstTab]);
       }
       else {

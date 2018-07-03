@@ -32,17 +32,17 @@ let buffer =  {
 
   methods: {
     onMouseWheel(e){
-      if(this.screen){
+      if (this.screen) {
         let distance = this.scrollResolution || 1;
         distance *= e.deltaY < 0 ? -1 : 1;
         let currentPos = this.screen.cursor;
 
         return this.screen.update(currentPos + distance)
           .then(isUpdate => {
-            if(
+            if (
               isUpdate == 'loaded' ||
               isUpdate == 'cursor-moved'
-            ){
+            ) {
               this.forceUpdate(isUpdate == 'loaded');
             }
           });
@@ -56,8 +56,7 @@ let buffer =  {
     },
 
     updateScreen(){
-      if(this.screen){
-
+      if (this.screen) {
         let offsets = this.calculateLineOffsets();
         let offset = this.screen.cursor - this.screen.boundaryLow;
         this.linesWrapperNode.style.top = -offsets[offset] + 'px';
@@ -65,7 +64,7 @@ let buffer =  {
     },
 
     forceUpdate(isPageLoaded){
-      if(isPageLoaded){
+      if (isPageLoaded) {
         this.$forceUpdate();
       }
       Vue.nextTick(() => {
@@ -81,13 +80,13 @@ let buffer =  {
         let topLineIt = currentToplineOffset,
           prevTopLine = this.screen.cursor;
 
-        for(
+        for (
           let i = this.screen.cursor;
           i > 0;
           i--
-        ){
+        ) {
           topLineIt = offsets[i-this.screen.boundaryLow-1];
-          if(!this.checkIsLineCurrentlyOnScreen(offsets, prevTopLine, topLineIt)){
+          if (!this.checkIsLineCurrentlyOnScreen(offsets, prevTopLine, topLineIt)) {
             this.updateToRandomPosition(i);
             return;
           }
@@ -97,12 +96,12 @@ let buffer =  {
         }
       }
       else {
-        for(
+        for (
           let i = this.screen.cursor;
           i < this.screen.boundaryHigh;
           i++
-        ){
-          if(!this.checkIsLineCurrentlyOnScreen(offsets, i, currentToplineOffset)){
+        ) {
+          if (!this.checkIsLineCurrentlyOnScreen(offsets, i, currentToplineOffset)) {
             this.updateToRandomPosition(i);
             return;
           }
@@ -121,7 +120,7 @@ let buffer =  {
           offsets[offset] - topLineOffset < screenHeight &&
           offsets[offset-1] - topLineOffset >= 0
         )
-      ){
+      ) {
         return true;
       }
       else {
@@ -140,7 +139,7 @@ let buffer =  {
 
       let offsets = new Array(lineNodeHeights.length);
       offsets[0] = 0;
-      for(let i=1;i<offsets.length;i++){
+      for (let i=1;i<offsets.length;i++) {
         offsets[i] = offsets[i-1]+lineNodeHeights[i-1];
       }
       return offsets;
@@ -149,12 +148,16 @@ let buffer =  {
 
   computed: {
     linesWithNumbers: function(){
-      if(!this.screen){
+      if (!this.screen) {
         return [];
       }
 
       let arr = [];
-      for(let i=0;i<this.screen.boundaryHigh-this.screen.boundaryLow;i++){
+      for (
+        let i=0;
+        i<this.screen.boundaryHigh-this.screen.boundaryLow;
+        i++
+      ) {
         arr.push({
           'lineNo': i+this.screen.boundaryLow,
           'line': this.screen.lines[i]

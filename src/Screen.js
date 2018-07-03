@@ -13,9 +13,9 @@ class Screen {
 
   update(newCursorPos){
     return new Promise((function(resolve){
-      if(newCursorPos < this.boundaryLow){
+      if (newCursorPos < this.boundaryLow) {
         //boundaryLow should be 0 at minimum
-        if(this.boundaryLow > 0){
+        if (this.boundaryLow > 0) {
           this.readPrevPage()
             .then(() => {
               this.cursor = newCursorPos;
@@ -26,15 +26,15 @@ class Screen {
           resolve('no');
         }
       }
-      else if(newCursorPos + this.pageSize > this.boundaryHigh){
-        if(this.boundaryHigh < this.file.lineBeginnings.length){
+      else if (newCursorPos + this.pageSize > this.boundaryHigh) {
+        if (this.boundaryHigh < this.file.lineBeginnings.length) {
           this.readNextPage()
             .then(() => {
               this.cursor = newCursorPos;
               resolve('loaded');
             });
         }
-        else if(newCursorPos < this.boundaryHigh){
+        else if (newCursorPos < this.boundaryHigh) {
           this.cursor = newCursorPos;
           resolve('cursor-moved');
         }
@@ -73,13 +73,13 @@ class Screen {
 
   readNextPage(){
     return new Promise((function(resolve){
-      if(this.boundaryHigh - this.boundaryLow+1 >= 2*this.pageSize){
+      if (this.boundaryHigh - this.boundaryLow+1 >= 2*this.pageSize) {
         this.lines = this.lines.slice(this.pageSize);
         this.boundaryLow += this.pageSize;
       }
       this.file.readLines(range(this.boundaryHigh, this.boundaryHigh+this.pageSize))
         .then(lines => {
-          if(lines.length != this.pageSize){
+          if (lines.length != this.pageSize) {
             this.boundaryHigh = this.boundaryHigh + lines.length;
           }
           else {
@@ -95,13 +95,13 @@ class Screen {
 
   readPrevPage(){
     return new Promise((function(resolve){
-      if(this.boundaryHigh - this.boundaryLow >= 2*this.pageSize){
+      if (this.boundaryHigh - this.boundaryLow >= 2*this.pageSize) {
         this.lines = this.lines.slice(0,this.pageSize);
         this.boundaryHigh -= this.pageSize;
       }
       this.file.readLines(range(this.boundaryLow-this.pageSize, this.boundaryLow))
         .then(lines => {
-          if(lines.length != this.pageSize){
+          if (lines.length != this.pageSize) {
             this.boundaryLow = 0;
           }
           else {

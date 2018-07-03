@@ -10,7 +10,7 @@ class TabHolder {
 
   addTab(name, isVirtual, progressSubscriber){
     return new Promise((function(resolve, reject){
-      if(!isVirtual){
+      if (!isVirtual) {
         let basename = path.basename(name);
         let file, screen;
         openFilePromise(name, 'r')

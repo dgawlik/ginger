@@ -2,7 +2,7 @@ const fs = require('fs');
 
 function range(begin, end){
   let lst = [];
-  for(let i=begin;i<end;i++){
+  for (let i=begin;i<end;i++) {
     lst.push(i);
   }
   return lst;
@@ -11,7 +11,7 @@ function range(begin, end){
 function openFilePromise(filePath, mode){
   return new Promise(function(resolve, reject){
     fs.open(filePath, mode, function(err, fd){
-      if(err){
+      if (err) {
         reject(err);
       }
       resolve(fd);
@@ -20,14 +20,14 @@ function openFilePromise(filePath, mode){
 }
 
 function findLargestSmallerIndex(arr, start, end, val){
-  if(end-start==1){
+  if (end-start==1) {
     return arr[end] < val ? end : start;
   }
   let middle = Math.floor((end+start)/2);
-  if(val < arr[middle]){
+  if (val < arr[middle]) {
     return findLargestSmallerIndex(arr, start, middle, val);
   }
-  else{
+  else {
     return findLargestSmallerIndex(arr, middle, end, val);
   }
 }
