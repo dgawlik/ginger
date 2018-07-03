@@ -22,6 +22,9 @@ let mainApp = {
 
   mounted(){
     eventBus.$on('app/changeWrap', val => this.changeWrapping(val));
+    eventBus.$on('app/displayVirtual', name => this.displayVirtual(name));
+    eventBus.$on('app/displayBuffer', screen => this.displayBuffer(screen));
+    eventBus.$on('app/displayEmpty', () => this.displayEmpty());
 
     this.tabs = this.$children[0];
     this.buffer = this.$children[1];
@@ -51,6 +54,24 @@ let mainApp = {
 
     closeFindKeyDown(){
       eventBus.$emit('findApp/closeKeyDown');
+    },
+
+    displayVirtual(name){
+      this.display = name;
+      this.scrollbar.isVisible = false;
+    },
+
+    displayBuffer(screen){
+      this.display = 'buffer';
+      this.buffer.screen = screen;
+      this.scrollbar.isVisible = true;
+      this.buffer.forceUpdate();
+    },
+
+    displayEmpty(){
+      this.scrollbar.isVisible = false;
+      this.buffer.screen = undefined;
+      this.buffer.forceUpdate();
     }
   }
 };

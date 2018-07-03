@@ -4,9 +4,13 @@ const {Vue} = require('./vue.js');
   Events:
 
   app/changeWrap
+  app/displayVirtual
+  app/displayBuffer
+  app/displayEmpty
 
   findApp/keyDown
   findApp/closeKeyDown
+  findApp/changeValid
 
   scrollbar/stopDrag
   scrollbar/mouseMove

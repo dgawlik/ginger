@@ -41,31 +41,26 @@ let tabs =  {
 
     setTab(tab){
       let previousTab;
-      if (this.activeTabName && this.tabs[this.activeTabName]){
+      if (this.activeTabName && this.tabs[this.activeTabName]) {
         previousTab = this.tabs[this.activeTabName];
-        previousTab.offset = window.app.buffer.topLine;
         previousTab.isActive = false;
       }
 
       this.activeTabName = tab.name;
       Vue.set(tab, 'isActive', true);
       if (tab.isVirtual) {
-        window.app.display = this.virtualNameToComponent[tab.name];
-        window.app.scrollbar.isVisible = false;
-        window.findToolbar.isValid = false;
+        eventBus.$emit('app/displayVirtual', this.virtualNameToComponent[tab.name]);
+        eventBus.$emit('findApp/changeValid', false);
       }
       else {
-        window.app.display = 'buffer';
         let screen = window.tabManager.tabs[tab.name].screen;
-        window.app.buffer.screen = screen;
-        window.app.scrollbar.isVisible = true;
-        window.findToolbar.isValid = true;
+        eventBus.$emit('app/displayBuffer', screen);
+        eventBus.$emit('findApp/changeValid', true);
 
         if (this.wrappingCbk) {
           this.wrappingCbk();
           this.wrappingCbk = undefined;
         }
-        window.app.buffer.forceUpdate();
       }
       eventBus.$emit('tabs/changeActiveTab', this.tabs[this.activeTabName]);
     },
@@ -86,11 +81,9 @@ let tabs =  {
         this.setTab(this.tabs[firstTab]);
       }
       else {
-        window.app.scrollbar.isVisible = false;
-        window.findToolbar.isValid = false;
-        window.app.buffer.screen = undefined;
-        window.app.tabs.$forceUpdate();
-        window.app.buffer.forceUpdate();
+        this.$forceUpdate();
+        eventBus.$emit('findApp/changeValid', false);
+        eventBus.$emit('app/displayEmpty');
       }
     },
 

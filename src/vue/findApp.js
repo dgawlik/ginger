@@ -18,6 +18,7 @@ let findApp = {
 
     eventBus.$on('findApp/keyDown', () => this.isShow = true);
     eventBus.$on('findApp/closeKeyDown', () => this.isShow = false);
+    eventBus.$on('findApp/changeValid', val => this.isValid = val);
   },
 
   components: {
