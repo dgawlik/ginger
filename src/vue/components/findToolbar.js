@@ -29,8 +29,8 @@ let findToolbar =  {
       this.triggeringTab && this.triggeringTab.screen.file
         .find(this.findText, new $1())
         .then(matches => {
-          //console.log(matches);
           eventBus.$emit('progressBar/hide');
+          eventBus.$emit('findApp/highlight', matches);
         });
     }
   },

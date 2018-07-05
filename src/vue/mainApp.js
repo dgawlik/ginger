@@ -9,7 +9,6 @@ let mainApp = {
   el: '#content',
 
   data: {
-    message: 'Hello Vue!',
     display: 'buffer'
   },
 

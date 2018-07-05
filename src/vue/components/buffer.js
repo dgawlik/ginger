@@ -5,7 +5,8 @@ let buffer =  {
   data: function () {
     return {
       screen: undefined,
-      lineWraps: true
+      lineWraps: true,
+      mode: 'normal'
     };
   },
 
@@ -22,6 +23,8 @@ let buffer =  {
     eventBus.$on('buffer/changeWrap', val => this.lineWraps = val);
     eventBus.$on('settingsManager/changeScrollResolution', val => this.scrollResolution = val);
     eventBus.$on('buffer/updateToRandomPosition', val => this.updateToRandomPosition(val));
+    eventBus.$on('findApp/closeKeyDown', () => this.switchToNormalMode());
+    eventBus.$on('findApp/highlight', val => this.switchToFindMode(val));
   },
 
   updated: function(){
@@ -143,6 +146,28 @@ let buffer =  {
         offsets[i] = offsets[i-1]+lineNodeHeights[i-1];
       }
       return offsets;
+    },
+
+    postprocessLine(lineNo, text){
+      if (this.mode !== 'find') {
+        return text;
+      }
+
+      for (entry of this.linesWithNumbers) {
+        
+      }
+
+      return 'hello';
+    },
+
+    switchToFindMode(matches){
+      this.findMatches = matches;
+      this.findMatchesIt = 0;
+      this.mode = 'find';
+    },
+
+    switchToNormalMode(){
+      this.mode = 'normal';
     }
   },
 
@@ -173,11 +198,12 @@ let buffer =  {
 
   template: `<div id="textBuffer">
 <div id="linesWrapper">
-  <p :key="entry.lineNo"
-      v-for="entry in linesWithNumbers"
-      v-bind:class="{'no-wrap': noWrap, 'textBufferLine': true}">
+  <p
+   :key="entry.lineNo"
+   v-for="entry in linesWithNumbers"
+   v-bind:class="{'no-wrap': noWrap, 'textBufferLine': true}">
     <span class="lineNumber">{{entry.lineNo}}</span>
-    {{entry.line}}
+    {{ postprocessLine(entry.lineNo, entry.line) }}
   </p>
 </div>
 </div>`
