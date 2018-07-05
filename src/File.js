@@ -84,15 +84,18 @@ class File {
         .then(marks => {
           let matches = {
             lines: [],
-            positions: []
+            positions: [],
+            lineToIndex: new Map()
           };
 
+          let it = 0;
           for (let mark of marks) {
             let lineIndex = findLargestSmallerIndex(this.lineBeginnings,
               0, this.lineBeginnings.length-1, mark);
             let position = mark - this.lineBeginnings[lineIndex];
             matches.lines.push(lineIndex);
             matches.positions.push(position);
+            matches.lineToIndex.set(lineIndex, it++);
           }
           this.matches = matches;
           resolve(matches);

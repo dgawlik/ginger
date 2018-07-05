@@ -73,7 +73,7 @@ class Screen {
 
   readNextPage(){
     return new Promise((function(resolve){
-      if (this.boundaryHigh - this.boundaryLow+1 >= 2*this.pageSize) {
+      if (this.boundaryHigh - this.boundaryLow >= 2*this.pageSize) {
         this.lines = this.lines.slice(this.pageSize);
         this.boundaryLow += this.pageSize;
       }

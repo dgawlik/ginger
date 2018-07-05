@@ -30,7 +30,7 @@ let findToolbar =  {
         .find(this.findText, new $1())
         .then(matches => {
           eventBus.$emit('progressBar/hide');
-          eventBus.$emit('findApp/highlight', matches);
+          eventBus.$emit('findApp/highlight', {matches, 'text': this.findText});
         });
     }
   },

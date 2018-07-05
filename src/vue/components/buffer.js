@@ -46,6 +46,7 @@ let buffer =  {
               isUpdate == 'loaded' ||
               isUpdate == 'cursor-moved'
             ) {
+              console.log(this.screen.boundaryLow, this.screen.boundaryHigh);
               this.forceUpdate(isUpdate == 'loaded');
             }
           });
@@ -153,21 +154,42 @@ let buffer =  {
         return text;
       }
 
-      for (entry of this.linesWithNumbers) {
-        
-      }
+      let matchLength = this.findText.length;
 
-      return 'hello';
+      let idx;
+      if (idx = this.findMatches.lineToIndex.get(lineNo)) {
+        let lineSnapshot = this.findMatches.lines[idx],
+          offset = 0;
+
+        do {
+          let position = this.findMatches.positions[idx];
+
+          let header = text.slice(0, position+offset),
+            trailer = text.slice(position+matchLength+offset),
+            modification =
+              `<span class='highlight'>${text.slice(position, position+matchLength)}</span>`;
+            text = header + modification + trailer;
+            offset += 29;
+        }
+        while (this.findMatches.lines[++idx] === lineSnapshot);
+        return text;
+      }
+      else {
+        return text;
+      }
     },
 
-    switchToFindMode(matches){
+    switchToFindMode({matches, text}){
       this.findMatches = matches;
+      this.findText = text;
       this.findMatchesIt = 0;
       this.mode = 'find';
+      this.$forceUpdate();
     },
 
     switchToNormalMode(){
       this.mode = 'normal';
+      this.$forceUpdate();
     }
   },
 
@@ -199,11 +221,14 @@ let buffer =  {
   template: `<div id="textBuffer">
 <div id="linesWrapper">
   <p
-   :key="entry.lineNo"
    v-for="entry in linesWithNumbers"
+   :key="entry.lineNo"
    v-bind:class="{'no-wrap': noWrap, 'textBufferLine': true}">
     <span class="lineNumber">{{entry.lineNo}}</span>
-    {{ postprocessLine(entry.lineNo, entry.line) }}
+    <span
+      style="display:inline-block"
+      v-html="postprocessLine(entry.lineNo, entry.line)"
+    ></span>
   </p>
 </div>
 </div>`
