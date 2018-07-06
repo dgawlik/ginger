@@ -16,7 +16,9 @@ let findApp = {
   mounted() {
     this.findToolbar = this.$children[0];
 
-    eventBus.$on('findApp/keyDown', () => this.isShow = true);
+    eventBus.$on('findApp/keyDown', () => {
+      this.isShow = true;
+    });
     eventBus.$on('findApp/closeKeyDown', () => this.isShow = false);
     eventBus.$on('findApp/changeValid', val => this.isValid = val);
   },

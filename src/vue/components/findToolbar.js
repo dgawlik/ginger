@@ -19,9 +19,16 @@ let findToolbar =  {
     eventBus.$on('tabs/changeActiveTab', val => this.triggeringTab = val);
   },
 
+  updated(){
+    if (this.isValid && this.isShow) {
+      document.querySelector('#findToolbarInput').focus();
+    }
+  },
+
   methods: {
     onClose(){
       window.findToolbar.isShow = false;
+      eventBus.$emit('findApp/closeKeyDown');
     },
 
     onSearch(){
@@ -32,14 +39,28 @@ let findToolbar =  {
           eventBus.$emit('progressBar/hide');
           eventBus.$emit('findApp/highlight', {matches, 'text': this.findText});
         });
+    },
+
+    onPrev(){
+      eventBus.$emit('findApp/prev');
+    },
+
+    onNext(){
+      eventBus.$emit('findApp/next');
     }
   },
 
   template: `
 <div v-if="isValid && isShow" id="findToolbar">
   <input type="text" id="findToolbarInput" v-model="findText">
-  <i class="fas fa-angle-left"></i>
-  <i class="fas fa-angle-right"></i>
+  <i
+   class="fas fa-angle-left"
+   @click="onPrev"
+  ></i>
+  <i
+   class="fas fa-angle-right"
+   @click="onNext"
+  ></i>
   <button id="findToolbarSearch" @click="onSearch">
     <i class="fas fa-search"></i>
     Search

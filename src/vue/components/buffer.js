@@ -25,6 +25,8 @@ let buffer =  {
     eventBus.$on('buffer/updateToRandomPosition', val => this.updateToRandomPosition(val));
     eventBus.$on('findApp/closeKeyDown', () => this.switchToNormalMode());
     eventBus.$on('findApp/highlight', val => this.switchToFindMode(val));
+    eventBus.$on('findApp/next', () => this.findNext());
+    eventBus.$on('findApp/prev', () => this.findPrev());
   },
 
   updated: function(){
@@ -54,7 +56,7 @@ let buffer =  {
     },
 
     updateToRandomPosition(newPosition){
-      this.screen
+      return this.screen
         .readRandomAt(newPosition)
         .then(() => this.forceUpdate());
     },
@@ -68,17 +70,20 @@ let buffer =  {
     },
 
     forceUpdate(isPageLoaded){
-      if (isPageLoaded) {
-        this.$forceUpdate();
-      }
-      Vue.nextTick(() => {
-        this.updateScreen();
-      });
+      return new Promise(function(resolve){
+        if (isPageLoaded) {
+          this.$forceUpdate();
+        }
+        Vue.nextTick(() => {
+          this.updateScreen();
+          resolve();
+        });
+      }.bind(this));
     },
 
     changePage(isUp){
       let offsets = this.calculateLineOffsets(),
-        currentToplineOffset = -parseInt(this.linesWrapperNode.style.top.replace('px', ''));
+        currentToplineOffset = -this.linesWrapperNode.style.top.replace('px', '');
 
       if (isUp) {
         let topLineIt = currentToplineOffset,
@@ -153,15 +158,17 @@ let buffer =  {
       if (this.mode !== 'find') {
         return text;
       }
-
-      console.log(this.findMatches);
+      lineNo = +lineNo;
 
       let matchLength = this.findText.length;
 
       let idx;
-      if ((idx = this.findMatches.lineToIndex.get(lineNo)) && text) {
+      if ((idx = this.findMatches.lineToIndex.get(lineNo)) !== undefined && text) {
         let lineSnapshot = this.findMatches.lines[idx],
           offset = 0;
+        const isActiveHighlight =
+          (line, pos) => line ===  this.findMatches.lines[this.findMatchesIt] &&
+            pos === this.findMatches.positions[this.findMatchesIt];
 
         do {
           let position = this.findMatches.positions[idx];
@@ -169,10 +176,12 @@ let buffer =  {
           let header = text.slice(0, position+offset),
             trailer = text.slice(position+matchLength+offset),
             token = text.slice(position+offset, position+matchLength+offset),
-            modification =
+            modification = isActiveHighlight(lineNo, position) ?
+              `<span class='highlight-active'>${token}</span>` :
               `<span class='highlight'>${token}</span>`;
-            text = header + modification + trailer;
-            offset += 31;
+
+          text = header + modification + trailer;
+          offset += isActiveHighlight(lineNo, position) ? 38 : 31;
         }
         while (this.findMatches.lines[++idx] === lineSnapshot);
         return text;
@@ -187,12 +196,45 @@ let buffer =  {
       this.findText = text;
       this.findMatchesIt = 0;
       this.mode = 'find';
+      this.followActiveHighlight(this.findMatchesIt);
+    },
+
+    findNext(){
+      let len = this.findMatches.lines.length;
+      this.findMatchesIt = this.findMatchesIt == len - 1 ?
+        0 : this.findMatchesIt + 1;
+      this.followActiveHighlight(this.findMatchesIt);
+      this.$forceUpdate();
+    },
+
+    findPrev(){
+      let len = this.findMatches.lines.length;
+      this.findMatchesIt = this.findMatchesIt == 0 ?
+        len - 1 : this.findMatchesIt - 1;
+      let promise = this.followActiveHighlight(this.findMatchesIt);
+      if (promise) {
+        this.changePage(true);
+      }
       this.$forceUpdate();
     },
 
     switchToNormalMode(){
       this.mode = 'normal';
       this.$forceUpdate();
+    },
+
+    followActiveHighlight(idx){
+      let line = this.findMatches.lines[idx];
+
+      let shouldAlign =
+        (line < this.screen.boundaryLow || line > this.screen.boundaryHigh) ||
+        !this.checkIsLineCurrentlyOnScreen(
+          this.calculateLineOffsets(), line,
+          -this.linesWrapperNode.style.top.replace('px', ''));
+
+      if (shouldAlign) {
+        return this.updateToRandomPosition(line);
+      }
     }
   },
 
