@@ -79,13 +79,7 @@ class Screen {
       }
       this.file.readLines(range(this.boundaryHigh, this.boundaryHigh+this.pageSize))
         .then(lines => {
-          if (lines.length != this.pageSize) {
-            this.boundaryHigh = this.boundaryHigh + lines.length;
-          }
-          else {
-            this.boundaryHigh = this.boundaryHigh + this.pageSize;
-          }
-
+          this.boundaryHigh += Math.min(lines.length, this.pageSize);
           this.lines = this.lines.concat(lines);
           let isNew = lines.length == 0;
           resolve(isNew);
@@ -101,12 +95,7 @@ class Screen {
       }
       this.file.readLines(range(this.boundaryLow-this.pageSize, this.boundaryLow))
         .then(lines => {
-          if (lines.length != this.pageSize) {
-            this.boundaryLow = 0;
-          }
-          else {
-            this.boundaryLow -= this.pageSize;
-          }
+          this.boundaryLow = Math.max(0, this.boundaryLow - this.pageSize);
           this.lines = lines.concat(this.lines);
           let isNew = lines.length == 0;
           resolve(isNew);

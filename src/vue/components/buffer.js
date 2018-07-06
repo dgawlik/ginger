@@ -157,7 +157,7 @@ let buffer =  {
       let matchLength = this.findText.length;
 
       let idx;
-      if (idx = this.findMatches.lineToIndex.get(lineNo)) {
+      if ((idx = this.findMatches.lineToIndex.get(lineNo)) && text) {
         let lineSnapshot = this.findMatches.lines[idx],
           offset = 0;
 
