@@ -154,6 +154,8 @@ let buffer =  {
         return text;
       }
 
+      console.log(this.findMatches);
+
       let matchLength = this.findText.length;
 
       let idx;
@@ -166,10 +168,11 @@ let buffer =  {
 
           let header = text.slice(0, position+offset),
             trailer = text.slice(position+matchLength+offset),
+            token = text.slice(position+offset, position+matchLength+offset),
             modification =
-              `<span class='highlight'>${text.slice(position, position+matchLength)}</span>`;
+              `<span class='highlight'>${token}</span>`;
             text = header + modification + trailer;
-            offset += 29;
+            offset += 31;
         }
         while (this.findMatches.lines[++idx] === lineSnapshot);
         return text;

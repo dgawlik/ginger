@@ -95,7 +95,10 @@ class File {
             let position = mark - this.lineBeginnings[lineIndex];
             matches.lines.push(lineIndex);
             matches.positions.push(position);
-            matches.lineToIndex.set(lineIndex, it++);
+            if (!matches.lineToIndex.has(lineIndex)) {
+              matches.lineToIndex.set(lineIndex, it);
+            }
+            it++;
           }
           this.matches = matches;
           resolve(matches);
