@@ -107,7 +107,17 @@ body::-webkit-scrollbar-thumb {
   width: 300px;
   height: 200px;
   margin: auto;
-  display: none;
+  display: block;
+}
+
+.modal-content {
+  border-radius: 0;
+  background-color: #212529;
+  color:#CED4D9;
+}
+
+.progress-bar {
+  background-color: #B2FF59;
 }
 
 .scrollbar {
