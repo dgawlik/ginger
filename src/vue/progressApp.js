@@ -6,22 +6,22 @@ let progressApp = {
   el: '#progressContent',
 
   methods: {
-    show(){
+    show () {
       this.overlayNode.style.display = 'block';
       this.modalNode.style.display = 'block';
     },
 
-    hide() {
+    hide () {
       this.overlayNode.style.display = 'none';
       this.modalNode.style.display = 'none';
     },
 
-    updateProgress(val){
+    updateProgress (val) {
       this.dialog.update(val);
     }
   },
 
-  mounted() {
+  mounted () {
     eventBus.$on('progressBar/updateProgress', val => this.updateProgress(val));
     eventBus.$on('progressBar/show', () => this.show());
     eventBus.$on('progressBar/hide', () => this.hide());

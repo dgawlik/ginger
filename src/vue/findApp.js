@@ -13,7 +13,7 @@ let findApp = {
   methods: {
   },
 
-  mounted() {
+  mounted () {
     this.findToolbar = this.$children[0];
 
     eventBus.$on('findApp/keyDown', () => {

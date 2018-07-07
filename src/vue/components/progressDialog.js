@@ -7,13 +7,13 @@ let progressDialog =  {
   },
 
   methods: {
-    update(val){
+    update (val) {
       this.progress = val;
     }
   },
 
   computed: {
-    styleWidth: function(){
+    styleWidth: function () {
       return {
         width: this.progress+'%'
       };

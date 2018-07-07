@@ -2,17 +2,17 @@ let {range} = require('./util.js');
 
 class Screen {
 
-  constructor(pageSize, file){
+  constructor (pageSize, file) {
     this.pageSize = pageSize;
     this.file = file;
   }
 
-  init(){
+  init () {
     return this.readRandomAt(0);
   }
 
-  update(newCursorPos){
-    return new Promise((function(resolve){
+  update (newCursorPos) {
+    return new Promise((function (resolve) {
       if (newCursorPos < this.boundaryLow) {
         //boundaryLow should be 0 at minimum
         if (this.boundaryLow > 0) {
@@ -49,8 +49,8 @@ class Screen {
     }).bind(this));
   }
 
-  readRandomAt(beginning){
-    return new Promise((function(resolve){
+  readRandomAt (beginning) {
+    return new Promise((function (resolve) {
       this.cursor = beginning;
 
       this.boundaryHigh = Math.min(
@@ -71,8 +71,8 @@ class Screen {
     }).bind(this));
   }
 
-  readNextPage(){
-    return new Promise((function(resolve){
+  readNextPage () {
+    return new Promise((function (resolve) {
       if (this.boundaryHigh - this.boundaryLow >= 2*this.pageSize) {
         this.lines = this.lines.slice(this.pageSize);
         this.boundaryLow += this.pageSize;
@@ -81,14 +81,14 @@ class Screen {
         .then(lines => {
           this.boundaryHigh += Math.min(lines.length, this.pageSize);
           this.lines = this.lines.concat(lines);
-          let isNew = lines.length == 0;
+          let isNew = lines.length === 0;
           resolve(isNew);
         });
     }).bind(this));
   }
 
-  readPrevPage(){
-    return new Promise((function(resolve){
+  readPrevPage () {
+    return new Promise((function (resolve) {
       if (this.boundaryHigh - this.boundaryLow >= 2*this.pageSize) {
         this.lines = this.lines.slice(0,this.pageSize);
         this.boundaryHigh -= this.pageSize;
@@ -97,7 +97,7 @@ class Screen {
         .then(lines => {
           this.boundaryLow = Math.max(0, this.boundaryLow - this.pageSize);
           this.lines = lines.concat(this.lines);
-          let isNew = lines.length == 0;
+          let isNew = lines.length === 0;
           resolve(isNew);
         });
     }).bind(this));

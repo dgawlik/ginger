@@ -9,11 +9,11 @@ let settings =  {
   },
 
   watch : {
-    scrollResolution: function(val){
+    scrollResolution: function (val) {
       eventBus.$emit('settingsManager/changeScrollResolution', parseInt(val));
     },
 
-    lineWraps: function(val){
+    lineWraps: function (val) {
       eventBus.$emit('settingsManager/changeLineWrap', val);
     }
   },

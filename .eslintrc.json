@@ -33,6 +33,22 @@
             "before": true,
             "after": true
           }
-        ]
+        ],
+        "complexity": [
+          "error",
+          10
+        ],
+        "eqeqeq": [
+          "error",
+          "always"
+        ],
+        "no-extra-bind": "error",
+        "no-loop-func": "error",
+        "callback-return": "error",
+        "handle-callback-err": "error",
+        "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }],
+        "no-tabs": "error",
+        "no-trailing-spaces": "error",
+        "space-before-blocks": "error"
     }
 }

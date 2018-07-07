@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-function range(begin, end){
+function range (begin, end) {
   let lst = [];
   for (let i=begin;i<end;i++) {
     lst.push(i);
@@ -8,9 +8,9 @@ function range(begin, end){
   return lst;
 }
 
-function openFilePromise(filePath, mode){
-  return new Promise(function(resolve, reject){
-    fs.open(filePath, mode, function(err, fd){
+function openFilePromise (filePath, mode) {
+  return new Promise(function (resolve, reject) {
+    fs.open(filePath, mode, function (err, fd) {
       if (err) {
         reject(err);
       }
@@ -19,8 +19,8 @@ function openFilePromise(filePath, mode){
   });
 }
 
-function findLargestSmallerIndex(arr, start, end, val){
-  if (end-start==1) {
+function findLargestSmallerIndex (arr, start, end, val) {
+  if (end-start===1) {
     return arr[end] < val ? end : start;
   }
   let middle = Math.floor((end+start)/2);
@@ -32,13 +32,13 @@ function findLargestSmallerIndex(arr, start, end, val){
   }
 }
 
-function delayed(timeout){
-  return new Promise(function (resolve){
+function delayed (timeout) {
+  return new Promise(function (resolve) {
     setTimeout(() => resolve(), timeout);
   });
 }
 
-function dispatchEvent(el, evt){
+function dispatchEvent (el, evt) {
   let evObj = document.createEvent('Events');
   evObj.initEvent(evt, true, false);
   el.dispatchEvent(evObj);

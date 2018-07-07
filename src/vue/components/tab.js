@@ -10,19 +10,19 @@ let tab =  {
   },
 
   methods: {
-    onMouseEnter: function(){
+    onMouseEnter: function () {
       this.mouseOver = true;
     },
 
-    onMouseLeave: function(){
+    onMouseLeave: function () {
       this.mouseOver = false;
     },
 
-    onActivateClick: function(){
+    onActivateClick: function () {
       eventBus.$emit('tabs/activateTab', this.name);
     },
 
-    onCloseClick: function(){
+    onCloseClick: function () {
       eventBus.$emit('tabs/closeTab', this.name);
     }
   },

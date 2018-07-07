@@ -1,7 +1,7 @@
 const {eventBus} = require('../eventBus.js');
 
-class $1{
-  progress(val){
+class $1 {
+  progress (val) {
     eventBus.$emit('progressBar/updateProgress', val);
   }
 }
@@ -9,29 +9,29 @@ class $1{
 let findToolbar =  {
   props: ['isValid', 'isShow'],
 
-  data: function(){
+  data: function () {
     return {
       findText: ''
     };
   },
 
-  mounted(){
+  mounted () {
     eventBus.$on('tabs/changeActiveTab', val => this.triggeringTab = val);
   },
 
-  updated(){
+  updated () {
     if (this.isValid && this.isShow) {
       document.querySelector('#findToolbarInput').focus();
     }
   },
 
   methods: {
-    onClose(){
+    onClose () {
       window.findToolbar.isShow = false;
       eventBus.$emit('findApp/closeKeyDown');
     },
 
-    onSearch(){
+    onSearch () {
       eventBus.$emit('progressBar/show');
       this.triggeringTab && this.triggeringTab.screen.file
         .find(this.findText, new $1())
@@ -41,11 +41,11 @@ let findToolbar =  {
         });
     },
 
-    onPrev(){
+    onPrev () {
       eventBus.$emit('findApp/prev');
     },
 
-    onNext(){
+    onNext () {
       eventBus.$emit('findApp/next');
     }
   },

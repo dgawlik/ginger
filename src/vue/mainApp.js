@@ -19,7 +19,7 @@ let mainApp = {
     'settings': settings
   },
 
-  mounted(){
+  mounted () {
     eventBus.$on('app/changeWrap', val => this.changeWrapping(val));
     eventBus.$on('app/displayVirtual', name => this.displayVirtual(name));
     eventBus.$on('app/displayBuffer', screen => this.displayBuffer(screen));
@@ -31,43 +31,43 @@ let mainApp = {
   },
 
   methods: {
-    delegateStopDrag(){
+    delegateStopDrag () {
       eventBus.$emit('scrollbar/stopDrag');
     },
 
-    delegateMouseMove(e){
+    delegateMouseMove (e) {
       eventBus.$emit('scrollbar/mouseMove', e);
     },
 
-    delegateChangePage(isUp){
+    delegateChangePage (isUp) {
       eventBus.$emit('buffer/changePage', isUp);
     },
 
-    changeWrapping(val){
+    changeWrapping (val) {
       eventBus.$emit('tabs/changeWrap', val);
     },
 
-    findKeyDown(){
+    findKeyDown () {
       eventBus.$emit('findApp/keyDown');
     },
 
-    closeFindKeyDown(){
+    closeFindKeyDown () {
       eventBus.$emit('findApp/closeKeyDown');
     },
 
-    displayVirtual(name){
+    displayVirtual (name) {
       this.display = name;
       this.scrollbar.isVisible = false;
     },
 
-    displayBuffer(screen){
+    displayBuffer (screen) {
       this.display = 'buffer';
       this.buffer.screen = screen;
       this.scrollbar.isVisible = true;
       this.buffer.forceUpdate();
     },
 
-    displayEmpty(){
+    displayEmpty () {
       this.scrollbar.isVisible = false;
       this.buffer.screen = undefined;
       this.buffer.forceUpdate();

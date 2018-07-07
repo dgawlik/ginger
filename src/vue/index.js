@@ -20,7 +20,7 @@ eventBus.$on('settingsManager/changeLineWrap',
 window.settingsManager = {
   scrollResolution: 1,
 
-  setLineWraps(val){
+  setLineWraps (val) {
     eventBus.$emit('app/changeWrap', val);
   }
 };

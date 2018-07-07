@@ -4,12 +4,12 @@ const {Screen} = require('./Screen.js');
 const {openFilePromise} = require('./util.js');
 
 class TabHolder {
-  constructor(){
+  constructor () {
     this.tabs = {};
   }
 
-  addTab(name, isVirtual, progressSubscriber){
-    return new Promise((function(resolve, reject){
+  addTab (name, isVirtual, progressSubscriber) {
+    return new Promise((function (resolve, reject) {
       if (!isVirtual) {
         let basename = path.basename(name);
         let file, screen;
@@ -44,7 +44,7 @@ class TabHolder {
     }).bind(this));
   }
 
-  removeTab(name){
+  removeTab (name) {
     delete this.tabs[name];
   }
 }

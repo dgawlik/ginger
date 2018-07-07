@@ -12,6 +12,8 @@ const {Vue} = require('./vue.js');
   findApp/closeKeyDown
   findApp/changeValid
   findApp/highlight
+  findApp/findPrev
+  findApp/findNext
 
   scrollbar/stopDrag
   scrollbar/mouseMove

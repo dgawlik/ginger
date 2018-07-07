@@ -8,7 +8,7 @@ let scrollbar =  {
     };
   },
 
-  mounted() {
+  mounted () {
     eventBus.$on('scrollbar/stopDrag', () => this.doDrag = false);
     eventBus.$on('scrollbar/mouseMove', e => {
       if (this.doDrag) {
@@ -18,14 +18,14 @@ let scrollbar =  {
     eventBus.$on('tabs/changeActiveTab', val => this.activeTabName = val.name);
   },
 
-  updated() {
+  updated () {
     this.thumbNode = document.querySelector('.scrollbar .thumb');
     this.scrollbarNode = document.querySelector('.scrollbar');
     this.THUMB_HEIGHT = 30;
   },
 
   methods: {
-    onMouseDown(e){
+    onMouseDown (e) {
       e.preventDefault();
       this.doDrag = true;
       this.startingY = e.pageY;
@@ -34,7 +34,7 @@ let scrollbar =  {
       this.cursorY = this.thumbNode.getBoundingClientRect().top;
     },
 
-    onMouseMove(e){
+    onMouseMove (e) {
       let dy = e.pageY - this.startingY,
         newCursorY = this.cursorY + dy;
 
@@ -55,7 +55,7 @@ let scrollbar =  {
       }
     },
 
-    updateScreenOnScroll(currentCursor){
+    updateScreenOnScroll (currentCursor) {
       // eslint-disable-next-line no-undef
       let screen = tabManager.tabs[this.activeTabName].screen;
       let totalLines = screen.file.lineBeginnings.length;

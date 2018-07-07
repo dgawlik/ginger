@@ -15,7 +15,7 @@ let tabs =  {
     'tab': tab,
   },
 
-  mounted() {
+  mounted () {
     eventBus.$on('tabs/changeWrap', val => this.changeWrapping(val));
     eventBus.$on('tabs/activateTab', name => this.activateTab(name));
     eventBus.$on('tabs/closeTab', name => this.closeTab(name));
@@ -30,16 +30,16 @@ let tabs =  {
   },
 
   methods: {
-    addTab(tab){
+    addTab (tab) {
       Vue.set(this.tabs, tab.name, tab);
       this.setTab(tab);
     },
 
-    getActiveTab(){
+    getActiveTab () {
       return this.tabs[this.activeTabName];
     },
 
-    setTab(tab){
+    setTab (tab) {
       let previousTab;
       if (this.activeTabName && this.tabs[this.activeTabName]) {
         previousTab = this.tabs[this.activeTabName];
@@ -65,14 +65,14 @@ let tabs =  {
       eventBus.$emit('tabs/changeActiveTab', this.tabs[this.activeTabName]);
     },
 
-    activateTab(name){
+    activateTab (name) {
       let tab = this.tabs[name];
       if (tab) {
         this.setTab(tab);
       }
     },
 
-    closeTab(name){
+    closeTab (name) {
       delete this.tabs[name];
       window.tabManager.removeTab(name);
 
@@ -87,7 +87,7 @@ let tabs =  {
       }
     },
 
-    changeWrapping(val){
+    changeWrapping (val) {
       this.wrappingCbk = () => {
         eventBus.$emit('buffer/changeWrap', val);
       };

@@ -29,14 +29,14 @@ let buffer =  {
     eventBus.$on('findApp/prev', () => this.findPrev());
   },
 
-  updated: function(){
+  updated: function () {
     this.textBufferNode = document.querySelector('#textBuffer');
     this.linesWrapperNode = document.querySelector('#linesWrapper');
     this.lineNodes = [...document.querySelectorAll('#linesWrapper p')];
   },
 
   methods: {
-    onMouseWheel(e){
+    onMouseWheel (e) {
       if (this.screen) {
         let distance = this.scrollResolution || 1;
         distance *= e.deltaY < 0 ? -1 : 1;
@@ -45,23 +45,23 @@ let buffer =  {
         return this.screen.update(currentPos + distance)
           .then(isUpdate => {
             if (
-              isUpdate == 'loaded' ||
-              isUpdate == 'cursor-moved'
+              isUpdate === 'loaded' ||
+              isUpdate === 'cursor-moved'
             ) {
               console.log(this.screen.boundaryLow, this.screen.boundaryHigh);
-              this.forceUpdate(isUpdate == 'loaded');
+              this.forceUpdate(isUpdate === 'loaded');
             }
           });
       }
     },
 
-    updateToRandomPosition(newPosition){
+    updateToRandomPosition (newPosition) {
       return this.screen
         .readRandomAt(newPosition)
         .then(() => this.forceUpdate());
     },
 
-    updateScreen(){
+    updateScreen () {
       if (this.screen) {
         let offsets = this.calculateLineOffsets();
         let offset = this.screen.cursor - this.screen.boundaryLow;
@@ -69,8 +69,8 @@ let buffer =  {
       }
     },
 
-    forceUpdate(isPageLoaded){
-      return new Promise(function(resolve){
+    forceUpdate (isPageLoaded) {
+      return new Promise(function (resolve) {
         if (isPageLoaded) {
           this.$forceUpdate();
         }
@@ -81,7 +81,7 @@ let buffer =  {
       }.bind(this));
     },
 
-    changePage(isUp){
+    changePage (isUp) {
       let offsets = this.calculateLineOffsets(),
         currentToplineOffset = -this.linesWrapperNode.style.top.replace('px', '');
 
@@ -118,13 +118,13 @@ let buffer =  {
       }
     },
 
-    checkIsLineCurrentlyOnScreen(offsets, lineNo, topLineOffset){
+    checkIsLineCurrentlyOnScreen (offsets, lineNo, topLineOffset) {
       //we want ensure whole line is visible
       let offset = lineNo - this.screen.boundaryLow + 1,
         screenHeight = this.textBufferNode.getBoundingClientRect().height;
 
       if (
-        offset == offsets.length ||
+        offset === offsets.length ||
         (
           offsets[offset] - topLineOffset < screenHeight &&
           offsets[offset-1] - topLineOffset >= 0
@@ -137,7 +137,7 @@ let buffer =  {
       }
     },
 
-    calculateLineOffsets(){
+    calculateLineOffsets () {
       let lineNodeHeights = this.lineNodes.map(e => {
         const propValue = prop =>
           parseInt(window.getComputedStyle(e).getPropertyValue(prop));
@@ -154,7 +154,7 @@ let buffer =  {
       return offsets;
     },
 
-    postprocessLine(lineNo, text){
+    postprocessLine (lineNo, text) {
       if (this.mode !== 'find') {
         return text;
       }
@@ -191,7 +191,7 @@ let buffer =  {
       }
     },
 
-    switchToFindMode({matches, text}){
+    switchToFindMode ({matches, text}) {
       this.findMatches = matches;
       this.findText = text;
       this.findMatchesIt = 0;
@@ -199,17 +199,17 @@ let buffer =  {
       this.followActiveHighlight(this.findMatchesIt);
     },
 
-    findNext(){
+    findNext () {
       let len = this.findMatches.lines.length;
-      this.findMatchesIt = this.findMatchesIt == len - 1 ?
+      this.findMatchesIt = this.findMatchesIt === len - 1 ?
         0 : this.findMatchesIt + 1;
       this.followActiveHighlight(this.findMatchesIt);
       this.$forceUpdate();
     },
 
-    findPrev(){
+    findPrev () {
       let len = this.findMatches.lines.length;
-      this.findMatchesIt = this.findMatchesIt == 0 ?
+      this.findMatchesIt = this.findMatchesIt === 0 ?
         len - 1 : this.findMatchesIt - 1;
       let promise = this.followActiveHighlight(this.findMatchesIt);
       if (promise) {
@@ -218,12 +218,12 @@ let buffer =  {
       this.$forceUpdate();
     },
 
-    switchToNormalMode(){
+    switchToNormalMode () {
       this.mode = 'normal';
       this.$forceUpdate();
     },
 
-    followActiveHighlight(idx){
+    followActiveHighlight (idx) {
       let line = this.findMatches.lines[idx];
 
       let shouldAlign =
@@ -239,7 +239,7 @@ let buffer =  {
   },
 
   computed: {
-    linesWithNumbers: function(){
+    linesWithNumbers: function () {
       if (!this.screen) {
         return [];
       }
@@ -258,7 +258,7 @@ let buffer =  {
 
       return arr;
     },
-    noWrap: function(){
+    noWrap: function () {
       return !this.lineWraps;
     }
   },
