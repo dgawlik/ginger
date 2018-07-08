@@ -39,5 +39,5 @@ let eventBus = new Vue();
 
 
 module.exports = {
-  'eventBus': eventBus
+  eventBus
 };

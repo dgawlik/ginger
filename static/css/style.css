@@ -226,6 +226,7 @@ body::-webkit-scrollbar-thumb {
   border: none;
   border-radius: 3px;
   cursor: pointer;
+  outline: none;
 }
 
 .custom-checkbox input {

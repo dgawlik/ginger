@@ -3,26 +3,26 @@ const {eventBus} = require('../eventBus.js');
 let tab =  {
   props: ['name', 'isActive'],
 
-  data: function () {
+  data () {
     return {
       mouseOver: false
     };
   },
 
   methods: {
-    onMouseEnter: function () {
+    onMouseEnter () {
       this.mouseOver = true;
     },
 
-    onMouseLeave: function () {
+    onMouseLeave () {
       this.mouseOver = false;
     },
 
-    onActivateClick: function () {
+    onActivateClick () {
       eventBus.$emit('tabs/activateTab', this.name);
     },
 
-    onCloseClick: function () {
+    onCloseClick () {
       eventBus.$emit('tabs/closeTab', this.name);
     }
   },
@@ -36,5 +36,5 @@ let tab =  {
 };
 
 module.exports = {
-  'tab': tab
+  tab
 };

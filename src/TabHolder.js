@@ -26,7 +26,7 @@ class TabHolder {
             this.tabs[basename] = {
               'name': basename,
               'path': name,
-              'screen': screen,
+              screen,
               'offset': 0,
               'isVirtual': false
             };
@@ -36,7 +36,7 @@ class TabHolder {
       }
       else {
         this.tabs[name] = {
-          'name': name,
+          name,
           'isVirtual': true
         };
         resolve(name);
@@ -50,5 +50,5 @@ class TabHolder {
 }
 
 module.exports = {
-  'TabHolder': TabHolder
+  TabHolder
 };

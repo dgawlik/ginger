@@ -1,7 +1,7 @@
 const {eventBus} = require('../eventBus.js');
 
 let settings =  {
-  data: function () {
+  data () {
     return {
       scrollResolution: 1,
       lineWraps: true
@@ -9,11 +9,11 @@ let settings =  {
   },
 
   watch : {
-    scrollResolution: function (val) {
+    scrollResolution (val) {
       eventBus.$emit('settingsManager/changeScrollResolution', parseInt(val));
     },
 
-    lineWraps: function (val) {
+    lineWraps (val) {
       eventBus.$emit('settingsManager/changeLineWrap', val);
     }
   },
@@ -43,5 +43,5 @@ let settings =  {
 };
 
 module.exports = {
-  'settings': settings
+  settings
 };

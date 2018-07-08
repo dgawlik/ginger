@@ -199,5 +199,5 @@ class File {
 
 
 module.exports = {
-  'File': File,
+  File
 };

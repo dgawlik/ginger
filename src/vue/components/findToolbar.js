@@ -9,7 +9,7 @@ class $1 {
 let findToolbar =  {
   props: ['isValid', 'isShow'],
 
-  data: function () {
+  data () {
     return {
       findText: ''
     };
@@ -71,5 +71,5 @@ let findToolbar =  {
 };
 
 module.exports = {
-  'findToolbar': findToolbar
+  findToolbar
 };

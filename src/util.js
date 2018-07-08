@@ -45,9 +45,9 @@ function dispatchEvent (el, evt) {
 }
 
 module.exports = {
-  'range': range,
-  'openFilePromise': openFilePromise,
-  'findLargestSmallerIndex': findLargestSmallerIndex,
-  'delayed': delayed,
-  'dispatchEvent': dispatchEvent
+  range,
+  openFilePromise,
+  findLargestSmallerIndex,
+  delayed,
+  dispatchEvent
 };

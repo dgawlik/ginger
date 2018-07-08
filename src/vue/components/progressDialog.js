@@ -1,6 +1,6 @@
 
 let progressDialog =  {
-  data: function () {
+  data () {
     return {
       progress: 0
     };
@@ -13,7 +13,7 @@ let progressDialog =  {
   },
 
   computed: {
-    styleWidth: function () {
+    styleWidth () {
       return {
         width: this.progress+'%'
       };
@@ -41,5 +41,5 @@ let progressDialog =  {
 };
 
 module.exports = {
-  'progressDialog': progressDialog
+  progressDialog
 };

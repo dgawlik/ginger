@@ -13,10 +13,10 @@ let mainApp = {
   },
 
   components: {
-    'tabs': tabs,
-    'buffer': buffer,
-    'scrollbar': scrollbar,
-    'settings': settings
+    tabs,
+    buffer,
+    scrollbar,
+    settings
   },
 
   mounted () {
@@ -78,5 +78,5 @@ let mainApp = {
 let app = new Vue(mainApp);
 
 module.exports = {
-  'app': app
+  app
 };

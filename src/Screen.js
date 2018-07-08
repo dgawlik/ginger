@@ -105,5 +105,5 @@ class Screen {
 }
 
 module.exports = {
-  'Screen' : Screen
+  Screen
 };

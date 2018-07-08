@@ -2,7 +2,7 @@ const {eventBus} = require('../eventBus.js');
 const {Vue} = require('../vue.js');
 
 let buffer =  {
-  data: function () {
+  data () {
     return {
       screen: undefined,
       lineWraps: true,
@@ -29,7 +29,7 @@ let buffer =  {
     eventBus.$on('findApp/prev', () => this.findPrev());
   },
 
-  updated: function () {
+  updated () {
     this.textBufferNode = document.querySelector('#textBuffer');
     this.linesWrapperNode = document.querySelector('#linesWrapper');
     this.lineNodes = [...document.querySelectorAll('#linesWrapper p')];
@@ -239,7 +239,7 @@ let buffer =  {
   },
 
   computed: {
-    linesWithNumbers: function () {
+    linesWithNumbers () {
       if (!this.screen) {
         return [];
       }
@@ -258,7 +258,7 @@ let buffer =  {
 
       return arr;
     },
-    noWrap: function () {
+    noWrap () {
       return !this.lineWraps;
     }
   },
@@ -280,5 +280,5 @@ let buffer =  {
 };
 
 module.exports = {
-  'buffer': buffer
+  buffer
 };

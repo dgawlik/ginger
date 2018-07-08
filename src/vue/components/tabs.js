@@ -3,7 +3,7 @@ const {eventBus} = require('../eventBus.js');
 const {Vue} = require('../vue.js');
 
 let tabs =  {
-  data: function () {
+  data () {
     return {
       tabs: {}
     };
@@ -12,7 +12,7 @@ let tabs =  {
   template: '<div class="tabs"><tab v-for="tabAttr in Object.values(tabs)" :key="tabAttr.name" :name="tabAttr.name" :isActive="tabAttr.isActive"></tab></div>',
 
   components: {
-    'tab': tab,
+    tab,
   },
 
   mounted () {
@@ -96,5 +96,5 @@ let tabs =  {
 };
 
 module.exports = {
-  'tabs' : tabs
+  tabs
 };

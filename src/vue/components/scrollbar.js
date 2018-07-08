@@ -1,7 +1,7 @@
 const {eventBus} = require('../eventBus.js');
 
 let scrollbar =  {
-  data: function () {
+  data () {
     return {
       cursor: 0,
       isVisible: false
@@ -74,5 +74,5 @@ let scrollbar =  {
 };
 
 module.exports = {
-  'scrollbar': scrollbar
+  scrollbar
 };

@@ -39,5 +39,5 @@ let progressApp = {
 let progressBar = new Vue(progressApp);
 
 module.exports = {
-  'progressBar': progressBar
+  progressBar
 };
