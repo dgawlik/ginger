@@ -1,4 +1,5 @@
 const {eventBus} = require('../eventBus.js');
+const {settingsStore} = require('../settingsStore.js');
 
 let settings =  {
   data () {
@@ -10,11 +11,11 @@ let settings =  {
 
   watch : {
     scrollResolution (val) {
-      eventBus.$emit('settingsManager/changeScrollResolution', parseInt(val));
+      settingsStore.setScrollResolution(+val);
     },
 
     lineWraps (val) {
-      eventBus.$emit('settingsManager/changeLineWrap', val);
+      settingsStore.setWrapLines(!!val);
     }
   },
 

@@ -1,5 +1,6 @@
 const {eventBus} = require('../eventBus.js');
 const {Vue} = require('../vue.js');
+const {settingsStore} = require('../settingsStore.js');
 
 let buffer =  {
   data () {
@@ -21,7 +22,6 @@ let buffer =  {
   mounted () {
     eventBus.$on('buffer/changePage', isUp => this.changePage(isUp));
     eventBus.$on('buffer/changeWrap', val => this.lineWraps = val);
-    eventBus.$on('settingsManager/changeScrollResolution', val => this.scrollResolution = val);
     eventBus.$on('buffer/updateToRandomPosition', val => this.updateToRandomPosition(val));
     eventBus.$on('findApp/closeKeyDown', () => this.switchToNormalMode());
     eventBus.$on('findApp/highlight', val => this.switchToFindMode(val));
@@ -38,7 +38,7 @@ let buffer =  {
   methods: {
     onMouseWheel (e) {
       if (this.screen) {
-        let distance = this.scrollResolution || 1;
+        let distance = settingsStore.state.scrollResolution;
         distance *= e.deltaY < 0 ? -1 : 1;
         let currentPos = this.screen.cursor;
 

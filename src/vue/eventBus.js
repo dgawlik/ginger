@@ -3,7 +3,6 @@ const {Vue} = require('./vue.js');
 /**
   Events:
 
-  app/changeWrap
   app/displayVirtual
   app/displayBuffer
   app/displayEmpty
@@ -25,9 +24,6 @@ const {Vue} = require('./vue.js');
   tabs/activateTab
   tabs/closeTab
   tabs/changeActiveTab
-
-  settingsManager/changeScrollResolution
-  settingsManager/changeLineWrap
 
   progressBar/updateProgress
   progressBar/show

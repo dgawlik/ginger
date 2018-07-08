@@ -4,6 +4,7 @@ const {scrollbar} = require('./components/scrollbar.js');
 const {settings} = require('./components/settings.js');
 const {eventBus} = require('./eventBus.js');
 const {Vue} = require('./vue.js');
+const {settingsStore} = require('./settingsStore.js');
 
 let mainApp = {
   el: '#content',
@@ -20,10 +21,11 @@ let mainApp = {
   },
 
   mounted () {
-    eventBus.$on('app/changeWrap', val => this.changeWrapping(val));
     eventBus.$on('app/displayVirtual', name => this.displayVirtual(name));
     eventBus.$on('app/displayBuffer', screen => this.displayBuffer(screen));
     eventBus.$on('app/displayEmpty', () => this.displayEmpty());
+
+    settingsStore.watch('wrapLines', val => this.changeWrapping(val));
 
     this.tabs = this.$children[0];
     this.buffer = this.$children[1];

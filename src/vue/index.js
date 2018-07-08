@@ -12,19 +12,6 @@ window.findToolbar = findToolbar;
 
 window.tabManager = new TabHolder();
 
-eventBus.$on('settingsManager/changeScrollResolution',
-  val => window.settingsManager.scrollResolution = val);
-eventBus.$on('settingsManager/changeLineWrap',
-  val => window.settingsManager.setLineWraps(val));
-
-window.settingsManager = {
-  scrollResolution: 1,
-
-  setLineWraps (val) {
-    eventBus.$emit('app/changeWrap', val);
-  }
-};
-
 module.exports = {
   'progressBar': window.progressBar,
   'app': window.app,
