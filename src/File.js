@@ -83,11 +83,9 @@ class File {
       this
         .findMarks(match.bind(this), true, progressSubscriber)
         .then(marks => {
-          let matches = {
-            lines: [],
-            positions: [],
-            lineToIndex: new Map()
-          },
+          let lines = [],
+            positions = [],
+            lineToIndex = new Map(),
             it = 0;
 
           for (let mark of marks) {
@@ -95,16 +93,16 @@ class File {
               0, this.lineBeginnings.length-1, mark),
               position = mark - this.lineBeginnings[lineIndex];
 
-            matches.lines.push(lineIndex);
-            matches.positions.push(position);
-            if (!matches.lineToIndex.has(lineIndex)) {
-              matches.lineToIndex.set(lineIndex, it);
+            lines.push(lineIndex);
+            positions.push(position);
+            if (!lineToIndex.has(lineIndex)) {
+              lineToIndex.set(lineIndex, it);
             }
 
             it++;
           }
-          this.matches = matches;
-          resolve(matches);
+          this.matches = {lines, positions, lineToIndex};
+          resolve({lines, positions, lineToIndex});
         });
     }
     return new Promise(promise.bind(this));
@@ -190,15 +188,19 @@ class File {
           return this.findMarks(matchNewlines.bind(that), true, progressSubscriber);
         })
         .then(marks => {
-          let matches = [-this.ending.length+this.BOM].concat(marks);
-          this.lineBeginnings = [];
-          this.lineEndings = [];
+          let matches = [-this.ending.length+this.BOM].concat(marks),
+            endingLength = this.ending.length,
+            lineBeginnings = [],
+            lineEndings = [];
 
           for (let i=0;i<matches.length-1;i++) {
-            this.lineBeginnings.push(matches[i]+this.ending.length);
-            this.lineEndings.push(matches[i+1]);
+            lineBeginnings.push(matches[i]+endingLength);
+            lineEndings.push(matches[i+1]);
           }
-          
+
+          this.lineBeginnings = lineBeginnings;
+          this.lineEndings = lineEndings;
+
           resolve();
         });
     }

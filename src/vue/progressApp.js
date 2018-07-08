@@ -14,6 +14,7 @@ let progressApp = {
     hide () {
       this.overlayNode.style.display = 'none';
       this.modalNode.style.display = 'none';
+      this.dialog.update(0);
     },
 
     updateProgress (val) {
