@@ -49,6 +49,7 @@ class File {
         if (err) {
           reject(err);
         }
+
         resolve(stat.size);
       });
     }
@@ -62,16 +63,12 @@ class File {
         if (err || bytesRead < 3) {
           resolve(false);
         }
-        if (
+
+        return resolve(
           buffer.readUInt8(0) === parseInt('ef', 16) &&
           buffer.readUInt8(1) === parseInt('bb', 16) &&
           buffer.readUInt8(2) === parseInt('bf', 16)
-        ) {
-          resolve(true);
-        }
-        else {
-          resolve(false);
-        }
+        );
       });
     }).bind(this));
   }
@@ -81,26 +78,29 @@ class File {
     function match (buffer, offset) {
       return buffer.indexOf(text, offset);
     }
-    let that = this;
+
     function promise (resolve) {
-      this.findMarks(match.bind(that), true, progressSubscriber)
+      this
+        .findMarks(match.bind(this), true, progressSubscriber)
         .then(marks => {
           let matches = {
             lines: [],
             positions: [],
             lineToIndex: new Map()
-          };
+          },
+            it = 0;
 
-          let it = 0;
           for (let mark of marks) {
             let lineIndex = findLargestSmallerIndex(this.lineBeginnings,
-              0, this.lineBeginnings.length-1, mark);
-            let position = mark - this.lineBeginnings[lineIndex];
+              0, this.lineBeginnings.length-1, mark),
+              position = mark - this.lineBeginnings[lineIndex];
+
             matches.lines.push(lineIndex);
             matches.positions.push(position);
             if (!matches.lineToIndex.has(lineIndex)) {
               matches.lineToIndex.set(lineIndex, it);
             }
+
             it++;
           }
           this.matches = matches;
@@ -112,19 +112,22 @@ class File {
 
   findMarks (match, fullSearch, progressSubscriber) {
     function promise (resolve, reject) {
-      let marks = [];
-      let pages = 0;
+      let marks = [],
+        pages = 0;
+
       function onRead (err, bytesRead, buffer) {
         if (err) {
           reject(err);
         }
 
-        let totalPages = Math.ceil(this.fileSize / this.RAW_BLOCK_SIZE);
+        let totalPages = Math.ceil(this.fileSize / this.RAW_BLOCK_SIZE),
+          index = match(buffer, 0);
+
         if (bytesRead === 0) {
           resolve(marks);
           return;
         }
-        let index = match(buffer, 0);
+
         if (index !== -1 && !fullSearch) {
           resolve(marks);
           return;
@@ -137,14 +140,17 @@ class File {
           else {
             marks.push(index + this.BOM);
           }
+
           index = match(buffer, index+1);
         }
 
         if (progressSubscriber) {
           progressSubscriber.progress(100.0*(pages+1)/totalPages);
         }
+
         this.block.fill(0);
-        fs.read(this.file, this.block, 0, this.RAW_BLOCK_SIZE, this.RAW_BLOCK_SIZE*(++pages), onRead.bind(this));
+        fs.read(this.file, this.block, 0, this.RAW_BLOCK_SIZE,
+          this.RAW_BLOCK_SIZE*(++pages), onRead.bind(this));
       }
 
       this.checkFileSize()
@@ -178,7 +184,8 @@ class File {
 
     let that = this;
     function promise (resolve) {
-      this.findMarks(detectNewlines.bind(that), false)
+      this
+        .findMarks(detectNewlines.bind(that), false)
         .then(() => {
           return this.findMarks(matchNewlines.bind(that), true, progressSubscriber);
         })
@@ -186,10 +193,12 @@ class File {
           let matches = [-this.ending.length+this.BOM].concat(marks);
           this.lineBeginnings = [];
           this.lineEndings = [];
+
           for (let i=0;i<matches.length-1;i++) {
             this.lineBeginnings.push(matches[i]+this.ending.length);
             this.lineEndings.push(matches[i+1]);
           }
+          
           resolve();
         });
     }
