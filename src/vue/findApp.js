@@ -1,4 +1,4 @@
-const {findToolbar} = require('./components/findToolbar.js');
+const {findToolbar} = require('./components/dialogs/findToolbar.js');
 const {eventBus} = require('./eventBus.js');
 const {Vue} = require('./vue.js');
 

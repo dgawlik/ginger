@@ -1,4 +1,4 @@
-const {progressDialog} = require('./components/progressDialog.js');
+const {progressDialog} = require('./components/dialogs/progressDialog.js');
 const {eventBus} = require('./eventBus.js');
 const {Vue} = require('./vue.js');
 
