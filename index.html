@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="./static/css/style.css">
   </head>
   <body>
-    <div id="overlay">
-      <div id="progressContent">
-        <progress-dialog></progress-dialog>
+    <div id="dialog-overlay">
+      <div id="dialog-content">
+        <component :is="component"></component>
       </div>
     </div>
     <div id="findContent">

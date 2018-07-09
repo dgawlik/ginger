@@ -5,6 +5,7 @@ const {remote} = require('electron')
 const {Menu, MenuItem} = remote
 const {dialog} = require('electron').remote
 const {eventBus} = require('./src/vue/eventBus.js');
+const dialog_ = require('./src/vue/dialogApp.js').dialog;
 
 const template = [
     {
@@ -55,11 +56,12 @@ class $1{
 function onMenuOpenClick(){
   let path = dialog.showOpenDialog({properties: ['openFile']});
   if(path && path[0]){
-    eventBus.$emit('progressBar/show');
+    window.dialog.show();
+    dialog_.show('progress-component');
     tabManager.addTab(path[0], false, new $1())
       .then(name => {
         let tab = tabManager.tabs[name];
-        eventBus.$emit('progressBar/hide');
+        dialog_.hide();
         eventBus.$emit('tabs/addTab', tab);
       });
   }

@@ -1,9 +1,14 @@
+const {eventBus} = require('./../../eventBus.js');
 
-let progressDialog =  {
+let progressComponent =  {
   data () {
     return {
       progress: 0
     };
+  },
+
+  mounted () {
+    eventBus.$on('progress/update', val => this.update(val));
   },
 
   methods: {
@@ -41,5 +46,5 @@ let progressDialog =  {
 };
 
 module.exports = {
-  progressDialog
+  progressComponent
 };

@@ -1,14 +1,14 @@
 const {app} = require('./src/vue/mainApp.js');
-const {progressBar} = require('./src/vue/progressApp.js');
+const {dialog} = require('./src/vue/dialogApp.js');
 const {findToolbar} = require('./src/vue/findApp.js');
 const {TabHolder} = require('./src/TabHolder.js');
 const {eventBus} = require('./src/vue/eventBus.js');
 
-window.progressBar = progressBar;
-
 window.app = app;
 
 window.findToolbar = findToolbar;
+
+window.dialog = dialog;
 
 window.tabManager = new TabHolder();
 

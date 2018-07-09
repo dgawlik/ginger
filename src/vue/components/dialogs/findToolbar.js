@@ -1,4 +1,5 @@
 const {eventBus} = require('../../eventBus.js');
+const {dialog} = require('../../dialogApp.js');
 
 class $1 {
   progress (val) {
@@ -32,11 +33,11 @@ let findToolbar =  {
     },
 
     onSearch () {
-      eventBus.$emit('progressBar/show');
+      dialog.show('progress-component');
       this.triggeringTab && this.triggeringTab.screen.file
         .find(this.findText, new $1())
         .then(matches => {
-          eventBus.$emit('progressBar/hide');
+          dialog.hide();
           eventBus.$emit('findApp/highlight', {matches, 'text': this.findText});
         });
     },

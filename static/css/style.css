@@ -86,7 +86,7 @@ body::-webkit-scrollbar-thumb {
   margin-right: 10px;
 }
 
-#overlay {
+#dialog-overlay {
   width: 100vw;
   height: 100vh;
   position: absolute;
@@ -96,9 +96,10 @@ body::-webkit-scrollbar-thumb {
   display: none;
 }
 
-#overlay #progressContent {
+#dialog-overlay #dialog-content {
   width: 100vw;
   height: 100vh;
+  z-index: 2;
 }
 
 .modal {
