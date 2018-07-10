@@ -34,7 +34,7 @@ function createWindow () {
     mainWindow = null
   })
 
-  globalShortcut.register('F',
+  globalShortcut.register('CmdOrCtrl+F',
     () => mainWindow.webContents.executeJavaScript('app.findKeyDown()'));
   globalShortcut.register('Esc',
     () => mainWindow.webContents.executeJavaScript('app.closeDialog()'));
@@ -42,7 +42,7 @@ function createWindow () {
     () => mainWindow.webContents.executeJavaScript('app.delegateChangePage(true)'));
   globalShortcut.register('PageDown',
     () => mainWindow.webContents.executeJavaScript('app.delegateChangePage(false)'));
-  globalShortcut.register('C',
+  globalShortcut.register('CmdOrCtrl+C',
     () => mainWindow.webContents.executeJavaScript('app.showColorize()'));
 
 }

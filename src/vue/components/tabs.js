@@ -20,6 +20,7 @@ let tabs =  {
     eventBus.$on('tabs/activateTab', name => this.activateTab(name));
     eventBus.$on('tabs/closeTab', name => this.closeTab(name));
     eventBus.$on('tabs/addTab', tab => this.addTab(tab));
+    eventBus.$on('colorize/tab/update', filters => this.updateTabColors(filters));
     eventBus.$on('tabs/queryActiveTab', () => {
       eventBus.$emit('findToolbar/pushActiveTab', this.getActiveTab());
     });
@@ -31,6 +32,7 @@ let tabs =  {
 
   methods: {
     addTab (tab) {
+      tab.colors = [];
       Vue.set(this.tabs, tab.name, tab);
       this.setTab(tab);
     },
@@ -56,6 +58,7 @@ let tabs =  {
         let screen = window.tabManager.tabs[tab.name].screen;
         eventBus.$emit('app/displayBuffer', screen);
         eventBus.$emit('findApp/changeValid', true);
+        eventBus.$emit('colorize/update', tab.colors);
 
         if (this.wrappingCbk) {
           this.wrappingCbk();
@@ -91,6 +94,12 @@ let tabs =  {
       this.wrappingCbk = () => {
         eventBus.$emit('buffer/changeWrap', val);
       };
+    },
+
+    updateTabColors (filters) {
+      let activeTab = this.getActiveTab();
+      Vue.set(activeTab, 'colors', filters);
+      eventBus.$emit('colorize/update', filters);
     }
   }
 };

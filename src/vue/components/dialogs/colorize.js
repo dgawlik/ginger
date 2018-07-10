@@ -27,11 +27,14 @@ let colorize =  {
         'pattern': this.pattern,
         'color': this.selectedColor
       });
+
+      eventBus.$emit('colorize/tab/update', this.filters);
     },
 
     removeFilter (hash) {
       let ind = this.filters.findIndex(e => e.hash === hash);
       this.$delete(this.filters, ind);
+      eventBus.$emit('colorize/update', this.filters);
     }
   },
 

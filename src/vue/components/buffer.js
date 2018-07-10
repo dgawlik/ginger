@@ -7,7 +7,8 @@ let buffer =  {
     return {
       screen: undefined,
       lineWraps: true,
-      mode: 'normal'
+      mode: 'normal',
+      filters: []
     };
   },
 
@@ -27,6 +28,7 @@ let buffer =  {
     eventBus.$on('findApp/highlight', val => this.switchToFindMode(val));
     eventBus.$on('findApp/next', () => this.findNext());
     eventBus.$on('findApp/prev', () => this.findPrev());
+    eventBus.$on('colorize/update', filters => this.colorizeUpdate(filters));
   },
 
   updated () {
@@ -235,6 +237,24 @@ let buffer =  {
       if (shouldAlign) {
         return this.updateToRandomPosition(line);
       }
+    },
+
+    colorizeUpdate (filters) {
+      this.filters = filters;
+    },
+
+    classObject (text) {
+      let o = {
+        'no-wrap': !this.lineWraps,
+        'textBufferLine': true
+      };
+
+      for (filter of this.filters) {
+        let r = new RegExp(filter.pattern);
+        o['palette-'+filter.color] = r.test(text);
+      }
+
+      return o;
     }
   },
 
@@ -257,9 +277,6 @@ let buffer =  {
       }
 
       return arr;
-    },
-    noWrap () {
-      return !this.lineWraps;
     }
   },
 
@@ -268,7 +285,7 @@ let buffer =  {
   <p
    v-for="entry in linesWithNumbers"
    :key="entry.lineNo"
-   v-bind:class="{'no-wrap': noWrap, 'textBufferLine': true}">
+   v-bind:class="classObject(entry.line)">
     <span class="lineNumber">{{entry.lineNo}}</span>
     <span
       style="display:inline-block"
