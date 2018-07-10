@@ -5,6 +5,7 @@ const {settings} = require('./components/settings.js');
 const {eventBus} = require('./eventBus.js');
 const {Vue} = require('./vue.js');
 const {settingsStore} = require('./settingsStore.js');
+const {dialog} = require('./dialogApp.js');
 
 let mainApp = {
   el: '#content',
@@ -53,7 +54,8 @@ let mainApp = {
       eventBus.$emit('findApp/keyDown');
     },
 
-    closeFindKeyDown () {
+    closeDialog () {
+      dialog.hide();
       eventBus.$emit('findApp/closeKeyDown');
     },
 
@@ -73,6 +75,12 @@ let mainApp = {
       this.scrollbar.isVisible = false;
       this.buffer.screen = undefined;
       this.buffer.forceUpdate();
+    },
+
+    showColorize () {
+      if (this.display === 'buffer'){
+        dialog.show('colorize');
+      }
     }
   }
 };

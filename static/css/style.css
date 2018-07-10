@@ -106,7 +106,6 @@ body::-webkit-scrollbar-thumb {
   position: relative;
   top: 25%;
   width: 300px;
-  height: 200px;
   margin: auto;
   display: block;
 }
@@ -148,13 +147,13 @@ body::-webkit-scrollbar-thumb {
   margin: 0;
 }
 
-#settingsContainer input#settingsScroll {
+input {
   background-color: #3e454c;
   width: 100px;
   color: #CED4D9;
 }
 
-#settingsContainer input#settingsScroll:focus {
+input:focus {
   outline-color: #B2FF59;
 }
 
@@ -216,6 +215,19 @@ body::-webkit-scrollbar-thumb {
   cursor: pointer;
 }
 
+button {
+  background-color: #B2FF59;
+  color: black;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  outline: none;
+}
+
+button:focus {
+  outline: none;
+}
+
 #findToolbar button {
   width: 100px;
   display: flex;
@@ -253,4 +265,73 @@ body::-webkit-scrollbar-thumb {
 
 .form-group {
   width: 98%;
+}
+
+.colorize-input-regex {
+  width: 200px;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.colorize-palette-wrapper {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 200px;
+}
+
+.colorize-palette-item {
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+}
+
+.palette-red {
+  background-color: #D32F2F;
+  color: white;
+}
+
+.palette-red-light {
+  background-color: #EF9A9A;
+  color: black;
+}
+
+.palette-blue {
+  background-color: #1976D2;
+  color: white;
+}
+
+.palette-blue-light {
+  background-color: #90CAF9;
+  color: black;
+}
+
+.palette-green {
+  background-color: #00796B;
+  color: white;
+}
+
+.palette-green-light {
+  background-color: #B2DFDB;
+  color: black;
+}
+
+.palette-orange {
+  background-color: #FBC02D;
+  color: white;
+}
+
+.palette-orange-light {
+  background-color: #ffc77d;
+  color: black;
+}
+
+.colorize-entry {
+  width: 250px;
+  display: inline-block;
+}
+
+.palette-active {
+  border: 2px solid white;
 }

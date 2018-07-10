@@ -17,14 +17,26 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content" style="opacity:1.0">
           <div class="modal-header">
-            <h5 class="modal-title">Loading</h5>
+            <h5 class="modal-title">Colorize</h5>
           </div>
           <div class="modal-body">
-            <div class="progress">
-              <div class="progress-bar progress-bar-striped progress-bar-animated"
-                role="progressbar"
-                :style="styleWidth"></div>
+            <div>
+              <span class="colorize-entry">DEBUG</span><i class="fas fa-times"></i>
             </div>
+            <label>Regex</label>
+            <input class="form-control-plaintext colorize-input-regex" type="text" placeholder="pattern">
+            <label>Palette</label>
+            <div class="colorize-palette-wrapper">
+              <div class="colorize-palette-item palette-red"></div>
+              <div class="colorize-palette-item palette-blue"></div>
+              <div class="colorize-palette-item palette-green"></div>
+              <div class="colorize-palette-item palette-orange"></div>
+              <div class="colorize-palette-item palette-red-light"></div>
+              <div class="colorize-palette-item palette-blue-light"></div>
+              <div class="colorize-palette-item palette-green-light"></div>
+              <div class="colorize-palette-item palette-orange-light"></div>
+            </div>
+            <button>Add</button>
           </div>
         </div>
       </div>

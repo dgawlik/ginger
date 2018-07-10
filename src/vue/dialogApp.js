@@ -1,4 +1,5 @@
 const {progressComponent} = require('./components/dialogs/progressComponent.js');
+const {colorize} = require('./components/dialogs/colorize.js');
 const {Vue} = require('./vue.js');
 
 let dialogApp = {
@@ -29,6 +30,7 @@ let dialogApp = {
 
   components: {
     'progress-component': progressComponent,
+    'colorize': colorize
   },
 };
 

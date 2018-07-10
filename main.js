@@ -37,11 +37,14 @@ function createWindow () {
   globalShortcut.register('F',
     () => mainWindow.webContents.executeJavaScript('app.findKeyDown()'));
   globalShortcut.register('Esc',
-    () => mainWindow.webContents.executeJavaScript('app.closeFindKeyDown()'));
+    () => mainWindow.webContents.executeJavaScript('app.closeDialog()'));
   globalShortcut.register('PageUp',
     () => mainWindow.webContents.executeJavaScript('app.delegateChangePage(true)'));
   globalShortcut.register('PageDown',
     () => mainWindow.webContents.executeJavaScript('app.delegateChangePage(false)'));
+  globalShortcut.register('C',
+    () => mainWindow.webContents.executeJavaScript('app.showColorize()'));
+
 }
 
 // This method will be called when Electron has finished

@@ -44,10 +44,25 @@ function dispatchEvent (el, evt) {
   el.dispatchEvent(evObj);
 }
 
+function hashCode (...args) {
+  args = args.map(v => String(v));
+  args = args.reduce((a,v) => a+v, '');
+
+  let hash = 0;
+  if (args.length === 0) return hash;
+  for (let i = 0; i < args.length; i++) {
+    let chr   = args.charCodeAt(i);
+    hash  = ((hash << 5) - hash) + chr;
+    hash |= 0;
+  }
+  return hash;
+}
+
 module.exports = {
   range,
   openFilePromise,
   findLargestSmallerIndex,
   delayed,
-  dispatchEvent
+  dispatchEvent,
+  hashCode
 };
