@@ -29,6 +29,7 @@ let buffer =  {
     eventBus.$on('findApp/next', () => this.findNext());
     eventBus.$on('findApp/prev', () => this.findPrev());
     eventBus.$on('colorize/update', filters => this.colorizeUpdate(filters));
+    eventBus.$on('gotoline/go', val => this.updateToRandomPosition(+val));
   },
 
   updated () {

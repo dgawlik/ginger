@@ -335,3 +335,13 @@ button:focus {
 .palette-active {
   border: 2px solid white;
 }
+
+.gotoline-input {
+  width: 100%;
+}
+
+.gotoline-button {
+  border-radius: 0;
+  width: 99.77%;
+  margin: 0 auto;
+}

@@ -1,5 +1,7 @@
 const {progressComponent} = require('./components/dialogs/progressComponent.js');
 const {colorize} = require('./components/dialogs/colorize.js');
+const {gotoLine} = require('./components/dialogs/gotoLine.js');
+const {eventBus} = require('./eventBus.js');
 const {Vue} = require('./vue.js');
 
 let dialogApp = {
@@ -26,11 +28,14 @@ let dialogApp = {
     this.overlayNode = document.querySelector('#dialog-overlay');
     this.modalNode = document.querySelector('#dialog-content');
     this.dialog = this.$children[0];
+
+    eventBus.$on('dialog/close', () => this.hide());
   },
 
   components: {
     'progress-component': progressComponent,
-    'colorize': colorize
+    'colorize': colorize,
+    'goto-line': gotoLine
   },
 };
 

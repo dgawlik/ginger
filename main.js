@@ -44,6 +44,8 @@ function createWindow () {
     () => mainWindow.webContents.executeJavaScript('app.delegateChangePage(false)'));
   globalShortcut.register('CmdOrCtrl+C',
     () => mainWindow.webContents.executeJavaScript('app.showColorize()'));
+  globalShortcut.register('CmdOrCtrl+G',
+    () => mainWindow.webContents.executeJavaScript('app.showGotoLine()'));
 
 }
 

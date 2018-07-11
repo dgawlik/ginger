@@ -82,6 +82,12 @@ let mainApp = {
         dialog.show('colorize');
         eventBus.$emit('colorize/populate', this.tabs.getActiveTab().colors);
       }
+    },
+
+    showGotoLine () {
+      if (this.display === 'buffer') {
+        dialog.show('goto-line');
+      }
     }
   }
 };
