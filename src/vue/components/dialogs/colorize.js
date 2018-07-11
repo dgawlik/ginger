@@ -12,6 +12,8 @@ let colorize =  {
 
   mounted () {
     this.$refs['red'].classList.add('palette-active');
+
+    eventBus.$on('colorize/populate', val => this.filters = val);
   },
 
   methods: {
