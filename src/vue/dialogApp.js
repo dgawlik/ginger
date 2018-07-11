@@ -34,7 +34,7 @@ let dialogApp = {
 
   components: {
     'progress-component': progressComponent,
-    'colorize': colorize,
+    colorize,
     'goto-line': gotoLine
   },
 };

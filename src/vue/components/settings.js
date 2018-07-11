@@ -1,4 +1,3 @@
-const {eventBus} = require('../eventBus.js');
 const {settingsStore} = require('../settingsStore.js');
 
 let settings =  {

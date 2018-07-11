@@ -78,7 +78,7 @@ let mainApp = {
     },
 
     showColorize () {
-      if (this.display === 'buffer'){
+      if (this.display === 'buffer') {
         dialog.show('colorize');
         eventBus.$emit('colorize/populate', this.tabs.getActiveTab().colors);
       }

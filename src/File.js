@@ -90,7 +90,7 @@ class File {
 
           for (let mark of marks) {
             let lineIndex = findLargestSmallerIndex(this.lineBeginnings,
-              0, this.lineBeginnings.length-1, mark),
+                0, this.lineBeginnings.length-1, mark),
               position = mark - this.lineBeginnings[lineIndex];
 
             lines.push(lineIndex);

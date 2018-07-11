@@ -28,7 +28,7 @@ let settingsStore = {
       this.watchCallbacks[propName](val);
     }
   }
-}
+};
 
 module.exports = {
   settingsStore

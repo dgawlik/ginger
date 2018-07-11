@@ -250,7 +250,7 @@ let buffer =  {
         'textBufferLine': true
       };
 
-      for (filter of this.filters) {
+      for (let filter of this.filters) {
         let r = new RegExp(filter.pattern);
         o['palette-'+filter.color] = r.test(text);
       }
