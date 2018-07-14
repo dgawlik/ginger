@@ -74,7 +74,6 @@ body::-webkit-scrollbar-thumb {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  padding-left: 5px;
   margin-bottom: 3px;
   font-family: "Open Sans";
 }
