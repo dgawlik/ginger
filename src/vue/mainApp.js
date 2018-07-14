@@ -79,7 +79,8 @@ let mainApp = {
     },
 
     showColorize () {
-      if (this.display === 'buffer') {
+      if (this.display === 'buffer'
+        && Object.keys(this.tabs.tabs).length) {
         dialog.show('colorize');
         eventBus.$emit('colorize/populate', this.tabs.getActiveTab().colors);
       }
@@ -97,6 +98,14 @@ let mainApp = {
 
     moveDown () {
       eventBus.$emit('buffer/movedown');
+    },
+
+    showBookmarks () {
+      if (this.display === 'buffer'
+        && Object.keys(this.tabs.tabs).length) {
+        dialog.show('bookmarks');
+        eventBus.$emit('bookmarks/populate', this.tabs.getActiveTab().bookmarks);
+      }
     }
   }
 };

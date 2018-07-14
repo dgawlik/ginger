@@ -45,6 +45,7 @@ function createWindow () {
     {accelerator: 'CmdOrCtrl+G', action: 'app.showGotoLine()'},
     {accelerator: 'CmdOrCtrl+S', action: 'window.onSettings()'},
     {accelerator: 'CmdOrCtrl+O', action: 'window.onOpen()'},
+    {accelerator: 'CmdOrCtrl+M', action: 'app.showBookmarks()'}
   ];
 
   for (let entry of keyMap) {

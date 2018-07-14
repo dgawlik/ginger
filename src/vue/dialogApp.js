@@ -1,6 +1,7 @@
 const {progressComponent} = require('./components/dialogs/progressComponent.js');
 const {colorize} = require('./components/dialogs/colorize.js');
 const {gotoLine} = require('./components/dialogs/gotoLine.js');
+const {bookmarks} = require('./components/dialogs/bookmarks.js');
 const {eventBus} = require('./eventBus.js');
 const {Vue} = require('./vue.js');
 
@@ -35,7 +36,8 @@ let dialogApp = {
   components: {
     'progress-component': progressComponent,
     colorize,
-    'goto-line': gotoLine
+    'goto-line': gotoLine,
+    bookmarks
   },
 };
 

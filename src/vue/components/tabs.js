@@ -21,6 +21,7 @@ let tabs =  {
     eventBus.$on('tabs/closeTab', name => this.closeTab(name));
     eventBus.$on('tabs/addTab', tab => this.addTab(tab));
     eventBus.$on('colorize/tab/update', filters => this.updateTabColors(filters));
+    eventBus.$on('bookmarks/tab/update', filters => this.updateTabBookmarks(filters));
     eventBus.$on('tabs/queryActiveTab', () => {
       eventBus.$emit('findToolbar/pushActiveTab', this.getActiveTab());
     });
@@ -100,6 +101,11 @@ let tabs =  {
       let activeTab = this.getActiveTab();
       Vue.set(activeTab, 'colors', filters);
       eventBus.$emit('colorize/update', filters);
+    },
+
+    updateTabBookmarks (entries) {
+      let activeTab = this.getActiveTab();
+      Vue.set(activeTab, 'bookmarks', entries);
     }
   }
 };

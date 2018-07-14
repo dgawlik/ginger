@@ -366,6 +366,7 @@ button:focus {
 }
 
 .bookmarks-menu {
+  padding-left: 7px;
   width: 50px;
   cursor: pointer;
 }
