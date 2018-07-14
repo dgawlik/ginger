@@ -28,10 +28,11 @@ body::-webkit-scrollbar-thumb {
 .tabs {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: flex-start;
   padding: 5px;
   height: 30px;
+  overflow-x: hidden;
 }
 
 .tabs .tabOuterContainer {
@@ -42,6 +43,9 @@ body::-webkit-scrollbar-thumb {
   padding: 0 3px 0 10px;
   background-color: #212529;
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 .tabs .tabOuterContainer .tabTextHolder {
