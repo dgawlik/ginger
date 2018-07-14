@@ -6,6 +6,7 @@ const {eventBus} = require('./eventBus.js');
 const {Vue} = require('./vue.js');
 const {settingsStore} = require('./settingsStore.js');
 const {dialog} = require('./dialogApp.js');
+const {findToolbar} = require('./findApp.js');
 
 let mainApp = {
   el: '#content',
@@ -66,7 +67,9 @@ let mainApp = {
       if (e.code === 'KeyG' && e.ctrlKey === true) {
         this.showGotoLine();
       }
-      e.preventDefault();
+      if (e.code === 'Enter') {
+        this.onEnter();
+      }
     });
   },
 
@@ -151,6 +154,12 @@ let mainApp = {
 
     showSettings () {
       window.onSettings();
+    },
+
+    onEnter () {
+      if (findToolbar.isShow) {
+        findToolbar.findToolbar.onSearch();
+      }
     }
   }
 };

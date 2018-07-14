@@ -9,7 +9,8 @@ let dialogApp = {
   el: '#dialog-content',
 
   data: {
-    component: 'progress-component'
+    component: 'progress-component',
+    isVisible: false
   },
 
   methods: {
@@ -17,11 +18,13 @@ let dialogApp = {
       this.overlayNode.style.display = 'block';
       this.modalNode.style.display = 'block';
       this.component = componentName;
+      this.isVisible = true;
     },
 
     hide () {
       this.overlayNode.style.display = 'none';
       this.modalNode.style.display = 'none';
+      this.isVisible = false;
     },
   },
 

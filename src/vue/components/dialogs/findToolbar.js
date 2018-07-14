@@ -34,11 +34,13 @@ let findToolbar =  {
 
     onSearch () {
       dialog.show('progress-component');
-      this.triggeringTab && this.triggeringTab.screen.file
+      this.triggeringTab && this.findText && this.triggeringTab.screen.file
         .find(this.findText, new $1())
         .then(matches => {
           dialog.hide();
-          eventBus.$emit('findApp/highlight', {matches, 'text': this.findText});
+          if (matches.lines.length) {
+            eventBus.$emit('findApp/highlight', {matches, 'text': this.findText});
+          }
         });
     },
 
