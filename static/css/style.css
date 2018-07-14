@@ -349,3 +349,11 @@ button:focus {
   width: 99.77%;
   margin: 0 auto;
 }
+
+.input-error:focus {
+  outline-color: red;
+}
+
+.button-error {
+  background-color: #D32F2F;
+}
