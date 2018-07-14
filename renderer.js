@@ -73,6 +73,7 @@ function onMenuOpenClick(){
       });
   }
 }
+window.onOpen = onMenuOpenClick;
 
 function onMenuSettingsClick(){
   tabManager.addTab("<Settings>", true)
@@ -81,3 +82,4 @@ function onMenuSettingsClick(){
       eventBus.$emit('tabs/addTab', tab);
     });
 }
+window.onSettings = onMenuSettingsClick;
