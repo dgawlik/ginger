@@ -230,6 +230,7 @@ let buffer =  {
 
     followActiveHighlight (idx) {
       let line = this.findMatches.lines[idx];
+      line = Math.max(0, line-2);
 
       let shouldAlign =
         (line < this.screen.boundaryLow || line > this.screen.boundaryHigh) ||
