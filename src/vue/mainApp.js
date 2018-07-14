@@ -73,6 +73,7 @@ let mainApp = {
 
     displayEmpty () {
       this.scrollbar.isVisible = false;
+      this.display = 'buffer';
       this.buffer.screen = undefined;
       this.buffer.forceUpdate();
     },
