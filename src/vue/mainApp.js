@@ -89,6 +89,14 @@ let mainApp = {
       if (this.display === 'buffer') {
         dialog.show('goto-line');
       }
+    },
+
+    moveUp () {
+      eventBus.$emit('buffer/moveup');
+    },
+
+    moveDown () {
+      eventBus.$emit('buffer/movedown');
     }
   }
 };

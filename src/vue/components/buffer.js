@@ -30,6 +30,8 @@ let buffer =  {
     eventBus.$on('findApp/prev', () => this.findPrev());
     eventBus.$on('colorize/update', filters => this.colorizeUpdate(filters));
     eventBus.$on('gotoline/go', val => this.updateToRandomPosition(+val));
+    eventBus.$on('buffer/moveup', () => this.onMouseWheel({deltaY: -1}));
+    eventBus.$on('buffer/movedown', () => this.onMouseWheel({deltaY: 1}));
   },
 
   updated () {

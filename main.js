@@ -46,6 +46,10 @@ function createWindow () {
     () => mainWindow.webContents.executeJavaScript('app.showColorize()'));
   globalShortcut.register('CmdOrCtrl+G',
     () => mainWindow.webContents.executeJavaScript('app.showGotoLine()'));
+  globalShortcut.register('Up',
+    () => mainWindow.webContents.executeJavaScript('app.moveUp()'));
+  globalShortcut.register('Down',
+    () => mainWindow.webContents.executeJavaScript('app.moveDown()'));
 
 }
 
