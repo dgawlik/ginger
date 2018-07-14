@@ -29,7 +29,7 @@ let buffer =  {
     eventBus.$on('findApp/next', () => this.findNext());
     eventBus.$on('findApp/prev', () => this.findPrev());
     eventBus.$on('colorize/update', filters => this.colorizeUpdate(filters));
-    eventBus.$on('gotoline/go', val => this.updateToRandomPosition(+val));
+    eventBus.$on('gotoline/go', val => this.gotoLine(+val));
     eventBus.$on('buffer/moveup', () => this.onMouseWheel({deltaY: -1}));
     eventBus.$on('buffer/movedown', () => this.onMouseWheel({deltaY: 1}));
   },
@@ -259,6 +259,12 @@ let buffer =  {
       }
 
       return o;
+    },
+
+    gotoLine (line) {
+      line = Math.max(0, line);
+      line = Math.min(line, this.screen.file.lineBeginnings.length-1);
+      this.updateToRandomPosition(line);
     }
   },
 
