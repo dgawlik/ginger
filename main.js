@@ -41,7 +41,7 @@ function createWindow () {
     {accelerator: 'Up', action: 'app.moveUp()'},
     {accelerator: 'Down', action: 'app.moveDown()'},
     {accelerator: 'CmdOrCtrl+F', action: 'app.findKeyDown()'},
-    {accelerator: 'CmdOrCtrl+C', action: 'app.showColorize()'},
+    {accelerator: 'CmdOrCtrl+X', action: 'app.showColorize()'},
     {accelerator: 'CmdOrCtrl+G', action: 'app.showGotoLine()'},
     {accelerator: 'CmdOrCtrl+S', action: 'window.onSettings()'},
     {accelerator: 'CmdOrCtrl+O', action: 'window.onOpen()'},
