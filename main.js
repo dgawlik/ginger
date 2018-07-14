@@ -32,25 +32,23 @@ function createWindow () {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null
-  })
+  });
 
-  globalShortcut.register('CmdOrCtrl+F',
-    () => mainWindow.webContents.executeJavaScript('app.findKeyDown()'));
-  globalShortcut.register('Esc',
-    () => mainWindow.webContents.executeJavaScript('app.closeDialog()'));
-  globalShortcut.register('PageUp',
-    () => mainWindow.webContents.executeJavaScript('app.delegateChangePage(true)'));
-  globalShortcut.register('PageDown',
-    () => mainWindow.webContents.executeJavaScript('app.delegateChangePage(false)'));
-  globalShortcut.register('CmdOrCtrl+C',
-    () => mainWindow.webContents.executeJavaScript('app.showColorize()'));
-  globalShortcut.register('CmdOrCtrl+G',
-    () => mainWindow.webContents.executeJavaScript('app.showGotoLine()'));
-  globalShortcut.register('Up',
-    () => mainWindow.webContents.executeJavaScript('app.moveUp()'));
-  globalShortcut.register('Down',
-    () => mainWindow.webContents.executeJavaScript('app.moveDown()'));
+  let keyMap = [
+    {accelerator: 'Esc', action: 'app.closeDialog()'},
+    {accelerator: 'PageUp', action: 'app.delegateChangePage(true)'},
+    {accelerator: 'PageDown', action: 'app.delegateChangePage(false)'},
+    {accelerator: 'Up', action: 'app.moveUp()'},
+    {accelerator: 'Down', action: 'app.moveDown()'},
+    {accelerator: 'CmdOrCtrl+F', action: 'app.findKeyDown()'},
+    {accelerator: 'CmdOrCtrl+C', action: 'app.showColorize()'},
+    {accelerator: 'CmdOrCtrl+G', action: 'app.showGotoLine()'},
+  ];
 
+  for (let entry of keyMap) {
+    globalShortcut.register(entry.accelerator,
+      () => mainWindow.webContents.executeJavaScript(entry.action));
+  }
 }
 
 // This method will be called when Electron has finished

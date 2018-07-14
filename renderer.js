@@ -26,14 +26,21 @@ const template = [
       ]
     },
     {
-      label: 'Filters',
+      label: 'Actions',
       submenu: [
-        {label: 'Show'},
-        {label: 'Toggle'}
+        {
+          label: 'Colorize',
+          click () { app.showColorize() }
+        },
+        {
+          label: 'Find',
+          click () { app.findKeyDown() }
+        },
+        {
+          label: 'Go to line',
+          click () { app.showGotoLine() }
+        }
       ]
-    },
-    {
-      label: 'Bookmarks'
     },
     {
       label: 'View',
