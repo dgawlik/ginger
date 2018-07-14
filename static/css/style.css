@@ -357,6 +357,10 @@ button:focus {
   background-color: #D32F2F;
 }
 
+.bookmarks-entries {
+  margin-bottom: 15px;
+}
+
 .bookmarks-entry {
   display: flex;
   flex-direction: row;
