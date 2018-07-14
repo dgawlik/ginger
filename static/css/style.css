@@ -356,3 +356,20 @@ button:focus {
 .button-error {
   background-color: #D32F2F;
 }
+
+.bookmarks-entry {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.bookmarks-menu {
+  width: 50px;
+  cursor: pointer;
+}
+
+.bookmarks-button {
+  margin-top: 7px;
+}

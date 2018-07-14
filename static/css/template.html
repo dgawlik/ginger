@@ -17,12 +17,27 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content" style="opacity:1.0">
           <div class="modal-header">
-            <h5 class="modal-title">Go to line</h5>
+            <h5 class="modal-title">Bookmarks</h5>
           </div>
           <div class="modal-body">
-            <input class="form-control-plaintext gotoline-input" type="text" placeholder="line">
+            <div class="bookmarks-entries">
+              <div class="bookmarks-entry">
+                <div class="bookmarks-description">
+                  This is very long description that doesnt
+                  fit into one line
+                </div>
+                <div class="bookmarks-menu">
+                  <i class="fas fa-arrow-right"></i>
+                  <i class="fas fa-times"></i>
+                </div>
+              </div>
+            </div>
+            <label>Line number</label>
+            <input class="form-control-plaintext" type="text" placeholder="line">
+            <label>Description</label>
+            <input class="form-control-plaintext" type="text" placeholder="description">
+            <button class="bookmarks-button">Add</button>
           </div>
-          <button class="gotoline-button">Go</button>
         </div>
       </div>
     </div>
