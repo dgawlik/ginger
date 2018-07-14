@@ -31,6 +31,43 @@ let mainApp = {
     this.tabs = this.$children[0];
     this.buffer = this.$children[1];
     this.scrollbar = this.$children[2];
+
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'PageDown') {
+        this.delegateChangePage(true);
+      }
+      if (e.code === 'PageUp') {
+        this.delegateChangePage(false);
+      }
+      if (e.code === 'ArrowUp') {
+        this.moveUp();
+      }
+      if (e.code === 'ArrowDown') {
+        this.moveDown();
+      }
+      if (e.code === 'Escape') {
+        this.closeDialog();
+      }
+      if (e.code === 'KeyF' && e.ctrlKey === true) {
+        this.findKeyDown();
+      }
+      if (e.code === 'KeyX' && e.ctrlKey === true) {
+        this.showColorize();
+      }
+      if (e.code === 'KeyM' && e.ctrlKey === true) {
+        this.showBookmarks();
+      }
+      if (e.code === 'KeyO' && e.ctrlKey === true) {
+        this.showOpen();
+      }
+      if (e.code === 'KeyS' && e.ctrlKey === true) {
+        this.showSettings();
+      }
+      if (e.code === 'KeyG' && e.ctrlKey === true) {
+        this.showGotoLine();
+      }
+      e.preventDefault();
+    });
   },
 
   methods: {
@@ -106,6 +143,14 @@ let mainApp = {
         dialog.show('bookmarks');
         eventBus.$emit('bookmarks/populate', this.tabs.getActiveTab().bookmarks);
       }
+    },
+
+    showOpen () {
+      window.onOpen();
+    },
+
+    showSettings () {
+      window.onSettings();
     }
   }
 };

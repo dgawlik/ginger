@@ -28,7 +28,7 @@ function createWindow () {
   }))
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
@@ -37,25 +37,6 @@ function createWindow () {
     // when you should delete the corresponding element.
     mainWindow = null
   });
-
-  let keyMap = [
-    {accelerator: 'Esc', action: 'app.closeDialog()'},
-    {accelerator: 'PageUp', action: 'app.delegateChangePage(true)'},
-    {accelerator: 'PageDown', action: 'app.delegateChangePage(false)'},
-    {accelerator: 'Up', action: 'app.moveUp()'},
-    {accelerator: 'Down', action: 'app.moveDown()'},
-    {accelerator: 'CmdOrCtrl+F', action: 'app.findKeyDown()'},
-    {accelerator: 'CmdOrCtrl+X', action: 'app.showColorize()'},
-    {accelerator: 'CmdOrCtrl+G', action: 'app.showGotoLine()'},
-    {accelerator: 'CmdOrCtrl+S', action: 'window.onSettings()'},
-    {accelerator: 'CmdOrCtrl+O', action: 'window.onOpen()'},
-    {accelerator: 'CmdOrCtrl+M', action: 'app.showBookmarks()'}
-  ];
-
-  for (let entry of keyMap) {
-    globalShortcut.register(entry.accelerator,
-      () => mainWindow.webContents.executeJavaScript(entry.action));
-  }
 }
 
 // This method will be called when Electron has finished
