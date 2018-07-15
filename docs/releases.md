@@ -7,18 +7,18 @@ layout: default
 
 #### v1.0.1: Bug fixes for v1.0
 
-* close icon in dialogs
-* enter triggers search
-* input colored red when not found
-* key bindings in dom
-* styling
-* missing bookmarks in menu
+* All dialogs now include close button in top right corner.
+* With find dialog opened enter triggers search.
+* Find dialog is colored red when there are no matches.
+* Key bindings are handled in document event callback
+* Minor styling fixes.
+* Added missing bookmarks menu entry.
 
 
 #### v1.0: Basic Version
 
-* handling of large files
-* find text in buffer
-* colorize buffer by regexp
-* go to line
-* bookmarks
+* Browser handles large files.
+* Finding text works.
+* Colorizing on various regexes.
+* Go to line works.
+* Bookmarks with manual editing.
