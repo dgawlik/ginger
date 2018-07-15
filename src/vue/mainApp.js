@@ -122,7 +122,9 @@ let mainApp = {
       if (this.display === 'buffer'
         && Object.keys(this.tabs.tabs).length) {
         dialog.show('colorize');
-        eventBus.$emit('colorize/populate', this.tabs.getActiveTab().colors);
+        setTimeout(() => {
+            eventBus.$emit('colorize/populate', this.tabs.getActiveTab().colors);
+        }, 500);
       }
     },
 
@@ -144,7 +146,10 @@ let mainApp = {
       if (this.display === 'buffer'
         && Object.keys(this.tabs.tabs).length) {
         dialog.show('bookmarks');
-        eventBus.$emit('bookmarks/populate', this.tabs.getActiveTab().bookmarks);
+        setTimeout(() => {
+          eventBus.$emit('bookmarks/populate', this.tabs.getActiveTab().bookmarks);
+        }, 500);
+
       }
     },
 

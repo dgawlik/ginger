@@ -13,7 +13,10 @@ let bookmarks =  {
   },
 
   mounted () {
-    eventBus.$on('bookmarks/populate', entries => this.entries = entries);
+    eventBus.$on('bookmarks/populate', entries => {
+      this.entries = entries;
+      this.$forceUpdate();
+    });
   },
 
   methods: {

@@ -34,6 +34,7 @@ let tabs =  {
   methods: {
     addTab (tab) {
       tab.colors = [];
+      tab.bookmarks = [];
       Vue.set(this.tabs, tab.name, tab);
       this.setTab(tab);
     },
