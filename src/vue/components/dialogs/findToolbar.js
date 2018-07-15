@@ -12,7 +12,8 @@ let findToolbar =  {
 
   data () {
     return {
-      findText: ''
+      findText: '',
+      isFound: true
     };
   },
 
@@ -40,6 +41,10 @@ let findToolbar =  {
           dialog.hide();
           if (matches.lines.length) {
             eventBus.$emit('findApp/highlight', {matches, 'text': this.findText});
+            this.isFound = true;
+          }
+          else {
+            this.isFound = false;
           }
         });
     },
@@ -53,9 +58,22 @@ let findToolbar =  {
     }
   },
 
+  computed: {
+    inputClassObject () {
+      return {
+        'input-error': !this.isFound
+      };
+    }
+  },
+
   template: `
 <div v-if="isValid && isShow" id="findToolbar">
-  <input type="text" id="findToolbarInput" v-model="findText">
+  <input
+   type="text"
+   id="findToolbarInput"
+   v-model="findText"
+   v-bind:class="inputClassObject"
+  >
   <i
    class="fas fa-angle-left"
    @click="onPrev"

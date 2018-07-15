@@ -207,12 +207,6 @@ input:focus {
   color: #CED4D9;
 }
 
-#findToolbar input:focus{
-  border-color: #B2FF59;
-  outline-color: #B2FF59;
-  box-shadow:none;
-}
-
 #findToolbar i {
   margin: 0px 5px;
   cursor: pointer;
