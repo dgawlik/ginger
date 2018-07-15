@@ -119,6 +119,12 @@ body::-webkit-scrollbar-thumb {
   color:#CED4D9;
 }
 
+.modal-close {
+  float: right;
+  display: block;
+  cursor: pointer;
+}
+
 .progress-bar {
   background-color: #B2FF59;
 }

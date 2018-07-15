@@ -40,6 +40,10 @@ let bookmarks =  {
     removeEntry (hash) {
       let ind = this.entries.findIndex(e => e.hash === hash);
       this.$delete(this.entries, ind);
+    },
+
+    close () {
+      eventBus.$emit('dialog/close');
     }
   },
 
@@ -72,6 +76,7 @@ let bookmarks =  {
     <div class="modal-content" style="opacity:1.0">
       <div class="modal-header">
         <h5 class="modal-title">Bookmarks</h5>
+        <i @click="close" class="fas fa-times modal-close"></i>
       </div>
       <div class="modal-body">
         <div class="bookmarks-entries">

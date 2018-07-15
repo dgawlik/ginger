@@ -21,6 +21,10 @@ let gotoLine =  {
 
     validate () {
       this.isValid = !isNaN(this.line);
+    },
+
+    close () {
+      eventBus.$emit('dialog/close');
     }
   },
 
@@ -47,6 +51,7 @@ let gotoLine =  {
     <div class="modal-content" style="opacity:1.0">
       <div class="modal-header">
         <h5 class="modal-title">Go to line</h5>
+        <i @click="close" class="fas fa-times modal-close"></i>
       </div>
       <div class="modal-body">
         <input

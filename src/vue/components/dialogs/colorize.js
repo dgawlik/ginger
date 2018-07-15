@@ -37,6 +37,10 @@ let colorize =  {
       let ind = this.filters.findIndex(e => e.hash === hash);
       this.$delete(this.filters, ind);
       eventBus.$emit('colorize/update', this.filters);
+    },
+
+    close () {
+      eventBus.$emit('dialog/close');
     }
   },
 
@@ -50,6 +54,7 @@ let colorize =  {
     <div class="modal-content" style="opacity:1.0">
       <div class="modal-header">
         <h5 class="modal-title">Colorize</h5>
+        <i @click="close" class="fas fa-times modal-close"></i>
       </div>
       <div class="modal-body">
         <div v-for="filter in filters">
