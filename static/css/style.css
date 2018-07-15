@@ -182,7 +182,7 @@ input:focus {
 #findContent {
   position: absolute;
   top : 30px;
-  left: 15px;
+  left: 5px;
   z-index: 10;
 }
 
@@ -193,7 +193,6 @@ input:focus {
   align-items: center;
   color: #CED4D9;
   background-color: #212529;
-  border-radius: 5px;
   height: 40px;
   width: 300px;
   padding: 0px 5px;
@@ -231,12 +230,11 @@ button:focus {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  background-color: #343A40;
+  background-color: #1b1e21;
   color: #CED4D9;
-  border: none;
-  border-radius: 3px;
   cursor: pointer;
   outline: none;
+  border-radius: 0px;
 }
 
 .custom-checkbox input {
