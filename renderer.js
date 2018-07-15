@@ -39,6 +39,10 @@ const template = [
         {
           label: 'Go to line',
           click () { app.showGotoLine() }
+        },
+        {
+          label: 'Bookmarks',
+          click () { app.showBookmarks() }
         }
       ]
     },
